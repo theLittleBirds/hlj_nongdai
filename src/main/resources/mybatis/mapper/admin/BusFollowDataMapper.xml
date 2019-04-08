@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusFollowDataMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusFollowData" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="member_operate_id" property="memberOperateId" jdbcType="VARCHAR" />
+        <result column="follow_item_id" property="followItemId" jdbcType="VARCHAR" />
+        <result column="item_value" property="itemValue" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, member_operate_id, follow_item_id, item_value
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_followdata
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_followdata
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusFollowData" >
+        insert into t_bus_followdata (id, member_operate_id, follow_item_id, 
+            item_value)
+        values (#{id,jdbcType=VARCHAR}, #{memberOperateId,jdbcType=VARCHAR}, #{followItemId,jdbcType=VARCHAR}, 
+            #{itemValue,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusFollowData" >
+        insert into t_bus_followdata
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="memberOperateId != null" >
+                member_operate_id,
+            </if>
+            <if test="followItemId != null" >
+                follow_item_id,
+            </if>
+            <if test="itemValue != null" >
+                item_value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="memberOperateId != null" >
+                #{memberOperateId,jdbcType=VARCHAR},
+            </if>
+            <if test="followItemId != null" >
+                #{followItemId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemValue != null" >
+                #{itemValue,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusFollowData" >
+        update t_bus_followdata
+        <set >
+            <if test="memberOperateId != null" >
+                member_operate_id = #{memberOperateId,jdbcType=VARCHAR},
+            </if>
+            <if test="followItemId != null" >
+                follow_item_id = #{followItemId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemValue != null" >
+                item_value = #{itemValue,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusFollowData" >
+        update t_bus_followdata
+        set member_operate_id = #{memberOperateId,jdbcType=VARCHAR},
+            follow_item_id = #{followItemId,jdbcType=VARCHAR},
+            item_value = #{itemValue,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+	
+	<delete id="deleteBeforeSave" parameterType="hashmap" >
+        delete from t_bus_followdata
+        where member_operate_id = #{memberOperateId,jdbcType=VARCHAR} and follow_item_id in (select id from t_bus_followitem where type = #{type,jdbcType=VARCHAR})
+    </delete>
+    
+</mapper>

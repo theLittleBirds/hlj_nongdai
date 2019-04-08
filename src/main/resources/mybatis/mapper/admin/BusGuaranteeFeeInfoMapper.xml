@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusGuaranteeFeeInfoMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusGuaranteeFeeInfo" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="use" property="use" jdbcType="INTEGER" />
+        <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+        <result column="certificate_no" property="certificateNo" jdbcType="VARCHAR" />
+        <result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+        <result column="mobile_no" property="mobileNo" jdbcType="VARCHAR" />
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL" />
+        <result column="payer" property="payer" jdbcType="VARCHAR" />
+        <result column="payer_idcard" property="payerIdcard" jdbcType="VARCHAR" />
+        <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, org_id, org_name, into_piece_id, `use`, account_name, certificate_no, account_no, mobile_no, 
+        total_amount, payer, payer_idcard, pay_way, status, create_by, create_date, update_date
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_guaranteefeeinfo
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_guaranteefeeinfo
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+     <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusGuaranteeFeeInfo" >
+        insert into t_bus_guaranteefeeinfo (id, org_id, org_name, 
+            into_piece_id, `use`, account_name, certificate_no, 
+            account_no, mobile_no, total_amount, 
+            payer, payer_idcard, pay_way, 
+            status, create_by, create_date, 
+            update_date)
+        values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+            #{intoPieceId,jdbcType=VARCHAR}, #{use,jdbcType=INTEGER}, #{accountName,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, 
+            #{accountNo,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, 
+            #{payer,jdbcType=VARCHAR}, #{payerIdcard,jdbcType=VARCHAR}, #{payWay,jdbcType=VARCHAR}, 
+            #{status,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+            #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusGuaranteeFeeInfo" >
+        insert into t_bus_guaranteefeeinfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+             <if test="use != null" >
+                `use`,
+            </if>
+            <if test="accountName != null" >
+                account_name,
+            </if>
+            <if test="certificateNo != null" >
+                certificate_no,
+            </if>
+            <if test="accountNo != null" >
+                account_no,
+            </if>
+            <if test="mobileNo != null" >
+                mobile_no,
+            </if>
+            <if test="totalAmount != null" >
+                total_amount,
+            </if>
+            <if test="payer != null" >
+                payer,
+            </if>
+            <if test="payerIdcard != null" >
+                payer_idcard,
+            </if>
+            <if test="payWay != null" >
+                pay_way,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="use != null" >
+                #{use,jdbcType=INTEGER},
+            </if>
+            <if test="accountName != null" >
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateNo != null" >
+                #{certificateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="accountNo != null" >
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNo != null" >
+                #{mobileNo,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null" >
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payer != null" >
+                #{payer,jdbcType=VARCHAR},
+            </if>
+            <if test="payerIdcard != null" >
+                #{payerIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="payWay != null" >
+                #{payWay,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusGuaranteeFeeInfo" >
+        update t_bus_guaranteefeeinfo
+        <set >
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="use != null" >
+                `use` = #{use,jdbcType=INTEGER},
+            </if>
+            <if test="accountName != null" >
+                account_name = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateNo != null" >
+                certificate_no = #{certificateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="accountNo != null" >
+                account_no = #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNo != null" >
+                mobile_no = #{mobileNo,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null" >
+                total_amount = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payer != null" >
+                payer = #{payer,jdbcType=VARCHAR},
+            </if>
+            <if test="payerIdcard != null" >
+                payer_idcard = #{payerIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="payWay != null" >
+                pay_way = #{payWay,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusGuaranteeFeeInfo" >
+        update t_bus_guaranteefeeinfo
+        set org_id = #{orgId,jdbcType=VARCHAR},
+            org_name = #{orgName,jdbcType=VARCHAR},
+            into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            `use` = #{use,jdbcType=INTEGER},
+            account_name = #{accountName,jdbcType=VARCHAR},
+            certificate_no = #{certificateNo,jdbcType=VARCHAR},
+            account_no = #{accountNo,jdbcType=VARCHAR},
+            mobile_no = #{mobileNo,jdbcType=VARCHAR},
+            total_amount = #{totalAmount,jdbcType=DECIMAL},
+            payer = #{payer,jdbcType=VARCHAR},
+            payer_idcard = #{payerIdcard,jdbcType=VARCHAR},
+            pay_way = #{payWay,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            create_by = #{createBy,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据条件查询 -->
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="hashmap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_guaranteefeeinfo gf
+        <where>
+        	1=1 
+        	<if test="feeInfo.orgName != null" >
+               		and gf.org_name like "%"#{feeInfo.orgName}"%" 
+	        </if>
+        	<if test="feeInfo.accountName != null" >
+               		and gf.account_name like "%"#{feeInfo.accountName}"%" 
+	        </if>
+        	<if test="feeInfo.certificateNo != null" >
+               		and gf.certificate_no like "%"#{feeInfo.certificateNo}"%" 
+	        </if>
+        	<if test="feeInfo.mobileNo != null" >
+               		and gf.mobile_no like "%"#{feeInfo.mobileNo}"%" 
+	        </if>
+        	<if test="feeInfo.status != null" >
+               		and gf.status  = #{feeInfo.status} 
+	        </if>
+        	<if test="feeInfo.payWay != null" >
+               		and gf.pay_way = #{feeInfo.payWay}
+	        </if>
+        	<if test="feeInfo.payer != null" >
+               		and gf.payer like "%"#{feeInfo.payer}"%" 
+	        </if>
+	        <if test="startDate != null" >
+	             	and gf.update_date &gt; #{startDate,jdbcType=VARCHAR}
+	        </if>
+	        <if test="endDate != null" >
+	             	and gf.update_date &lt; #{endDate,jdbcType=VARCHAR}
+	        </if>
+	        <if test="orgIds != null" >
+	             and gf.org_id IN 
+	             <foreach item="orgId" index="index" collection="orgIds"
+	                open="(" separator="," close=")" >  #{orgId}
+	             </foreach>
+        	</if>
+        </where> 
+        order by create_date desc
+    </select>
+    
+    <select id="selectCountByCondition" resultType="java.lang.Integer" parameterType="hashmap" >
+        select 
+        count(gf.id)
+        from t_bus_guaranteefeeinfo gf
+        <where>
+        	1=1 
+        	<if test="feeInfo.orgName != null" >
+               		and gf.org_name like "%"#{feeInfo.orgName}"%" 
+	        </if>
+        	<if test="feeInfo.accountName != null" >
+               		and gf.account_name like "%"#{feeInfo.accountName}"%" 
+	        </if>
+        	<if test="feeInfo.certificateNo != null" >
+               		and gf.certificate_no like "%"#{feeInfo.certificateNo}"%" 
+	        </if>
+        	<if test="feeInfo.mobileNo != null" >
+               		and gf.mobile_no like "%"#{feeInfo.mobileNo}"%" 
+	        </if>
+        	<if test="feeInfo.status != null" >
+               		and gf.status = #{feeInfo.status} 
+	        </if>
+	        <if test="feeInfo.payWay != null" >
+               		and gf.pay_way = #{feeInfo.payWay}
+	        </if>
+        	<if test="feeInfo.payer != null" >
+               		and gf.payer like "%"#{feeInfo.payer}"%" 
+	        </if>
+	        <if test="startDate != null" >
+	             	and gf.update_date &gt; #{startDate,jdbcType=VARCHAR}
+	        </if>
+	        <if test="endDate != null" >
+	             	and gf.update_date &lt; #{endDate,jdbcType=VARCHAR}
+	        </if>
+	        <if test="orgIds != null" >
+	             and gf.org_id IN 
+	             <foreach item="orgId" index="index" collection="orgIds"
+	                open="(" separator="," close=")" >  #{orgId}
+	             </foreach>
+        	</if>
+        </where> 
+    </select>
+    
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_guaranteefeeinfo where into_piece_id = #{intopieceId}
+    </select>
+</mapper>

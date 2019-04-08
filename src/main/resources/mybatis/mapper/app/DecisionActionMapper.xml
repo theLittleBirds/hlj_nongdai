@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongyeos.loan.app.mapper.DecisionActionMapper">
+
+	<resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.DecisionAction">
+		<id column="ACTION_ID" jdbcType="VARCHAR" property="actionId" />
+		<result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+		<result column="CATEGORY" jdbcType="SMALLINT" property="category" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="FROM_ITEM_ID" jdbcType="VARCHAR" property="fromItemId" />
+		<result column="OPERATOR" jdbcType="SMALLINT" property="operator" />
+		<result column="OPT_VALUE" jdbcType="VARCHAR" property="optValue" />
+		<result column="TO_ITEM_ID" jdbcType="VARCHAR" property="toItemId" />
+		<result column="TO_NODE_ID" jdbcType="VARCHAR" property="toNodeId" />
+		<result column="CHECK_ITEM_IDS" jdbcType="VARCHAR" property="checkItemIds" />
+		<result column="IS_ALL_NULL" jdbcType="SMALLINT" property="isAllNull" />
+		<result column="SEQNO" jdbcType="INTEGER" property="seqno" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		ACTION_ID, APP_ID, CATEGORY, NAME, FROM_ITEM_ID, OPERATOR, OPT_VALUE,
+		TO_ITEM_ID, TO_NODE_ID, CHECK_ITEM_IDS, IS_ALL_NULL, SEQNO
+	</sql>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_decision_action
+		where ACTION_ID = #{actionId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByAppIdAndCategory" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_decision_action
+		where APP_ID = #{appId,jdbcType=VARCHAR} 
+		AND CATEGORY = #{value,jdbcType=SMALLINT} order by SEQNO asc
+	</select>
+	
+	<select id="countByAppIdAndCategory" resultType="Integer">
+		select count(ACTION_ID)
+		from t_decision_action
+		where APP_ID = #{appId,jdbcType=VARCHAR} 
+		AND CATEGORY = #{value,jdbcType=SMALLINT}
+	</select>
+	
+	<select id="selectByAppId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_decision_action
+		where APP_ID = #{appId,jdbcType=VARCHAR} 
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from t_decision_action
+    	order by SEQNO ASC
+    </select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_decision_action
+		where ACTION_ID = #{actionId,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.nongyeos.loan.app.entity.DecisionAction">
+		insert into t_decision_action (ACTION_ID, APP_ID, CATEGORY,
+		NAME, FROM_ITEM_ID, OPERATOR,
+		OPT_VALUE, TO_ITEM_ID, TO_NODE_ID,
+		CHECK_ITEM_IDS, IS_ALL_NULL, SEQNO)
+		values (#{actionId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR},
+		#{category,jdbcType=SMALLINT},
+		#{name,jdbcType=VARCHAR}, #{fromItemId,jdbcType=VARCHAR}, #{operator,jdbcType=SMALLINT},
+		#{optValue,jdbcType=VARCHAR}, #{toItemId,jdbcType=VARCHAR},
+		#{toNodeId,jdbcType=VARCHAR}, #{checkItemIds,jdbcType=VARCHAR},
+		#{isAllNull,jdbcType=SMALLINT}, #{seqno,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.DecisionAction">
+		insert into t_decision_action
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="actionId != null">
+				ACTION_ID,
+			</if>
+			<if test="appId != null">
+				APP_ID,
+			</if>
+			<if test="category != null">
+				CATEGORY,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="fromItemId != null">
+				FROM_ITEM_ID,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="optValue != null">
+				OPT_VALUE,
+			</if>
+			<if test="toItemId != null">
+				TO_ITEM_ID,
+			</if>
+			<if test="toNodeId != null">
+				TO_NODE_ID,
+			</if>
+			<if test="checkItemIds != null">
+				CHECK_ITEM_IDS,
+			</if>
+			<if test="isAllNull != null">
+				IS_ALL_NULL,
+			</if>
+			<if test="seqno != null">
+				SEQNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="actionId != null">
+				#{actionId,jdbcType=VARCHAR},
+			</if>
+			<if test="appId != null">
+				#{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=SMALLINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="fromItemId != null">
+				#{fromItemId,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=SMALLINT},
+			</if>
+			<if test="optValue != null">
+				#{optValue,jdbcType=VARCHAR},
+			</if>
+			<if test="toItemId != null">
+				#{toItemId,jdbcType=VARCHAR},
+			</if>
+			<if test="toNodeId != null">
+				#{toNodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="checkItemIds != null">
+				#{checkItemIds,jdbcType=VARCHAR},
+			</if>
+			<if test="isAllNull != null">
+				#{isAllNull,jdbcType=SMALLINT},
+			</if>
+			<if test="seqno != null">
+				#{seqno,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.DecisionAction">
+		update t_decision_action
+		<set>
+			<if test="appId != null">
+				APP_ID = #{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				CATEGORY = #{category,jdbcType=SMALLINT},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="fromItemId != null">
+				FROM_ITEM_ID = #{fromItemId,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=SMALLINT},
+			</if>
+			<if test="optValue != null">
+				OPT_VALUE = #{optValue,jdbcType=VARCHAR},
+			</if>
+			<if test="toItemId != null">
+				TO_ITEM_ID = #{toItemId,jdbcType=VARCHAR},
+			</if>
+			<if test="toNodeId != null">
+				TO_NODE_ID = #{toNodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="checkItemIds != null">
+				CHECK_ITEM_IDS = #{checkItemIds,jdbcType=VARCHAR},
+			</if>
+			<if test="isAllNull != null">
+				IS_ALL_NULL = #{isAllNull,jdbcType=SMALLINT},
+			</if>
+			<if test="seqno != null">
+				SEQNO = #{seqno,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ACTION_ID = #{actionId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.DecisionAction">
+		update t_decision_action
+		set APP_ID = #{appId,jdbcType=VARCHAR},
+		CATEGORY = #{category,jdbcType=SMALLINT},
+		NAME = #{name,jdbcType=VARCHAR},
+		FROM_ITEM_ID = #{fromItemId,jdbcType=VARCHAR},
+		OPERATOR = #{operator,jdbcType=SMALLINT},
+		OPT_VALUE = #{optValue,jdbcType=VARCHAR},
+		TO_ITEM_ID = #{toItemId,jdbcType=VARCHAR},
+		TO_NODE_ID = #{toNodeId,jdbcType=VARCHAR},
+		CHECK_ITEM_IDS = #{checkItemIds,jdbcType=VARCHAR},
+		IS_ALL_NULL = #{isAllNull,jdbcType=SMALLINT},
+		SEQNO = #{seqno,jdbcType=INTEGER}
+		where ACTION_ID = #{actionId,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

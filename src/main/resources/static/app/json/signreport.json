@@ -1,0 +1,23 @@
+[
+    {
+        "qbtype": "营管部签报",
+        "wjheadline": "国家标准公文",
+        "zbsection": "国库处",
+        "qbzhh": "行签报字号",
+        "wjzt":"流转中文件"
+    },
+    {
+        "qbtype": "外汇签报",
+        "wjheadline": "各部门拟办文件",
+        "zbsection": "内审处",
+        "qbzhh": "司局签报字号",
+        "wjzt":"已完成文件"
+    },
+    {
+        "qbtype": "中关村中支签报",
+        "wjheadline": "各单位标准公文",
+        "zbsection": "金融研究处",
+        "qbzhh": "办公厅签报字号",
+        "wjzt":"流转中文件"
+    }
+]

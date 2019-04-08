@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.AppApplicationMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppApplication" >
+        <id column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="FINS_CODE" property="finsCode" jdbcType="VARCHAR" />
+        <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="SHORT_CNAME" property="shortCname" jdbcType="VARCHAR" />
+        <result column="SHORT_ENAME" property="shortEname" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="SMALLINT" />
+        <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+        <result column="FARMER_RATE" property="farmerRate" jdbcType="VARCHAR" />
+        <result column="STATION_RATE" property="stationRate" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        APP_ID, FINS_CODE, GROUP_ID, CNAME, ENAME, SHORT_CNAME, SHORT_ENAME, STATUS, MEMO, 
+        SEQNO, IS_DELETE, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+        UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE, FARMER_RATE, STATION_RATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_application
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </select>
+    <!-- 查询所有产品 -->
+    <select id="selectAllApplications" resultMap="BaseResultMap"  >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_application order by SEQNO ASC
+    </select>
+    
+    <select id="selectByFinsCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_application
+        where FINS_CODE = #{finsCode,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+    <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_application
+        where GROUP_ID = #{groupId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="count" resultType="Integer">
+  	   	select count(APP_ID) from t_app_application
+  	   	where GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_app_application
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppApplication" >
+        insert into t_app_application (APP_ID, FINS_CODE, GROUP_ID, 
+            CNAME, ENAME, SHORT_CNAME, 
+            SHORT_ENAME, STATUS, MEMO, 
+            SEQNO, IS_DELETE, CRE_OPER_ID, 
+            CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, 
+            UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, 
+            UPD_DATE, FARMER_RATE, STATION_RATE
+            )
+        values (#{appId,jdbcType=VARCHAR}, #{finsCode,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+            #{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{shortCname,jdbcType=VARCHAR}, 
+            #{shortEname,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{memo,jdbcType=VARCHAR}, 
+            #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=SMALLINT}, #{creOperId,jdbcType=VARCHAR}, 
+            #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, 
+            #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP}, #{farmerRate,jdbcType=VARCHAR}, #{stationRate,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.AppApplication" >
+        insert into t_app_application
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="appId != null" >
+                APP_ID,
+            </if>
+            <if test="finsCode != null" >
+                FINS_CODE,
+            </if>
+            <if test="groupId != null" >
+                GROUP_ID,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="shortCname != null" >
+                SHORT_CNAME,
+            </if>
+            <if test="shortEname != null" >
+                SHORT_ENAME,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="memo != null" >
+                MEMO,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+            <if test="farmerRate != null" >
+                FARMER_RATE,
+            </if>
+            <if test="stationRate != null" >
+                STATION_RATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="appId != null" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsCode != null" >
+                #{finsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null" >
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="shortCname != null" >
+                #{shortCname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortEname != null" >
+                #{shortEname,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="memo != null" >
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="farmerRate != null" >
+                #{farmerRate,jdbcType=VARCHAR},
+            </if>
+            <if test="stationRate != null" >
+                #{stationRate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.AppApplication" >
+        update t_app_application
+        <set >
+            <if test="finsCode != null" >
+                FINS_CODE = #{finsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null" >
+                GROUP_ID = #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="shortCname != null" >
+                SHORT_CNAME = #{shortCname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortEname != null" >
+                SHORT_ENAME = #{shortEname,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="memo != null" >
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="farmerRate != null" >
+                FARMER_RATE = #{farmerRate,jdbcType=VARCHAR},
+            </if>
+            <if test="stationRate != null" >
+                STATION_RATE = #{stationRate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppApplication" >
+        update t_app_application
+        set FINS_CODE = #{finsCode,jdbcType=VARCHAR},
+            GROUP_ID = #{groupId,jdbcType=VARCHAR},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            SHORT_CNAME = #{shortCname,jdbcType=VARCHAR},
+            SHORT_ENAME = #{shortEname,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=SMALLINT},
+            MEMO = #{memo,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            FARMER_RATE = #{farmerRate,jdbcType=VARCHAR},
+            STATION_RATE = #{stationRate,jdbcType=VARCHAR}
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据组织机构查找产品 -->
+    <select id="selectApplicationsByOrg"  resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        distinct app.*
+        from t_app_application app left join t_bus_fins fin on app.FINS_CODE=fin.FINS_ID  
+        where fin.ORG_ID like "%"#{orgId,jdbcType=VARCHAR}"%" order by app.SEQNO ASC
+    </select>
+    <select id="quetyByFinsIdType"  resultMap="BaseResultMap" parameterType="com.nongyeos.loan.app.entity.AppApplication" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_application 
+        where FINS_CODE = #{finsCode,jdbcType=VARCHAR} and ENAME = #{ename,jdbcType=VARCHAR}
+    </select>
+</mapper>

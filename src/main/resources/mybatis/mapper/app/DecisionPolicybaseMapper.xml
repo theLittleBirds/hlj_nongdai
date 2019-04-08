@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.DecisionPolicybaseMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.DecisionPolicybase" >
+        <id column="BASE_ID" property="baseId" jdbcType="VARCHAR" />
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="DECISION_CATEGORY_ID" property="decisionCategoryId" jdbcType="VARCHAR" />
+        <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+        <result column="LOWER_VALUE" property="lowerValue" jdbcType="VARCHAR" />
+        <result column="LOWER_OPERATOR" property="lowerOperator" jdbcType="VARCHAR" />
+        <result column="UPPER_VALUE" property="upperValue" jdbcType="VARCHAR" />
+        <result column="UPPER_OPERATOR" property="upperOperator" jdbcType="VARCHAR" />
+        <result column="MIAOSHU" property="miaoshu" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        BASE_ID, APP_ID, DECISION_CATEGORY_ID, ITEM_ID, LOWER_VALUE, LOWER_OPERATOR, UPPER_VALUE, 
+        UPPER_OPERATOR, MIAOSHU, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_policybase
+        where BASE_ID = #{baseId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="queryByPrimaryKeyAndDesc" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_policybase
+        where BASE_ID = #{baseId,jdbcType=VARCHAR} and MIAOSHU = #{miaoshu,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByAppId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_policybase
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+        and DECISION_CATEGORY_ID = #{categoryId,jdbcType=VARCHAR} order by SEQNO
+    </select>
+    
+    <select id="selectAllByAppId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_policybase
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_decision_policybase
+        where BASE_ID = #{baseId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.DecisionPolicybase" >
+        insert into t_decision_policybase (BASE_ID, APP_ID, DECISION_CATEGORY_ID, 
+            ITEM_ID, LOWER_VALUE, LOWER_OPERATOR, 
+            UPPER_VALUE, UPPER_OPERATOR, MIAOSHU, 
+            SEQNO)
+        values (#{baseId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{decisionCategoryId,jdbcType=VARCHAR}, 
+            #{itemId,jdbcType=VARCHAR}, #{lowerValue,jdbcType=VARCHAR}, #{lowerOperator,jdbcType=VARCHAR}, 
+            #{upperValue,jdbcType=VARCHAR}, #{upperOperator,jdbcType=VARCHAR}, #{miaoshu,jdbcType=VARCHAR}, 
+            #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.DecisionPolicybase" >
+        insert into t_decision_policybase
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="baseId != null" >
+                BASE_ID,
+            </if>
+            <if test="appId != null" >
+                APP_ID,
+            </if>
+            <if test="decisionCategoryId != null" >
+                DECISION_CATEGORY_ID,
+            </if>
+            <if test="itemId != null" >
+                ITEM_ID,
+            </if>
+            <if test="lowerValue != null" >
+                LOWER_VALUE,
+            </if>
+            <if test="lowerOperator != null" >
+                LOWER_OPERATOR,
+            </if>
+            <if test="upperValue != null" >
+                UPPER_VALUE,
+            </if>
+            <if test="upperOperator != null" >
+                UPPER_OPERATOR,
+            </if>
+            <if test="miaoshu != null" >
+                MIAOSHU,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="baseId != null" >
+                #{baseId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="decisionCategoryId != null" >
+                #{decisionCategoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="lowerValue != null" >
+                #{lowerValue,jdbcType=VARCHAR},
+            </if>
+            <if test="lowerOperator != null" >
+                #{lowerOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="upperValue != null" >
+                #{upperValue,jdbcType=VARCHAR},
+            </if>
+            <if test="upperOperator != null" >
+                #{upperOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="miaoshu != null" >
+                #{miaoshu,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.DecisionPolicybase" >
+        update t_decision_policybase
+        <set >
+            <if test="appId != null" >
+                APP_ID = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="decisionCategoryId != null" >
+                DECISION_CATEGORY_ID = #{decisionCategoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="lowerValue != null" >
+                LOWER_VALUE = #{lowerValue,jdbcType=VARCHAR},
+            </if>
+            <if test="lowerOperator != null" >
+                LOWER_OPERATOR = #{lowerOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="upperValue != null" >
+                UPPER_VALUE = #{upperValue,jdbcType=VARCHAR},
+            </if>
+            <if test="upperOperator != null" >
+                UPPER_OPERATOR = #{upperOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="miaoshu != null" >
+                MIAOSHU = #{miaoshu,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where BASE_ID = #{baseId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.DecisionPolicybase" >
+        update t_decision_policybase
+        set APP_ID = #{appId,jdbcType=VARCHAR},
+            DECISION_CATEGORY_ID = #{decisionCategoryId,jdbcType=VARCHAR},
+            ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            LOWER_VALUE = #{lowerValue,jdbcType=VARCHAR},
+            LOWER_OPERATOR = #{lowerOperator,jdbcType=VARCHAR},
+            UPPER_VALUE = #{upperValue,jdbcType=VARCHAR},
+            UPPER_OPERATOR = #{upperOperator,jdbcType=VARCHAR},
+            MIAOSHU = #{miaoshu,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where BASE_ID = #{baseId,jdbcType=VARCHAR}
+    </update>
+</mapper>

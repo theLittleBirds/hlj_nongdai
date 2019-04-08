@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.FleFlowMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.FleFlow" >
+        <id column="FLOW_ID" property="flowId" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="TINYINT" />
+        <result column="FINS_ID" property="finsId" jdbcType="VARCHAR" />
+        <result column="CATEGORY" property="category" jdbcType="TINYINT" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="TINYINT" />
+        <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="TINYINT" />
+        <result column="CRE_OPER_CODE" property="creOperCode" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_CODE" property="creOrgCode" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_CODE" property="updOperCode" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_CODE" property="updOrgCode" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        FLOW_ID, TYPE, FINS_ID, CATEGORY, CNAME, ENAME, STATUS, MEMO, SEQNO, IS_DELETE,
+        CRE_OPER_CODE, CRE_OPER_NAME, CRE_ORG_CODE, CRE_DATE, UPD_OPER_CODE, UPD_OPER_NAME, 
+        UPD_ORG_CODE, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_fle_flow
+        where FLOW_ID = #{flowCode,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByFinsCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_fle_flow
+        where FINS_ID = #{finsId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_fle_flow
+        where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.FleFlow" >
+        insert into t_fle_flow (FLOW_ID, TYPE, FINS_ID,
+            CATEGORY, CNAME, ENAME, 
+            STATUS, MEMO, SEQNO, 
+            IS_DELETE, CRE_OPER_CODE, CRE_OPER_NAME, 
+            CRE_ORG_CODE, CRE_DATE, UPD_OPER_CODE, 
+            UPD_OPER_NAME, UPD_ORG_CODE, UPD_DATE
+            )
+        values (#{flowId,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{finsId,jdbcType=VARCHAR},
+            #{category,jdbcType=TINYINT}, #{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, 
+            #{status,jdbcType=TINYINT}, #{memo,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, 
+            #{isDelete,jdbcType=TINYINT}, #{creOperCode,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgCode,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperCode,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgCode,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.FleFlow" >
+        insert into t_fle_flow
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="flowId != null" >
+                FLOW_ID,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="finsId != null" >
+                FINS_ID,
+            </if>
+            <if test="category != null" >
+                CATEGORY,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="memo != null" >
+                MEMO,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="flowId != null" >
+                #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null" >
+                #{category,jdbcType=TINYINT},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="memo != null" >
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="creOperCode != null" >
+                #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.FleFlow" >
+        update t_fle_flow
+        <set >
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="finsId != null" >
+                FINS_ID = #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null" >
+                CATEGORY = #{category,jdbcType=TINYINT},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="memo != null" >
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.FleFlow" >
+        update t_fle_flow
+        set TYPE = #{type,jdbcType=TINYINT},
+            FINS_ID = #{finsId,jdbcType=VARCHAR},
+            CATEGORY = #{category,jdbcType=TINYINT},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=TINYINT},
+            MEMO = #{memo,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=TINYINT},
+            CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+    </update>
+</mapper>

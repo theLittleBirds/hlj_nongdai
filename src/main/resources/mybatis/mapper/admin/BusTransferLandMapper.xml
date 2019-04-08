@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusTransferLandMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusTransferLand" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="land_name" property="landName" jdbcType="VARCHAR" />
+        <result column="yield" property="yield" jdbcType="VARCHAR" />
+        <result column="land_level" property="landLevel" jdbcType="VARCHAR" />
+        <result column="land_area" property="landArea" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="eastern_border" property="easternBorder" jdbcType="VARCHAR" />
+        <result column="western_border" property="westernBorder" jdbcType="VARCHAR" />
+        <result column="northern_border" property="northernBorder" jdbcType="VARCHAR" />
+        <result column="southern_border" property="southernBorder" jdbcType="VARCHAR" />
+        <result column="outsource" property="outsource" jdbcType="INTEGER" />
+        <result column="outsourcing_term" property="outsourcingTerm" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, land_name, yield, land_level, land_area, sort, eastern_border, western_border, 
+        northern_border, southern_border, outsource, outsourcing_term
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_transferland
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_transferland
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusTransferLand" >
+        insert into t_bus_transferland (id, into_piece_id, land_name, yield,
+            land_level, land_area, sort, 
+            eastern_border, western_border, northern_border, 
+            southern_border, outsource, outsourcing_term
+            )
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{landName,jdbcType=VARCHAR}, #{yield,jdbcType=VARCHAR},
+            #{landLevel,jdbcType=VARCHAR}, #{landArea,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+            #{easternBorder,jdbcType=VARCHAR}, #{westernBorder,jdbcType=VARCHAR}, #{northernBorder,jdbcType=VARCHAR}, 
+            #{southernBorder,jdbcType=VARCHAR}, #{outsource,jdbcType=INTEGER}, #{outsourcingTerm,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusTransferLand" >
+        insert into t_bus_transferland
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="landName != null" >
+                land_name,
+            </if>
+            <if test="yield != null" >
+                yield,
+            </if>
+            <if test="landLevel != null" >
+                land_level,
+            </if>
+            <if test="landArea != null" >
+                land_area,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="easternBorder != null" >
+                eastern_border,
+            </if>
+            <if test="westernBorder != null" >
+                western_border,
+            </if>
+            <if test="northernBorder != null" >
+                northern_border,
+            </if>
+            <if test="southernBorder != null" >
+                southern_border,
+            </if>
+            <if test="outsource != null" >
+                outsource,
+            </if>
+            <if test="outsourcingTerm != null" >
+                outsourcing_term,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="landName != null" >
+                #{landName,jdbcType=VARCHAR},
+            </if>
+            <if test="yield != null" >
+                #{yield,jdbcType=VARCHAR},
+            </if>
+            <if test="landLevel != null" >
+                #{landLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="landArea != null" >
+                #{landArea,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="easternBorder != null" >
+                #{easternBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="westernBorder != null" >
+                #{westernBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="northernBorder != null" >
+                #{northernBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="southernBorder != null" >
+                #{southernBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="outsource != null" >
+                #{outsource,jdbcType=INTEGER},
+            </if>
+            <if test="outsourcingTerm != null" >
+                #{outsourcingTerm,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusTransferLand" >
+        update t_bus_transferland
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="landName != null" >
+                land_name = #{landName,jdbcType=VARCHAR},
+            </if>
+            <if test="yield != null" >
+                yield = #{yield,jdbcType=VARCHAR},
+            </if>
+            <if test="landLevel != null" >
+                land_level = #{landLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="landArea != null" >
+                land_area = #{landArea,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="easternBorder != null" >
+                eastern_border = #{easternBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="westernBorder != null" >
+                western_border = #{westernBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="northernBorder != null" >
+                northern_border = #{northernBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="southernBorder != null" >
+                southern_border = #{southernBorder,jdbcType=VARCHAR},
+            </if>
+            <if test="outsource != null" >
+                outsource = #{outsource,jdbcType=INTEGER},
+            </if>
+            <if test="outsourcingTerm != null" >
+                outsourcing_term = #{outsourcingTerm,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusTransferLand" >
+        update t_bus_transferland
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            land_name = #{landName,jdbcType=VARCHAR},
+            yield = #{yield,jdbcType=VARCHAR},
+            land_level = #{landLevel,jdbcType=VARCHAR},
+            land_area = #{landArea,jdbcType=VARCHAR},
+            sort = #{sort,jdbcType=INTEGER},
+            eastern_border = #{easternBorder,jdbcType=VARCHAR},
+            western_border = #{westernBorder,jdbcType=VARCHAR},
+            northern_border = #{northernBorder,jdbcType=VARCHAR},
+            southern_border = #{southernBorder,jdbcType=VARCHAR},
+            outsource = #{outsource,jdbcType=INTEGER},
+            outsourcing_term = #{outsourcingTerm,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据进件ID查询土地信息 -->
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_transferland
+        where into_piece_id = #{intopieceId,jdbcType=VARCHAR} order by sort asc
+    </select>
+    <select id="selectMaxSortByIpId" resultType="INTEGER" parameterType="java.lang.String" >
+        select 
+        max(sort)
+        from t_bus_transferland
+        where into_piece_id = #{intopieceId,jdbcType=VARCHAR} 
+    </select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysParaGroupMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysParaGroup" >
+        <id column="PGROUP_ID" property="pgroupId" jdbcType="INTEGER" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="DESCR" property="descr" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        PGROUP_ID, NAME, DESCR, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_paragroup
+        where PGROUP_ID = #{pgroupId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_paragroup
+	    where NAME = #{name,jdbcType=VARCHAR}
+	    order by SEQNO ASC
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	 select 
+        <include refid="Base_Column_List" />
+        from t_sys_paragroup
+          order by SEQNO ASC
+    </select>
+	
+	<select id="count" resultType="Integer">
+  	   	select count(PGROUP_ID) from t_sys_paragroup
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_sys_paragroup
+        where PGROUP_ID = #{pgroupId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysParaGroup" >
+        insert into t_sys_paragroup (PGROUP_ID, NAME, DESCR, 
+            SEQNO)
+        values (#{pgroupId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{descr,jdbcType=VARCHAR}, 
+            #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysParaGroup" >
+        insert into t_sys_paragroup
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pgroupId != null" >
+                PGROUP_ID,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="descr != null" >
+                DESCR,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pgroupId != null" >
+                #{pgroupId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null" >
+                #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysParaGroup" >
+        update t_sys_paragroup
+        <set >
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null" >
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PGROUP_ID = #{pgroupId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysParaGroup" >
+        update t_sys_paragroup
+        set NAME = #{name,jdbcType=VARCHAR},
+            DESCR = #{descr,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where PGROUP_ID = #{pgroupId,jdbcType=INTEGER}
+    </update>
+    
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	 select 
+        <include refid="Base_Column_List" />
+        from t_sys_paragroup
+        order by SEQNO ASC
+    </select>
+    <select id="existedSameName" resultMap="BaseResultMap">
+    	 select 
+        <include refid="Base_Column_List" />
+        from t_sys_paragroup
+        where NAME = #{name,jdbcType=VARCHAR}
+    </select>
+    <select id="existedSameDesc" resultMap="BaseResultMap">
+    	 select 
+        <include refid="Base_Column_List" />
+        from t_sys_paragroup
+        where DESCR = #{descr,jdbcType=VARCHAR}
+    </select>
+</mapper>

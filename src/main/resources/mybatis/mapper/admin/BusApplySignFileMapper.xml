@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusApplySignFileMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusApplySignFile" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+        <result column="sequence_order" property="sequenceOrder" jdbcType="INTEGER" />
+        <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+        <result column="req_time" property="reqTime" jdbcType="VARCHAR" />
+        <result column="no" property="no" jdbcType="INTEGER" />
+        <result column="apply_no" property="applyNo" jdbcType="VARCHAR" />
+        <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="amount" property="amount" jdbcType="DECIMAL" />
+        <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+        <result column="file_downpath" property="fileDownpath" jdbcType="VARCHAR" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="signatories" property="signatories" jdbcType="LONGVARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="solution" property="solution" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, business_no, sequence_order, total_num, req_time, no, apply_no, loan_id, name, 
+        amount, file_path, file_downpath, channel, signatories, remark, status, message, solution, 
+        IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+        UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_apply_sign_file
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_apply_sign_file
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusApplySignFile" >
+        insert into t_bus_apply_sign_file (id, business_no, sequence_order, 
+            total_num, req_time, no, 
+            apply_no, loan_id, name, 
+            amount, file_path, file_downpath, channel,
+            signatories, remark, status, 
+            message, solution, IS_DELETED, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{businessNo,jdbcType=VARCHAR}, #{sequenceOrder,jdbcType=INTEGER}, 
+            #{totalNum,jdbcType=INTEGER}, #{reqTime,jdbcType=VARCHAR}, #{no,jdbcType=INTEGER}, 
+            #{applyNo,jdbcType=VARCHAR}, #{loanId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+            #{amount,jdbcType=DECIMAL}, #{filePath,jdbcType=VARCHAR}, #{fileDownpath,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR},
+            #{signatories,jdbcType=LONGVARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+            #{message,jdbcType=VARCHAR}, #{solution,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusApplySignFile" >
+        insert into t_bus_apply_sign_file
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="businessNo != null" >
+                business_no,
+            </if>
+            <if test="sequenceOrder != null" >
+                sequence_order,
+            </if>
+            <if test="totalNum != null" >
+                total_num,
+            </if>
+            <if test="reqTime != null" >
+                req_time,
+            </if>
+            <if test="no != null" >
+                no,
+            </if>
+            <if test="applyNo != null" >
+                apply_no,
+            </if>
+            <if test="loanId != null" >
+                loan_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="amount != null" >
+                amount,
+            </if>
+            <if test="filePath != null" >
+                file_path,
+            </if>
+            <if test="fileDownpath != null" >
+                file_downpath,
+            </if>
+            <if test="channel != null" >
+                channel,
+            </if>
+            <if test="signatories != null" >
+                signatories,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="message != null" >
+                message,
+            </if>
+            <if test="solution != null" >
+                solution,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="businessNo != null" >
+                #{businessNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sequenceOrder != null" >
+                #{sequenceOrder,jdbcType=INTEGER},
+            </if>
+            <if test="totalNum != null" >
+                #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="reqTime != null" >
+                #{reqTime,jdbcType=VARCHAR},
+            </if>
+            <if test="no != null" >
+                #{no,jdbcType=INTEGER},
+            </if>
+            <if test="applyNo != null" >
+                #{applyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null" >
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="filePath != null" >
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileDownpath != null" >
+                #{fileDownpath,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="signatories != null" >
+                #{signatories,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="message != null" >
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="solution != null" >
+                #{solution,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusApplySignFile" >
+        update t_bus_apply_sign_file
+        <set >
+            <if test="businessNo != null" >
+                business_no = #{businessNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sequenceOrder != null" >
+                sequence_order = #{sequenceOrder,jdbcType=INTEGER},
+            </if>
+            <if test="totalNum != null" >
+                total_num = #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="reqTime != null" >
+                req_time = #{reqTime,jdbcType=VARCHAR},
+            </if>
+            <if test="no != null" >
+                no = #{no,jdbcType=INTEGER},
+            </if>
+            <if test="applyNo != null" >
+                apply_no = #{applyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                loan_id = #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null" >
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="filePath != null" >
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileDownpath != null" >
+                file_downpath = #{fileDownpath,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="signatories != null" >
+                signatories = #{signatories,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="solution != null" >
+                solution = #{solution,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusApplySignFile" >
+        update t_bus_apply_sign_file
+        set business_no = #{businessNo,jdbcType=VARCHAR},
+            sequence_order = #{sequenceOrder,jdbcType=INTEGER},
+            total_num = #{totalNum,jdbcType=INTEGER},
+            req_time = #{reqTime,jdbcType=VARCHAR},
+            no = #{no,jdbcType=INTEGER},
+            apply_no = #{applyNo,jdbcType=VARCHAR},
+            loan_id = #{loanId,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            amount = #{amount,jdbcType=DECIMAL},
+            file_path = #{filePath,jdbcType=VARCHAR},
+            file_downpath = #{fileDownpath,jdbcType=VARCHAR},
+            channel = #{channel,jdbcType=VARCHAR},
+            signatories = #{signatories,jdbcType=LONGVARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER},
+            message = #{message,jdbcType=VARCHAR},
+            solution = #{solution,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByLoanId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_apply_sign_file
+        where loan_id = #{loanId,jdbcType=VARCHAR} and IS_DELETED = 0 order by sequence_order
+    </select>
+    
+    <select id="waitSign" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_apply_sign_file
+        where loan_id = #{loanId,jdbcType=VARCHAR} and IS_DELETED = 0 and status = 2 order by sequence_order
+    </select>
+    <select id="finishSign" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_apply_sign_file
+        where loan_id = #{loanId,jdbcType=VARCHAR} and IS_DELETED = 0 and status = 3 order by sequence_order
+    </select>
+    <select id="checkExist" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusApplySignFile" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_apply_sign_file
+        where loan_id = #{loanId,jdbcType=VARCHAR} and sequence_order = #{sequenceOrder,jdbcType=INTEGER} and IS_DELETED = 0
+    </select>
+</mapper>

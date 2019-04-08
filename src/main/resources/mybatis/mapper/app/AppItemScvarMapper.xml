@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongyeos.loan.app.mapper.AppItemScvarMapper">
+  <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppItemScvar">
+    <id column="ITEMSCVAR_ID" jdbcType="INTEGER" property="itemscvarId" />
+    <result column="APPSC_ID" jdbcType="VARCHAR" property="appscId" />
+    <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId" />
+    <result column="SCVAR_ID" jdbcType="VARCHAR" property="scvarId" />
+    <result column="PC_ID" jdbcType="VARCHAR" property="pcId" />
+    <result column="SEQNO" jdbcType="INTEGER" property="seqno" />
+    <result column="SCORE_ID" jdbcType="VARCHAR" property="scoreId" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ITEMSCVAR_ID, APPSC_ID, ITEM_ID, SCVAR_ID, PC_ID, SEQNO, SCORE_ID, APP_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where ITEMSCVAR_ID = #{itemscvarId,jdbcType=INTEGER} and SCORE_ID = #{scoreId,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="queryByScvarId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where SCVAR_ID = #{scvarId,jdbcType=VARCHAR} and SCORE_ID = #{scoreId,jdbcType=VARCHAR} and APP_ID = #{appId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByAppscId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where APPSC_ID = #{appscId,jdbcType=INTEGER}
+    order by SEQNO asc
+  </select>
+  
+  <select id="existItemId"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where ITEM_ID = #{arg0} and APPSC_ID = #{arg1}
+  </select>
+  
+   <select id="existScvarId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where SCVAR_ID = #{arg0} and APPSC_ID = #{arg1}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_app_itemscvar
+    where ITEMSCVAR_ID = #{itemscvarId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppItemScvar">
+    insert into t_app_itemscvar (ITEMSCVAR_ID, APPSC_ID, ITEM_ID, 
+      SCVAR_ID, PC_ID, SEQNO, SCORE_ID, APP_ID
+      )
+    values (#{itemscvarId,jdbcType=INTEGER}, #{appscId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+      #{scvarId,jdbcType=VARCHAR}, #{pcId,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, #{scoreId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.AppItemScvar">
+    insert into t_app_itemscvar
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemscvarId != null">
+        ITEMSCVAR_ID,
+      </if>
+      <if test="appscId != null">
+        APPSC_ID,
+      </if>
+      <if test="itemId != null">
+        ITEM_ID,
+      </if>
+      <if test="scvarId != null">
+        SCVAR_ID,
+      </if>
+      <if test="pcId != null">
+        PC_ID,
+      </if>
+      <if test="seqno != null">
+        SEQNO,
+      </if>
+      <if test="scoreId != null">
+        SCORE_ID,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemscvarId != null">
+        #{itemscvarId,jdbcType=INTEGER},
+      </if>
+      <if test="appscId != null">
+        #{appscId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="scvarId != null">
+        #{scvarId,jdbcType=VARCHAR},
+      </if>
+      <if test="pcId != null">
+        #{pcId,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        #{seqno,jdbcType=INTEGER},
+      </if>
+      <if test="scoreId != null">
+        #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.AppItemScvar">
+    update t_app_itemscvar
+    <set>
+      <if test="appscId != null">
+        APPSC_ID = #{appscId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="scvarId != null">
+        SCVAR_ID = #{scvarId,jdbcType=VARCHAR},
+      </if>
+      <if test="pcId != null">
+        PC_ID = #{pcId,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        SEQNO = #{seqno,jdbcType=INTEGER},
+      </if>
+      <if test="scoreId != null">
+        #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ITEMSCVAR_ID = #{itemscvarId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppItemScvar">
+    update t_app_itemscvar
+    set APPSC_ID = #{appscId,jdbcType=VARCHAR},
+      ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      SCVAR_ID = #{scvarId,jdbcType=VARCHAR},
+      PC_ID = #{pcId,jdbcType=VARCHAR},
+      SEQNO = #{seqno,jdbcType=INTEGER},
+      SCORE_ID = #{scoreId,jdbcType=VARCHAR},
+      APP_ID = #{appId,jdbcType=VARCHAR}
+    where ITEMSCVAR_ID = #{itemscvarId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="existItemId1"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where ITEMSCVAR_ID != #{appItemScvarId,jdbcType=INTEGER} and ITEM_ID = #{itemId,jdbcType=VARCHAR} and APPSC_ID = #{appscId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="existScvarId1" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_app_itemscvar
+    where ITEMSCVAR_ID != #{appItemScvarId,jdbcType=INTEGER} and SCVAR_ID = #{scvarId,jdbcType=VARCHAR} and APPSC_ID = #{appscId,jdbcType=VARCHAR} 
+  </select>
+</mapper>

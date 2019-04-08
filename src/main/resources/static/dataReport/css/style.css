@@ -1,0 +1,106 @@
+@charset "UTF-8";
+table .sortable:after {
+    margin-left: 5px;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0dc";
+}
+
+table .sortable {
+    cursor: pointer;
+}
+
+table .sortable.desc, table .sortable.asc {
+    color: green;
+    order-color: green;
+}
+
+table .sortable.desc:after {
+    margin-left: 5px;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0dd";
+}
+
+table .sortable.asc:after {
+    margin-left: 5px;
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0de";
+}
+
+table .thumbnail {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 0;
+}
+
+.search-form {
+    text-align: left !important;
+}
+
+.search-form .form-group {
+    margin-top: 0px;
+    vertical-align: bottom !important;
+}
+
+.search-form .form-group label {
+    width: 80px;
+    text-align: right;
+    margin-right: 8px;
+}
+
+.search-form .form-group .input-group {
+    width: 204px;
+}
+
+.search-form button {
+    margin-left: 20px !important;
+}
+
+.chosen-container-single .chosen-single {
+    background: #fff;
+    box-shadow: none;
+    -moz-box-sizing: border-box;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    cursor: text;
+    height: auto !important;
+    margin: 0;
+    padding: 6px 12px;
+    min-height: 30px;
+    overflow: hidden;
+    position: relative;
+    font-size: 14px;
+    width: 100%;
+}
+
+.has-success .chosen-container-single .chosen-single {
+    border-color: #1ab394;
+}
+
+.has-error .chosen-container-single .chosen-single {
+    border-color: #ed5565;
+}
+
+.help-block {
+    margin-top: 0;
+}
+
+.layui-layer-content .webuploader-pick {
+    cursor: pointer;
+    background-color: #1a7bb9;
+    border-color: #1a7bb9;
+    color: #fff;
+    text-align: center;
+    line-height: 3;
+    border-radius: 3px;
+    width: 100%;
+    margin: 0;
+}
+
+.panel-body {
+    padding: 0px;
+}
+
+/* 风控模型静态数据标题样式 */
+.dynamic-title {
+    color: #33CC66;
+}

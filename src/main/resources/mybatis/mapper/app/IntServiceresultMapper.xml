@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.IntServiceresultMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.IntServiceresult" >
+        <id column="SERVRES_CODE" property="servresCode" jdbcType="VARCHAR" />
+        <result column="SERVIMPL_CODE" property="servimplCode" jdbcType="VARCHAR" />
+        <result column="RESULT_TEXT" property="resultText" jdbcType="VARCHAR" />
+        <result column="RESULT_VALUE" property="resultValue" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SERVRES_CODE, SERVIMPL_CODE, RESULT_TEXT, RESULT_VALUE, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceresult
+        where SERVRES_CODE = #{servresCode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceresult
+    </select>
+     <select id="selectByServimplId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceresult
+        where SERVIMPL_CODE = #{servimplId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectAllByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_int_serviceresult
+	    where SERVIMPL_CODE = #{code,jdbcType=VARCHAR}
+	    order by SEQNO ASC
+	</select>
+	
+	<select id="count" resultType="Integer">
+  	   	select count(SERVRES_CODE) from t_int_serviceresult
+  	   	 where SERVIMPL_CODE = #{code,jdbcType=VARCHAR}
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_serviceresult
+        where SERVRES_CODE = #{servresCode,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.IntServiceresult" >
+        insert into t_int_serviceresult (SERVRES_CODE, SERVIMPL_CODE, RESULT_TEXT, 
+            RESULT_VALUE, SEQNO)
+        values (#{servresCode,jdbcType=VARCHAR}, #{servimplCode,jdbcType=VARCHAR}, #{resultText,jdbcType=VARCHAR}, 
+            #{resultValue,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.IntServiceresult" >
+        insert into t_int_serviceresult
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="servresCode != null" >
+                SERVRES_CODE,
+            </if>
+            <if test="servimplCode != null" >
+                SERVIMPL_CODE,
+            </if>
+            <if test="resultText != null" >
+                RESULT_TEXT,
+            </if>
+            <if test="resultValue != null" >
+                RESULT_VALUE,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="servresCode != null" >
+                #{servresCode,jdbcType=VARCHAR},
+            </if>
+            <if test="servimplCode != null" >
+                #{servimplCode,jdbcType=VARCHAR},
+            </if>
+            <if test="resultText != null" >
+                #{resultText,jdbcType=VARCHAR},
+            </if>
+            <if test="resultValue != null" >
+                #{resultValue,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.IntServiceresult" >
+        update t_int_serviceresult
+        <set >
+            <if test="servimplCode != null" >
+                SERVIMPL_CODE = #{servimplCode,jdbcType=VARCHAR},
+            </if>
+            <if test="resultText != null" >
+                RESULT_TEXT = #{resultText,jdbcType=VARCHAR},
+            </if>
+            <if test="resultValue != null" >
+                RESULT_VALUE = #{resultValue,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where SERVRES_CODE = #{servresCode,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.IntServiceresult" >
+        update t_int_serviceresult
+        set SERVIMPL_CODE = #{servimplCode,jdbcType=VARCHAR},
+            RESULT_TEXT = #{resultText,jdbcType=VARCHAR},
+            RESULT_VALUE = #{resultValue,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where SERVRES_CODE = #{servresCode,jdbcType=VARCHAR}
+    </update>
+</mapper>

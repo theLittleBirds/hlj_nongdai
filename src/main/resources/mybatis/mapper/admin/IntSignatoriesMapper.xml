@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.IntSignatoriesMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.IntSignatories" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+        <result column="apply_no" property="applyNo" jdbcType="VARCHAR" />
+        <result column="apply_sign_file_id" property="applySignFileId" jdbcType="VARCHAR" />
+        <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+        <result column="identity_type" property="identityType" jdbcType="INTEGER" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="solution" property="solution" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, loan_id, apply_no, apply_sign_file_id, full_name, identity_type, id_card, mobile, 
+        status, message, solution, create_by, create_date, update_by, update_date, del_flag
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_signatories
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_signatories
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.IntSignatories" >
+        insert into t_int_signatories (id, loan_id, apply_no, 
+            apply_sign_file_id, full_name, identity_type, 
+            id_card, mobile, status, 
+            message, solution, create_by, 
+            create_date, update_by, update_date, 
+            del_flag)
+        values (#{id,jdbcType=VARCHAR}, #{loanId,jdbcType=VARCHAR}, #{applyNo,jdbcType=VARCHAR}, 
+            #{applySignFileId,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{identityType,jdbcType=INTEGER}, 
+            #{idCard,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+            #{message,jdbcType=VARCHAR}, #{solution,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+            #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+            #{delFlag,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.IntSignatories" >
+        insert into t_int_signatories
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="loanId != null" >
+                loan_id,
+            </if>
+            <if test="applyNo != null" >
+                apply_no,
+            </if>
+            <if test="applySignFileId != null" >
+                apply_sign_file_id,
+            </if>
+            <if test="fullName != null" >
+                full_name,
+            </if>
+            <if test="identityType != null" >
+                identity_type,
+            </if>
+            <if test="idCard != null" >
+                id_card,
+            </if>
+            <if test="mobile != null" >
+                mobile,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="message != null" >
+                message,
+            </if>
+            <if test="solution != null" >
+                solution,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+            <if test="delFlag != null" >
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="applyNo != null" >
+                #{applyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="applySignFileId != null" >
+                #{applySignFileId,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null" >
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="identityType != null" >
+                #{identityType,jdbcType=INTEGER},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="message != null" >
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="solution != null" >
+                #{solution,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null" >
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.IntSignatories" >
+        update t_int_signatories
+        <set >
+            <if test="loanId != null" >
+                loan_id = #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="applyNo != null" >
+                apply_no = #{applyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="applySignFileId != null" >
+                apply_sign_file_id = #{applySignFileId,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null" >
+                full_name = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="identityType != null" >
+                identity_type = #{identityType,jdbcType=INTEGER},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null" >
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="solution != null" >
+                solution = #{solution,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.IntSignatories" >
+        update t_int_signatories
+        set loan_id = #{loanId,jdbcType=VARCHAR},
+            apply_no = #{applyNo,jdbcType=VARCHAR},
+            apply_sign_file_id = #{applySignFileId,jdbcType=VARCHAR},
+            full_name = #{fullName,jdbcType=VARCHAR},
+            identity_type = #{identityType,jdbcType=INTEGER},
+            id_card = #{idCard,jdbcType=VARCHAR},
+            mobile = #{mobile,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER},
+            message = #{message,jdbcType=VARCHAR},
+            solution = #{solution,jdbcType=VARCHAR},
+            create_by = #{createBy,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+            del_flag = #{delFlag,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectIdSendSms" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        id
+        from t_int_signatories
+        where loan_id = #{loanId,jdbcType=VARCHAR} and del_flag = 0 and identity_type = 1
+    </select>
+    <select id="selectByapplySignFileId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_signatories
+        where apply_sign_file_id = #{applySignFileId,jdbcType=VARCHAR} and del_flag = 0
+    </select>
+</mapper>

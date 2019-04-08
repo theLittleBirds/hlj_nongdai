@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.ApiPyReportMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="content_html" property="contentHtml" jdbcType="LONGVARCHAR" />
+        <result column="reject_flag" property="rejectFlag" jdbcType="INTEGER" />
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, id_card_no, content, content_html, reject_flag, createTime
+    </sql>
+
+    <select id="queryPyReportSelective" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_py_report
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and id_card_no = #{idCardNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_py_report
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_py_report
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        insert into t_int_py_report (id, into_piece_id, id_card_no, 
+            content, content_html,reject_flag, createTime
+            )
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{idCardNo,jdbcType=VARCHAR}, 
+            #{content,jdbcType=LONGVARCHAR}, #{contentHtml,jdbcType=LONGVARCHAR},#{rejectFlag,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="addPyReportSelective" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        insert into t_int_py_report
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="contentHtml != null" >
+                content_html,
+            </if>
+            <if test="rejectFlag != null" >
+                reject_flag,
+            </if>
+            <if test="createtime != null" >
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardNo != null" >
+                #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contentHtml != null" >
+                #{contentHtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="rejectFlag != null" >
+                #{rejectFlag,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        update t_int_py_report
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contentHtml != null" >
+                content_html = #{contentHtml,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="rejectFlag != null" >
+                reject_flag = #{rejectFlag,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        update t_int_py_report
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            content = #{content,jdbcType=LONGVARCHAR},
+            content_html = #{contentHtml,jdbcType=LONGVARCHAR},
+            reject_flag = #{rejectFlag,jdbcType=INTEGER},
+            createTime = #{createtime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据身份证和进件ID更新报告 -->
+    <update id="updateByIntoPAndIDCSelective" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        update t_int_py_report
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contentHtml != null" >
+                content_html = #{contentHtml,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rejectFlag != null" >
+                reject_flag = #{rejectFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and id_card_no = #{idCardNo,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据身份证查询历史报告 -->
+    <select id="selectByIDC" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.ApiPyReport" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_py_report
+        where id_card_no = #{idCardNo,jdbcType=VARCHAR} order by createTime desc limit 0,1
+    </select>
+</mapper>

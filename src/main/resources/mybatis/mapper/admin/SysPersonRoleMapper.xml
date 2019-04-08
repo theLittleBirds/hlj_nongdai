@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysPersonRoleMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysPersonRole" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="PERSON_ID" property="personId" jdbcType="VARCHAR" />
+        <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, PERSON_ID, ROLE_ID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_personrole
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    
+    <select id="getRoleByPerson" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_personrole
+        where PERSON_ID = #{personId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectRoleByPerson" resultType="java.lang.String" parameterType="java.lang.String" >
+        select 
+        ROLE_ID
+        from t_sys_personrole
+        where PERSON_ID = #{personId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="getPersonByRole" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_personrole
+        where ROLE_ID = #{roleId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_sys_personrole
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByPersonId" parameterType="java.lang.String" >
+        delete from t_sys_personrole
+        where PERSON_ID = #{personId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysPersonRole" >
+        insert into t_sys_personrole (ID, PERSON_ID, ROLE_ID
+            )
+        values (#{id,jdbcType=INTEGER}, #{personId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysPersonRole" >
+        insert into t_sys_personrole
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="personId != null" >
+                PERSON_ID,
+            </if>
+            <if test="roleId != null" >
+                ROLE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="personId != null" >
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysPersonRole" >
+        update t_sys_personrole
+        <set >
+            <if test="personId != null" >
+                PERSON_ID = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null" >
+                ROLE_ID = #{roleId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysPersonRole" >
+        update t_sys_personrole
+        set PERSON_ID = #{personId,jdbcType=VARCHAR},
+            ROLE_ID = #{roleId,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

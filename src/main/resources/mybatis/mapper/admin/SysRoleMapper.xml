@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysRoleMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysRole" >
+        <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="NAME_CN" property="nameCn" jdbcType="VARCHAR" />
+        <result column="NAME_EN" property="nameEn" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="STATUS" property="status" jdbcType="TINYINT" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ROLE_ID, ORG_ID, NAME_CN, NAME_EN, SEQNO, STATUS, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+        CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+        where status = #{status,jdbcType=TINYINT}
+        <if test="orgId != ''" >
+              and ORG_ID = #{orgId,jdbcType=VARCHAR}
+        </if>
+        order by SEQNO ASC
+    </select>
+    
+    
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+        order by SEQNO ASC
+    </select>
+    
+    <select id="getRolesByPersonOrg" resultMap="BaseResultMap">
+    	select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+            <if test="list == null or list.size() == 0">
+		        where 1 = 2
+	        </if>
+            <if test="list != null and list.size() > 0">
+		        where ORG_ID in
+		        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		                #{item}
+		        </foreach>
+	        </if>
+        order by SEQNO ASC
+    </select>
+    
+    <select id="getRoleListByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	 select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+        where ORG_ID = #{id,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+    <select id="count" resultType="Integer">
+  	   	select count(ROLE_ID) from t_sys_role
+  	   	 where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_sys_role
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysRole" >
+        insert into t_sys_role (ROLE_ID, ORG_ID, NAME_CN, 
+            NAME_EN, SEQNO, STATUS, 
+            IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+            CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+            UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+            )
+        values (#{roleId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{nameCn,jdbcType=VARCHAR}, 
+            #{nameEn,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+            #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysRole" >
+        insert into t_sys_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="roleId != null" >
+                ROLE_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="nameCn != null" >
+                NAME_CN,
+            </if>
+            <if test="nameEn != null" >
+                NAME_EN,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="roleId != null" >
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="nameCn != null" >
+                #{nameCn,jdbcType=VARCHAR},
+            </if>
+            <if test="nameEn != null" >
+                #{nameEn,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysRole" >
+        update t_sys_role
+        <set >
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="nameCn != null" >
+                NAME_CN = #{nameCn,jdbcType=VARCHAR},
+            </if>
+            <if test="nameEn != null" >
+                NAME_EN = #{nameEn,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysRole" >
+        update t_sys_role
+        set ORG_ID = #{orgId,jdbcType=VARCHAR},
+            NAME_CN = #{nameCn,jdbcType=VARCHAR},
+            NAME_EN = #{nameEn,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            STATUS = #{status,jdbcType=TINYINT},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectByCname" resultMap="BaseResultMap">
+    	select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+        where 
+        NAME_CN = #{nameCn,jdbcType=VARCHAR}
+        and 
+        ORG_ID = #{orgId,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+    <select id="selectByEname" resultMap="BaseResultMap">
+    	select 
+        <include refid="Base_Column_List" />
+        from t_sys_role
+        where 
+        NAME_EN = #{nameEn,jdbcType=VARCHAR}
+        and
+        ORG_ID = #{orgId,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+</mapper>

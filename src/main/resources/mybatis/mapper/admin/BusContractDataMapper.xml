@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusContractDataMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusContractData" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+        <result column="data" property="data" jdbcType="LONGVARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, loan_id, data
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractdata
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_contractdata
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusContractData" >
+        insert into t_bus_contractdata (id, loan_id, data
+            )
+        values (#{id,jdbcType=VARCHAR}, #{loanId,jdbcType=VARCHAR}, #{data,jdbcType=LONGVARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusContractData" >
+        insert into t_bus_contractdata
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="loanId != null" >
+                loan_id,
+            </if>
+            <if test="data != null" >
+                data,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="data != null" >
+                #{data,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusContractData" >
+        update t_bus_contractdata
+        <set >
+            <if test="loanId != null" >
+                loan_id = #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="data != null" >
+                data = #{data,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusContractData" >
+        update t_bus_contractdata
+        set loan_id = #{loanId,jdbcType=VARCHAR},
+            data = #{data,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <select id="selectByloanId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractdata
+        where loan_id = #{loanId,jdbcType=VARCHAR}
+    </select>
+    
+     <delete id="deleteByLoanId" parameterType="java.lang.String" >
+        delete from t_bus_contractdata
+        where loan_id = #{loanId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

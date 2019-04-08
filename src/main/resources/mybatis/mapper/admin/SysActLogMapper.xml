@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysActLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysActLog" >
+        <id column="LOG_ID" property="logId"/>
+        <result column="USER_CODE" property="userCode"/>
+        <result column="PERSON_CODE" property="personCode"/>
+        <result column="PERSON_NAME" property="personName"/>
+        <result column="ORG_CODE" property="orgCode"/>
+        <result column="ORG_NAME" property="orgName"/>
+        <result column="IP" property="ip"/>
+        <result column="ACT_EVENT" property="actEvent"/>
+        <result column="ACT_OBJECT" property="actObject"/>
+        <result column="ACT_TIME" property="actTime"/>
+    </resultMap>
+
+    <sql id="Act_Log_List" >
+       LOG_ID,USER_CODE,PERSON_CODE,PERSON_NAME,ORG_CODE,ORG_NAME,IP,ACT_EVENT,ACT_OBJECT,ACT_TIME
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap" >
+        select 
+        <include refid="Act_Log_List" />
+        from t_sys_actlog
+    </select>
+    
+    <select id="count" resultType="Integer">
+  	   	select count(LOG_ID) from t_sys_actlog
+  	</select>
+    
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysActLog" >
+        insert into t_sys_actlog
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logId != null" >
+                PARA_ID,
+            </if>
+            <if test="userCode != null" >
+                USER_CODE,
+            </if>
+            <if test="personCode != null" >
+                PERSON_CODE,
+            </if>
+            <if test="personName != null" >
+                PERSON_NAME,
+            </if>
+            <if test="orgCode != null" >
+                ORG_CODE,
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME,
+            </if>
+            <if test="ip != null" >
+                IP,
+            </if>
+            <if test="actEvent != null" >
+                ACT_EVENT,
+            </if>
+            <if test="actObject != null" >
+                ACT_OBJECT,
+            </if>
+            <if test="actTime != null" >
+                ACT_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logId != null" >
+                #{logId},
+            </if>
+            <if test="userCode != null" >
+                #{userCode},
+            </if>
+            <if test="personCode != null" >
+                #{personCode},
+            </if>
+            <if test="personName != null" >
+                #{personName},
+            </if>
+            <if test="orgCode != null" >
+                #{orgCode},
+            </if>
+            <if test="orgName != null" >
+                #{orgName},
+            </if>
+            <if test="ip != null" >
+                #{ip},
+            </if>
+            <if test="actEvent != null" >
+                #{actEvent},
+            </if>
+            <if test="actObject != null" >
+                #{actObject},
+            </if>
+            <if test="actTime != null" >
+                #{actTime},
+            </if>
+        </trim>
+    </insert>
+    
+    <delete id="deleteById">
+        delete from t_sys_actlog
+        where LOG_ID = #{logId}
+    </delete>
+
+	<update id="update" parameterType="com.nongyeos.loan.admin.entity.SysActLog" >
+        update t_sys_para
+        <set >
+            <if test="logId != null" >
+                LOG_ID = #{logId},
+            </if>
+            <if test="userCode != null" >
+                USER_CODE = #{userCode},
+            </if>
+            <if test="personCode != null" >
+                PERSON_CODE = #{personCode},
+            </if>
+            <if test="personName != null" >
+                PERSON_NAME = #{personName},
+            </if>
+            <if test="orgCode != null" >
+                ORG_CODE = #{orgCode},
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME = #{orgName},
+            </if>
+            <if test="ip != null" >
+                IP = #{ip},
+            </if>
+            <if test="actEvent != null" >
+                ACT_EVENT = #{actEvent},
+            </if>
+            <if test="actObject != null" >
+                ACT_OBJECT = #{actObject},
+            </if>
+            <if test="actTime != null" >
+                ACT_TIME = #{actTime},
+            </if>
+        </set>
+        where  LOG_ID = #{logId}
+    </update>
+
+</mapper>

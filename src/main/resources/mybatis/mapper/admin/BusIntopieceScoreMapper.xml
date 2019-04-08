@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusIntopieceScoreMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusIntopieceScore" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="score_id" property="scoreId" jdbcType="VARCHAR" />
+        <result column="class_id" property="classId" jdbcType="VARCHAR" />
+        <result column="class_name" property="className" jdbcType="VARCHAR" />
+        <result column="score_total" property="scoreTotal" jdbcType="VARCHAR" />
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, score_id, class_id, class_name, score_total, createTime
+    </sql>
+
+    <select id="queryByIntopieceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_intopiece_score
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_intopiece_score
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_intopiece_score
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceScore" >
+        insert into t_bus_intopiece_score (id, into_piece_id, score_id, 
+            class_id, class_name, score_total, createTime
+            )
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{scoreId,jdbcType=VARCHAR}, 
+            #{classId,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{scoreTotal,jdbcType=VARCHAR},
+            #{createtime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="addIntopieceScoreSelective" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceScore" >
+        insert into t_bus_intopiece_score
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="scoreId != null" >
+                score_id,
+            </if>
+            <if test="classId != null" >
+                class_id,
+            </if>
+            <if test="className != null" >
+                class_name,
+            </if>
+            <if test="scoreTotal != null" >
+                score_total,
+            </if>
+            <if test="createtime != null" >
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="scoreId != null" >
+                #{scoreId,jdbcType=VARCHAR},
+            </if>
+            <if test="classId != null" >
+                #{classId,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null" >
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="scoreTotal != null" >
+                #{scoreTotal,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceScore" >
+        update t_bus_intopiece_score
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="scoreId != null" >
+                score_id = #{scoreId,jdbcType=VARCHAR},
+            </if>
+            <if test="classId != null" >
+                class_id = #{classId,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null" >
+                class_name = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="scoreTotal != null" >
+                score_total = #{scoreTotal,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceScore" >
+        update t_bus_intopiece_score
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            score_id = #{scoreId,jdbcType=VARCHAR},
+            class_id = #{classId,jdbcType=VARCHAR},
+            class_name = #{className,jdbcType=VARCHAR},
+            score_total = #{scoreTotal,jdbcType=VARCHAR},
+            createTime = #{createtime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectByParentItemId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_intopiece_score
+        where into_piece_id = #{mainId,jdbcType=VARCHAR}
+    </select>
+    
+    <delete id="deleteByIpId">
+        delete from t_bus_intopiece_score
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+        and score_id = #{scoreId,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="historyScore" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        ss.cname as score_id,ips.class_name,ips.score_total
+        from t_bus_intopiece_score ips left join t_score_score ss on ips.score_id = ss.score_id
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} order by ss.seqno
+    </select>
+    <resultMap id="ExportMap" type="hashmap" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="score_id" property="scoreId" jdbcType="VARCHAR" />
+        <result column="class_id" property="classId" jdbcType="VARCHAR" />
+        <result column="class_name" property="className" jdbcType="VARCHAR" />
+        <result column="score_total" property="scoreTotal" jdbcType="VARCHAR" />
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="CNAME" property="cname" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <select id="selectExpByIntopieceId" resultMap="ExportMap" parameterType="java.lang.String" >
+        select 
+        ips.*,ss.CNAME
+        from t_bus_intopiece_score ips left join t_score_score ss on ips.score_id = ss.score_id
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} order by ss.seqno
+    </select>
+</mapper>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusNjorderinfoMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusNjorderinfo" >
+        <id column="ORDER_INFO_ID" property="orderInfoId" jdbcType="VARCHAR" />
+        <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+        <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+        <result column="MER_ID" property="merId" jdbcType="VARCHAR" />
+        <result column="MER_NAME" property="merName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_BRAND_NAME" property="productBrandName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_CATEGORY_NAME" property="productCategoryName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NUM" property="productNum" jdbcType="INTEGER" />
+        <result column="PRODUCT_PRICE" property="productPrice" jdbcType="VARCHAR" />
+        <result column="PRODUCT_SETTLE_PRICE" property="productSettlePrice" jdbcType="VARCHAR" />
+        <result column="PAY_PIC" property="payPic" jdbcType="VARCHAR" />
+        <result column="PAY_PIC_TAIL" property="payPicTail" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ORDER_INFO_ID, ORDER_ID, PRODUCT_ID, MER_ID, MER_NAME, PRODUCT_NAME, PRODUCT_BRAND_NAME, 
+        PRODUCT_CATEGORY_NAME, PRODUCT_NUM, PRODUCT_PRICE, PRODUCT_SETTLE_PRICE, PAY_PIC, PAY_PIC_TAIL, STATUS,
+        CREATE_DATE, UPDATE_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njorderinfo
+        where ORDER_INFO_ID = #{orderInfoId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njorderinfo
+        where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njorderinfo
+        where MER_ID = #{orgId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByOrderIdAndOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njorderinfo
+        where ORDER_ID = #{orderId,jdbcType=VARCHAR} and MER_ID = #{orgId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_njorderinfo
+        where ORDER_INFO_ID = #{orderInfoId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusNjorderinfo" >
+        insert into t_bus_njorderinfo (ORDER_INFO_ID, ORDER_ID, PRODUCT_ID, 
+            MER_ID, MER_NAME, PRODUCT_NAME, 
+            PRODUCT_BRAND_NAME, PRODUCT_CATEGORY_NAME, 
+            PRODUCT_NUM, PRODUCT_PRICE, PRODUCT_SETTLE_PRICE, PAY_PIC, PAY_PIC_TAIL,
+            STATUS, CREATE_DATE, UPDATE_DATE
+            )
+        values (#{orderInfoId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+            #{merId,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+            #{productBrandName,jdbcType=VARCHAR}, #{productCategoryName,jdbcType=VARCHAR}, 
+            #{productNum,jdbcType=INTEGER}, #{productPrice,jdbcType=VARCHAR}, #{productSettlePrice,jdbcType=VARCHAR}, #{payPic,jdbcType=VARCHAR}, #{payPicTail,jdbcType=VARCHAR},
+            #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusNjorderinfo" >
+        insert into t_bus_njorderinfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orderInfoId != null" >
+                ORDER_INFO_ID,
+            </if>
+            <if test="orderId != null" >
+                ORDER_ID,
+            </if>
+            <if test="productId != null" >
+                PRODUCT_ID,
+            </if>
+            <if test="merId != null" >
+                MER_ID,
+            </if>
+            <if test="merName != null" >
+                MER_NAME,
+            </if>
+            <if test="productName != null" >
+                PRODUCT_NAME,
+            </if>
+            <if test="productBrandName != null" >
+                PRODUCT_BRAND_NAME,
+            </if>
+            <if test="productCategoryName != null" >
+                PRODUCT_CATEGORY_NAME,
+            </if>
+            <if test="productNum != null" >
+                PRODUCT_NUM,
+            </if>
+            <if test="productPrice != null" >
+                PRODUCT_PRICE,
+            </if>
+            <if test="productSettlePrice != null" >
+                PRODUCT_SETTLE_PRICE,
+            </if>
+            <if test="payPic != null" >
+                PAY_PIC,
+            </if>
+            <if test="payPicTail != null" >
+                PAY_PIC_TAIL,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE,
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orderInfoId != null" >
+                #{orderInfoId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="merId != null" >
+                #{merId,jdbcType=VARCHAR},
+            </if>
+            <if test="merName != null" >
+                #{merName,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productNum != null" >
+                #{productNum,jdbcType=INTEGER},
+            </if>
+            <if test="productPrice != null" >
+                #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productSettlePrice != null" >
+                #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="payPic != null" >
+                #{payPic,jdbcType=VARCHAR},
+            </if>
+            <if test="payPicTail != null" >
+                #{payPicTail,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusNjorderinfo" >
+        update t_bus_njorderinfo
+        <set >
+            <if test="orderId != null" >
+                ORDER_ID = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="merId != null" >
+                MER_ID = #{merId,jdbcType=VARCHAR},
+            </if>
+            <if test="merName != null" >
+                MER_NAME = #{merName,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                PRODUCT_BRAND_NAME = #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                PRODUCT_CATEGORY_NAME = #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productNum != null" >
+                PRODUCT_NUM = #{productNum,jdbcType=INTEGER},
+            </if>
+            <if test="productPrice != null" >
+                PRODUCT_PRICE = #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productSettlePrice != null" >
+                PRODUCT_SETTLE_PRICE = #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="payPic != null" >
+                PAY_PIC = #{payPic,jdbcType=VARCHAR},
+            </if>
+            <if test="payPicTail != null" >
+                PAY_PIC_TAIL = #{payPicTail,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ORDER_INFO_ID = #{orderInfoId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusNjorderinfo" >
+        update t_bus_njorderinfo
+        set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+            PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+            MER_ID = #{merId,jdbcType=VARCHAR},
+            MER_NAME = #{merName,jdbcType=VARCHAR},
+            PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+            PRODUCT_BRAND_NAME = #{productBrandName,jdbcType=VARCHAR},
+            PRODUCT_CATEGORY_NAME = #{productCategoryName,jdbcType=VARCHAR},
+            PRODUCT_NUM = #{productNum,jdbcType=INTEGER},
+            PRODUCT_PRICE = #{productPrice,jdbcType=VARCHAR},
+            PRODUCT_SETTLE_PRICE = #{productSettlePrice,jdbcType=VARCHAR},
+            PAY_PIC = #{payPic,jdbcType=VARCHAR},
+            PAY_PIC_TAIL = #{payPicTail,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=VARCHAR},
+            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+        where ORDER_INFO_ID = #{orderInfoId,jdbcType=VARCHAR}
+    </update>
+</mapper>

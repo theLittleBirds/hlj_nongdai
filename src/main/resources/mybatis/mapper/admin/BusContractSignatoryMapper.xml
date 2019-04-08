@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusContractSignatoryMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="fins_id" property="finsId" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="ename" property="ename" jdbcType="VARCHAR" />
+        <result column="identity_type" property="identityType" jdbcType="INTEGER" />
+        <result column="identity_card" property="identityCard" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="legal_name" property="legalName" jdbcType="VARCHAR" />
+        <result column="legal_id_card" property="legalIdCard" jdbcType="VARCHAR" />
+        <result column="business_licence" property="businessLicence" jdbcType="VARCHAR" />
+        <result column="authorization" property="authorization" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, fins_id, name, ename, identity_type, identity_card, email, phone, legal_name, legal_id_card, 
+        business_licence, authorization, IS_DELETED, CRE_DATE, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractsignatory
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_contractsignatory
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        insert into t_bus_contractsignatory (id, fins_id, name, ename,
+            identity_type, identity_card, email, 
+            phone, legal_name, legal_id_card, 
+            business_licence, authorization, IS_DELETED, 
+            CRE_DATE, UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{finsId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR},  
+            #{identityType,jdbcType=INTEGER}, #{identityCard,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{legalName,jdbcType=VARCHAR}, #{legalIdCard,jdbcType=VARCHAR}, 
+            #{businessLicence,jdbcType=VARCHAR}, #{authorization,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        insert into t_bus_contractsignatory
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="finsId != null" >
+                fins_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="ename != null" >
+                ename,
+            </if>
+            <if test="identityType != null" >
+                identity_type,
+            </if>
+            <if test="identityCard != null" >
+                identity_card,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="legalName != null" >
+                legal_name,
+            </if>
+            <if test="legalIdCard != null" >
+                legal_id_card,
+            </if>
+            <if test="businessLicence != null" >
+                business_licence,
+            </if>
+            <if test="authorization != null" >
+                authorization,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="identityType != null" >
+                #{identityType,jdbcType=INTEGER},
+            </if>
+            <if test="identityCard != null" >
+                #{identityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null" >
+                #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalIdCard != null" >
+                #{legalIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicence != null" >
+                #{businessLicence,jdbcType=VARCHAR},
+            </if>
+            <if test="authorization != null" >
+                #{authorization,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        update t_bus_contractsignatory
+        <set >
+            <if test="finsId != null" >
+                fins_id = #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ename = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="identityType != null" >
+                identity_type = #{identityType,jdbcType=INTEGER},
+            </if>
+            <if test="identityCard != null" >
+                identity_card = #{identityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalName != null" >
+                legal_name = #{legalName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalIdCard != null" >
+                legal_id_card = #{legalIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicence != null" >
+                business_licence = #{businessLicence,jdbcType=VARCHAR},
+            </if>
+            <if test="authorization != null" >
+                authorization = #{authorization,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        update t_bus_contractsignatory
+        set fins_id = #{finsId,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            ename = #{ename,jdbcType=VARCHAR},
+            identity_type = #{identityType,jdbcType=INTEGER},
+            identity_card = #{identityCard,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            legal_name = #{legalName,jdbcType=VARCHAR},
+            legal_id_card = #{legalIdCard,jdbcType=VARCHAR},
+            business_licence = #{businessLicence,jdbcType=VARCHAR},
+            authorization = #{authorization,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectList" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractsignatory
+        where IS_DELETED = 0
+        <if test="name != null" >
+            and name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="identityCard != null" >
+            and identity_card like CONCAT('%',#{identityCard},'%')
+        </if>
+        order by UPD_DATE
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.BusContractSignatory" >
+        select 
+        count(id)
+        from t_bus_contractsignatory
+        where IS_DELETED = 0
+        <if test="name != null" >
+            and name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="identityCard != null" >
+            and identity_card like CONCAT('%',#{identityCard},'%')
+        </if>
+    </select>
+    <select id="selectByEname" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractsignatory
+        where IS_DELETED = 0 and ename = #{ename,jdbcType=VARCHAR}
+    </select>
+</mapper>

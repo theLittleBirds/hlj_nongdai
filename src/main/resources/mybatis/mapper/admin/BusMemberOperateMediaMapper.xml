@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusMemberOperateMediaMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusMemberOperateMedia" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="member_operate_id" property="memberOperateId" jdbcType="VARCHAR" />
+        <result column="file_type" property="fileType" jdbcType="INTEGER" />
+        <result column="file_type_name" property="fileTypeName" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="ext_name" property="extName" jdbcType="VARCHAR" />
+        <result column="size" property="size" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="qiniu_key" property="qiniuKey" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="SMALLINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, member_operate_id, file_type, file_type_name, name, ext_name, size, type, path, 
+        qiniu_key, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+        UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_memberoperatemedia
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_memberoperatemedia
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusMemberOperateMedia" >
+        insert into t_bus_memberoperatemedia (id, member_operate_id, file_type, 
+            file_type_name, name, ext_name, 
+            size, type, path, 
+            qiniu_key, IS_DELETED, CRE_OPER_ID, 
+            CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, 
+            UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, 
+            UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{memberOperateId,jdbcType=VARCHAR}, #{fileType,jdbcType=INTEGER}, 
+            #{fileTypeName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{extName,jdbcType=VARCHAR}, 
+            #{size,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+            #{qiniuKey,jdbcType=VARCHAR}, #{isDeleted,jdbcType=SMALLINT}, #{creOperId,jdbcType=VARCHAR}, 
+            #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, 
+            #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusMemberOperateMedia" >
+        insert into t_bus_memberoperatemedia
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="memberOperateId != null" >
+                member_operate_id,
+            </if>
+            <if test="fileType != null" >
+                file_type,
+            </if>
+            <if test="fileTypeName != null" >
+                file_type_name,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="extName != null" >
+                ext_name,
+            </if>
+            <if test="size != null" >
+                size,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="path != null" >
+                path,
+            </if>
+            <if test="qiniuKey != null" >
+                qiniu_key,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="memberOperateId != null" >
+                #{memberOperateId,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null" >
+                #{fileType,jdbcType=INTEGER},
+            </if>
+            <if test="fileTypeName != null" >
+                #{fileTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="extName != null" >
+                #{extName,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null" >
+                #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="qiniuKey != null" >
+                #{qiniuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusMemberOperateMedia" >
+        update t_bus_memberoperatemedia
+        <set >
+            <if test="memberOperateId != null" >
+                member_operate_id = #{memberOperateId,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null" >
+                file_type = #{fileType,jdbcType=INTEGER},
+            </if>
+            <if test="fileTypeName != null" >
+                file_type_name = #{fileTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="extName != null" >
+                ext_name = #{extName,jdbcType=VARCHAR},
+            </if>
+            <if test="size != null" >
+                size = #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="qiniuKey != null" >
+                qiniu_key = #{qiniuKey,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusMemberOperateMedia" >
+        update t_bus_memberoperatemedia
+        set member_operate_id = #{memberOperateId,jdbcType=VARCHAR},
+            file_type = #{fileType,jdbcType=INTEGER},
+            file_type_name = #{fileTypeName,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            ext_name = #{extName,jdbcType=VARCHAR},
+            size = #{size,jdbcType=VARCHAR},
+            type = #{type,jdbcType=VARCHAR},
+            path = #{path,jdbcType=VARCHAR},
+            qiniu_key = #{qiniuKey,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=SMALLINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <!-- 查询是否已存在图片 -->
+    <select id="existenceByKey" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.BusMemberOperateMedia" >
+        select 
+        count(id)
+        from t_bus_memberoperatemedia
+        where 1=1 and qiniu_key = #{qiniuKey,jdbcType=VARCHAR}
+        <if test="memberOperateId != null" >
+               and member_operate_id = #{memberOperateId,jdbcType=VARCHAR}
+        </if>
+        <if test="isDeleted != null" >
+              and IS_DELETED = #{isDeleted,jdbcType=SMALLINT} 
+        </if>
+    </select>
+    
+    <select id="selectByMOId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_memberoperatemedia
+        where  member_operate_id = #{id}
+        order by CRE_DATE 
+    </select>
+    
+</mapper>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusMoneyLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusMoneyLog" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="capital" property="capital" jdbcType="DECIMAL" />
+        <result column="interest" property="interest" jdbcType="DECIMAL" />
+        <result column="overdue" property="overdue" jdbcType="DECIMAL" />
+        <result column="info" property="info" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, loan_id, type, capital, interest, overdue, info, IS_DELETED, UPD_OPER_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_moneylog
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_moneylog
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusMoneyLog" >
+        insert into t_bus_moneylog (id, loan_id, type, 
+            capital, interest, overdue, 
+            info, IS_DELETED, UPD_OPER_ID, 
+            UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{loanId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+            #{capital,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{overdue,jdbcType=DECIMAL}, 
+            #{info,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, #{updOperId,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusMoneyLog" >
+        insert into t_bus_moneylog
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="loanId != null" >
+                loan_id,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="capital != null" >
+                capital,
+            </if>
+            <if test="interest != null" >
+                interest,
+            </if>
+            <if test="overdue != null" >
+                overdue,
+            </if>
+            <if test="info != null" >
+                info,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="capital != null" >
+                #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="interest != null" >
+                #{interest,jdbcType=DECIMAL},
+            </if>
+            <if test="overdue != null" >
+                #{overdue,jdbcType=DECIMAL},
+            </if>
+            <if test="info != null" >
+                #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusMoneyLog" >
+        update t_bus_moneylog
+        <set >
+            <if test="loanId != null" >
+                loan_id = #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="capital != null" >
+                capital = #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="interest != null" >
+                interest = #{interest,jdbcType=DECIMAL},
+            </if>
+            <if test="overdue != null" >
+                overdue = #{overdue,jdbcType=DECIMAL},
+            </if>
+            <if test="info != null" >
+                info = #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusMoneyLog" >
+        update t_bus_moneylog
+        set loan_id = #{loanId,jdbcType=VARCHAR},
+            type = #{type,jdbcType=INTEGER},
+            capital = #{capital,jdbcType=DECIMAL},
+            interest = #{interest,jdbcType=DECIMAL},
+            overdue = #{overdue,jdbcType=DECIMAL},
+            info = #{info,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="todayCreOut" resultMap="BaseResultMap" parameterType="hashmap" >
+        SELECT
+		count(0) total
+		from t_bus_intopiece 
+		where org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR}) and CRE_DATE > #{yyyymmdd,jdbcType=VARCHAR}
+    </select>
+</mapper>

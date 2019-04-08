@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusFamilySituationMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="member_id" property="memberId" jdbcType="VARCHAR" />
+        <result column="is_dead" property="isDead" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="seqno" property="seqno" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="live_address" property="liveAddress" jdbcType="VARCHAR" />
+        <result column="age" property="age" jdbcType="INTEGER" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="id_card_p" property="idCardP" jdbcType="VARCHAR" />
+        <result column="id_card_n" property="idCardN" jdbcType="VARCHAR" />
+        <result column="school" property="school" jdbcType="VARCHAR" />
+        <result column="education_level" property="educationLevel" jdbcType="INTEGER" />
+        <result column="marital_status" property="maritalStatus" jdbcType="INTEGER" />
+        <result column="health_status" property="healthStatus" jdbcType="INTEGER" />
+        <result column="disease_remark" property="diseaseRemark" jdbcType="VARCHAR" />
+        <result column="co_borrower" property="coBorrower" jdbcType="INTEGER" />
+        <result column="co_land" property="coLand" jdbcType="INTEGER" />
+        <result column="duty" property="duty" jdbcType="VARCHAR" />
+        <result column="nonfarm_com_name" property="nonfarmComName" jdbcType="VARCHAR" />
+        <result column="nonfarm_com_address" property="nonfarmComAddress" jdbcType="VARCHAR" />
+        <result column="nonfarm_com_phone" property="nonfarmComPhone" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, member_id, is_dead, type, seqno, name, sex, status, live_address, age, 
+        phone, id_card, id_card_p, id_card_n, school, education_level, marital_status, health_status, disease_remark, 
+        co_borrower, co_land, duty, nonfarm_com_name, nonfarm_com_address, nonfarm_com_phone, IS_DELETED, 
+        CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, 
+        UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_familysituation
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        insert into t_bus_familysituation (id, into_piece_id, member_id, 
+            is_dead, type, seqno, name, 
+            sex, status, live_address, 
+            age, phone, id_card, id_card_p,id_card_n,
+            school, education_level, marital_status, 
+            health_status, disease_remark, co_borrower, co_land,
+            duty, nonfarm_com_name, nonfarm_com_address, 
+            nonfarm_com_phone, IS_DELETED, CRE_OPER_ID, 
+            CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, 
+            UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, 
+            UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
+            #{isDead,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{seqno,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+            #{sex,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{liveAddress,jdbcType=VARCHAR}, 
+            #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR},  #{idCardP,jdbcType=VARCHAR},  #{idCardN,jdbcType=VARCHAR}, 
+            #{school,jdbcType=VARCHAR}, #{educationLevel,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, 
+            #{healthStatus,jdbcType=INTEGER}, #{diseaseRemark,jdbcType=VARCHAR}, #{coBorrower,jdbcType=INTEGER}, #{coLand,jdbcType=INTEGER}, 
+            #{duty,jdbcType=VARCHAR}, #{nonfarmComName,jdbcType=VARCHAR}, #{nonfarmComAddress,jdbcType=VARCHAR}, 
+            #{nonfarmComPhone,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, 
+            #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, 
+            #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        insert into t_bus_familysituation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="memberId != null" >
+                member_id,
+            </if>
+            <if test="isDead != null" >
+                is_dead,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="seqno != null" >
+                seqno,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="liveAddress != null" >
+                live_address,
+            </if>
+            <if test="age != null" >
+                age,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="idCard != null" >
+                id_card,
+            </if>
+            <if test="idCardP != null" >
+                id_card_p,
+            </if>
+            <if test="idCardN != null" >
+                id_card_n,
+            </if>
+            <if test="school != null" >
+                school,
+            </if>
+            <if test="educationLevel != null" >
+                education_level,
+            </if>
+            <if test="maritalStatus != null" >
+                marital_status,
+            </if>
+            <if test="healthStatus != null" >
+                health_status,
+            </if>
+            <if test="diseaseRemark != null" >
+                disease_remark,
+            </if>
+            <if test="coBorrower != null" >
+                co_borrower,
+            </if>
+            <if test="coLand != null" >
+                co_land,
+            </if>
+            <if test="duty != null" >
+                duty,
+            </if>
+            <if test="nonfarmComName != null" >
+                nonfarm_com_name,
+            </if>
+            <if test="nonfarmComAddress != null" >
+                nonfarm_com_address,
+            </if>
+            <if test="nonfarmComPhone != null" >
+                nonfarm_com_phone,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null" >
+                #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="isDead != null" >
+                #{isDead,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>            
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="liveAddress != null" >
+                #{liveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null" >
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardP != null" >
+                #{idCardP,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardN != null" >
+                #{idCardN,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null" >
+                #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="educationLevel != null" >
+                #{educationLevel,jdbcType=INTEGER},
+            </if>
+            <if test="maritalStatus != null" >
+                #{maritalStatus,jdbcType=INTEGER},
+            </if>
+            <if test="healthStatus != null" >
+                #{healthStatus,jdbcType=INTEGER},
+            </if>
+            <if test="diseaseRemark != null" >
+                #{diseaseRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="coBorrower != null" >
+                #{coBorrower,jdbcType=INTEGER},
+            </if>
+            <if test="coLand != null" >
+                #{co_land,jdbcType=INTEGER},
+            </if>
+            <if test="duty != null" >
+                #{duty,jdbcType=VARCHAR},
+            </if>
+            <if test="nonfarmComName != null" >
+                #{nonfarmComName,jdbcType=VARCHAR},
+            </if>
+            <if test="nonfarmComAddress != null" >
+                #{nonfarmComAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="nonfarmComPhone != null" >
+                #{nonfarmComPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        update t_bus_familysituation
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null" >
+                member_id = #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="isDead != null" >
+                is_dead = #{isDead,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="seqno != null" >
+                seqno = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="liveAddress != null" >
+                live_address = #{liveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null" >
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardP != null" >
+                id_card_p = #{idCardP,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardN != null" >
+                id_card_n = #{idCardN,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null" >
+                school = #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="educationLevel != null" >
+                education_level = #{educationLevel,jdbcType=INTEGER},
+            </if>
+            <if test="maritalStatus != null" >
+                marital_status = #{maritalStatus,jdbcType=INTEGER},
+            </if>
+            <if test="healthStatus != null" >
+                health_status = #{healthStatus,jdbcType=INTEGER},
+            </if>
+            <if test="diseaseRemark != null" >
+                disease_remark = #{diseaseRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="coBorrower != null" >
+                co_borrower = #{coBorrower,jdbcType=INTEGER},
+            </if>
+            <if test="coLand != null" >
+                co_land = #{coLand,jdbcType=INTEGER},
+            </if>
+            <if test="duty != null" >
+                duty = #{duty,jdbcType=VARCHAR},
+            </if>
+            <if test="nonfarmComName != null" >
+                nonfarm_com_name = #{nonfarmComName,jdbcType=VARCHAR},
+            </if>
+            <if test="nonfarmComAddress != null" >
+                nonfarm_com_address = #{nonfarmComAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="nonfarmComPhone != null" >
+                nonfarm_com_phone = #{nonfarmComPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        update t_bus_familysituation
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            member_id = #{memberId,jdbcType=VARCHAR},
+            is_dead = #{isDead,jdbcType=INTEGER},
+            type = #{type,jdbcType=INTEGER},
+            seqno = #{seqno,jdbcType=INTEGER},
+            name = #{name,jdbcType=VARCHAR},
+            sex = #{sex,jdbcType=INTEGER},
+            status = #{status,jdbcType=INTEGER},
+            live_address = #{liveAddress,jdbcType=VARCHAR},
+            age = #{age,jdbcType=INTEGER},
+            phone = #{phone,jdbcType=VARCHAR},
+            id_card = #{idCard,jdbcType=VARCHAR},
+            id_card_p = #{idCardP,jdbcType=VARCHAR},
+            id_card_n = #{idCardN,jdbcType=VARCHAR},
+            school = #{school,jdbcType=VARCHAR},
+            education_level = #{educationLevel,jdbcType=INTEGER},
+            marital_status = #{maritalStatus,jdbcType=INTEGER},
+            health_status = #{healthStatus,jdbcType=INTEGER},
+            disease_remark = #{diseaseRemark,jdbcType=VARCHAR},
+            co_borrower = #{coBorrower,jdbcType=INTEGER},
+            co_land = #{coLand,jdbcType=INTEGER}, 
+            duty = #{duty,jdbcType=VARCHAR},
+            nonfarm_com_name = #{nonfarmComName,jdbcType=VARCHAR},
+            nonfarm_com_address = #{nonfarmComAddress,jdbcType=VARCHAR},
+            nonfarm_com_phone = #{nonfarmComPhone,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+     <!-- 根据进件ID与序号查询 -->
+    <select id="selectByIntopIdAndSeqno" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and seqno = #{seqno,jdbcType=INTEGER} and IS_DELETED = 0
+    </select>
+    
+    <!-- 根据进件ID与类型查询 -->
+    <select id="selectByIntopIdAndType" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and type = #{type,jdbcType=INTEGER} and IS_DELETED = 0
+    </select>
+    
+    <!-- 根据进件ID -->
+    <select id="queryByIntopId" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and IS_DELETED = 0
+    </select>    
+    
+    <!-- 根据进件ID查询姓名、身份证号、手机号存在的家庭成员 -->
+    <select id="thirdpartycredit" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and name != '' and id_card != '' and phone != '' and IS_DELETED = 0
+    </select>
+    
+     <!-- 根据进件ID查询共同借款人 -->
+    <select id="queryCoBorrower" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusFamilySituation" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and co_borrower = #{coBorrower,jdbcType=INTEGER} and IS_DELETED = 0
+    </select>  
+    
+    <!-- 根据进件ID查询土地共有人 -->
+    <select id="queryCoLand" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and co_land = 1 and IS_DELETED = 0 and name != '' and id_card != '' and phone != ''
+    </select> 
+    
+    <select id="selectByParentItemId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_familysituation
+        where into_piece_id = #{mainId,jdbcType=VARCHAR}
+    </select>
+</mapper>

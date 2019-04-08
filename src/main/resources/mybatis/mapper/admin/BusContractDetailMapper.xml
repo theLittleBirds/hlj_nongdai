@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusContractDetailMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+        <result column="fins_id" property="finsId" jdbcType="VARCHAR" />
+        <result column="is_opean" property="isOpean" jdbcType="INTEGER" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, file_name, fins_id, is_opean, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+        CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractdetail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_contractdetail
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        insert into t_bus_contractdetail (id, name, file_name, 
+            fins_id, is_opean, IS_DELETED, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, 
+            #{finsId,jdbcType=VARCHAR}, #{isOpean,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        insert into t_bus_contractdetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="fileName != null" >
+                file_name,
+            </if>
+            <if test="finsId != null" >
+                fins_id,
+            </if>
+            <if test="isOpean != null" >
+                is_opean,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null" >
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="isOpean != null" >
+                #{isOpean,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        update t_bus_contractdetail
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null" >
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                fins_id = #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="isOpean != null" >
+                is_opean = #{isOpean,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        update t_bus_contractdetail
+        set name = #{name,jdbcType=VARCHAR},
+            file_name = #{fileName,jdbcType=VARCHAR},
+            fins_id = #{finsId,jdbcType=VARCHAR},
+            is_opean = #{isOpean,jdbcType=INTEGER},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectCount" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        select 
+        count(cd.id)
+        from t_bus_contractdetail cd left join t_bus_fins f on cd.fins_id = f.fins_id
+        where cd.IS_DELETED = 0 
+        <if test="finsId != null" >
+             and f.cname like CONCAT('%',#{finsId},'%')
+        </if>
+    </select>
+    <select id="selectByFinsId" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusContractDetail" >
+        select 
+        cd.id,cd.name,cd.file_name,f.cname as fins_id,cd.is_opean,cd.UPD_DATE
+        from t_bus_contractdetail cd left join t_bus_fins f on cd.fins_id = f.fins_id
+        where cd.IS_DELETED = 0 
+        <if test="finsId != null" >
+              and f.cname like CONCAT('%',#{finsId},'%')
+        </if>
+    </select>
+    <select id="contractList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_contractdetail
+        where IS_DELETED = 0 and is_opean = 1 and fins_id = #{finsId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.AppItemsectionMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppItemsection" >
+        <id column="SEIT_ID" property="seitId" jdbcType="INTEGER" />
+        <result column="SECTION_ID" property="sectionId" jdbcType="VARCHAR" />
+        <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SEIT_ID, SECTION_ID, ITEM_ID, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_itemsection
+        where SEIT_ID = #{seitId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectBySectionId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_itemsection
+        where SECTION_ID = #{sectionId,jdbcType=VARCHAR}
+        order by SEQNO asc
+    </select>
+    
+    <select id="count" resultType="Integer">
+  	   	select count(SEIT_ID) from t_app_itemsection
+  	   	where SECTION_ID = #{sectionId,jdbcType=VARCHAR}
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_app_itemsection
+        where SEIT_ID = #{seitId,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteBySectionId" parameterType="java.lang.String" >
+        delete from t_app_itemsection
+        where SECTION_ID = #{sectionId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppItemsection" >
+        insert into t_app_itemsection (SEIT_ID, SECTION_ID, ITEM_ID, 
+            SEQNO)
+        values (#{seitId,jdbcType=INTEGER}, #{sectionId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+            #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.AppItemsection" >
+        insert into t_app_itemsection
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="seitId != null" >
+                SEIT_ID,
+            </if>
+            <if test="sectionId != null" >
+                SECTION_ID,
+            </if>
+            <if test="itemId != null" >
+                ITEM_ID,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="seitId != null" >
+                #{seitId,jdbcType=INTEGER},
+            </if>
+            <if test="sectionId != null" >
+                #{sectionId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.AppItemsection" >
+        update t_app_itemsection
+        <set >
+            <if test="sectionId != null" >
+                SECTION_ID = #{sectionId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where SEIT_ID = #{seitId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppItemsection" >
+        update t_app_itemsection
+        set SECTION_ID = #{sectionId,jdbcType=VARCHAR},
+            ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where SEIT_ID = #{seitId,jdbcType=INTEGER}
+    </update>
+</mapper>

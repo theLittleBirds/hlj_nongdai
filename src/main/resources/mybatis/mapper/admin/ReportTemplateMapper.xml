@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.ReportTemplateMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.ReportTemplate" >
+        <id column="TPL_ID" property="tplId" jdbcType="VARCHAR" />
+        <result column="RPT_ID" property="rptId" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="SMALLINT" />
+        <result column="STEP" property="step" jdbcType="INTEGER" />
+        <result column="FILEPATH" property="filepath" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="SMALLINT" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        TPL_ID, RPT_ID, NAME, TYPE, STEP, FILEPATH, STATUS, SEQNO, IS_DELETE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_template
+        where TPL_ID = #{tplId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_report_template
+        where TPL_ID = #{tplId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.ReportTemplate" >
+        insert into t_report_template (TPL_ID, RPT_ID, NAME, 
+            TYPE, STEP, FILEPATH, 
+            STATUS, SEQNO, IS_DELETE
+            )
+        values (#{tplId,jdbcType=VARCHAR}, #{rptId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+            #{type,jdbcType=SMALLINT}, #{step,jdbcType=INTEGER}, #{filepath,jdbcType=VARCHAR}, 
+            #{status,jdbcType=SMALLINT}, #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=SMALLINT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.ReportTemplate" >
+        insert into t_report_template
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="tplId != null" >
+                TPL_ID,
+            </if>
+            <if test="rptId != null" >
+                RPT_ID,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="step != null" >
+                STEP,
+            </if>
+            <if test="filepath != null" >
+                FILEPATH,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="tplId != null" >
+                #{tplId,jdbcType=VARCHAR},
+            </if>
+            <if test="rptId != null" >
+                #{rptId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="step != null" >
+                #{step,jdbcType=INTEGER},
+            </if>
+            <if test="filepath != null" >
+                #{filepath,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.ReportTemplate" >
+        update t_report_template
+        <set >
+            <if test="rptId != null" >
+                RPT_ID = #{rptId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="step != null" >
+                STEP = #{step,jdbcType=INTEGER},
+            </if>
+            <if test="filepath != null" >
+                FILEPATH = #{filepath,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where TPL_ID = #{tplId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.ReportTemplate" >
+        update t_report_template
+        set RPT_ID = #{rptId,jdbcType=VARCHAR},
+            NAME = #{name,jdbcType=VARCHAR},
+            TYPE = #{type,jdbcType=SMALLINT},
+            STEP = #{step,jdbcType=INTEGER},
+            FILEPATH = #{filepath,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=SMALLINT},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=SMALLINT}
+        where TPL_ID = #{tplId,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectByRptId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_template
+        where RPT_ID = #{rptId,jdbcType=VARCHAR} order by STATUS desc, SEQNO asc
+    </select>
+    
+    <select id="existenceRptId" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_template
+        where RPT_ID = #{arg0} and STATUS = 1 and TPL_ID != #{arg1}
+    </select>
+    
+    <select id="selectByRptIdAndStatus" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_template
+        where RPT_ID = #{rptId,jdbcType=VARCHAR} and  STATUS = #{status,jdbcType=SMALLINT}
+    </select>
+</mapper>

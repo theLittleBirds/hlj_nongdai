@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusNjshopingcarMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusNjshopingcar" >
+        <id column="SHOPING_CAR_ID" property="shopingCarId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+        <result column="PERSON_ID" property="personId" jdbcType="VARCHAR" />
+        <result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_BRAND_NAME" property="productBrandName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_CATEGORY_NAME" property="productCategoryName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_NUM" property="productNum" jdbcType="INTEGER" />
+        <result column="PRODUCT_PRICE" property="productPrice" jdbcType="VARCHAR" />
+        <result column="PRODUCT_SETTLE_PRICE" property="productSettlePrice" jdbcType="VARCHAR" />
+        <result column="DETAIL_PIC" property="detailPic" jdbcType="VARCHAR" />
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SHOPING_CAR_ID, ORG_ID, ORG_NAME, PERSON_ID, MEMBER_NAME, PRODUCT_ID, PRODUCT_NAME, 
+        PRODUCT_BRAND_NAME, PRODUCT_CATEGORY_NAME, PRODUCT_NUM, PRODUCT_PRICE, PRODUCT_SETTLE_PRICE, 
+        DETAIL_PIC, CREATE_DATE, UPDATE_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njshopingcar
+        where SHOPING_CAR_ID = #{shopingCarId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_njshopingcar
+        where SHOPING_CAR_ID = #{shopingCarId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusNjshopingcar" >
+        insert into t_bus_njshopingcar (SHOPING_CAR_ID, ORG_ID, ORG_NAME, 
+            PERSON_ID, MEMBER_NAME, PRODUCT_ID, 
+            PRODUCT_NAME, PRODUCT_BRAND_NAME, PRODUCT_CATEGORY_NAME, 
+            PRODUCT_NUM, PRODUCT_PRICE, PRODUCT_SETTLE_PRICE, 
+            DETAIL_PIC, CREATE_DATE, UPDATE_DATE
+            )
+        values (#{shopingCarId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+            #{personId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+            #{productName,jdbcType=VARCHAR}, #{productBrandName,jdbcType=VARCHAR}, #{productCategoryName,jdbcType=VARCHAR}, 
+            #{productNum,jdbcType=INTEGER}, #{productPrice,jdbcType=VARCHAR}, #{productSettlePrice,jdbcType=VARCHAR}, 
+            #{detailPic,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusNjshopingcar" >
+        insert into t_bus_njshopingcar
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="shopingCarId != null" >
+                SHOPING_CAR_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME,
+            </if>
+            <if test="personId != null" >
+                PERSON_ID,
+            </if>
+            <if test="memberName != null" >
+                MEMBER_NAME,
+            </if>
+            <if test="productId != null" >
+                PRODUCT_ID,
+            </if>
+            <if test="productName != null" >
+                PRODUCT_NAME,
+            </if>
+            <if test="productBrandName != null" >
+                PRODUCT_BRAND_NAME,
+            </if>
+            <if test="productCategoryName != null" >
+                PRODUCT_CATEGORY_NAME,
+            </if>
+            <if test="productNum != null" >
+                PRODUCT_NUM,
+            </if>
+            <if test="productPrice != null" >
+                PRODUCT_PRICE,
+            </if>
+            <if test="productSettlePrice != null" >
+                PRODUCT_SETTLE_PRICE,
+            </if>
+            <if test="detailPic != null" >
+                DETAIL_PIC,
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE,
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="shopingCarId != null" >
+                #{shopingCarId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productNum != null" >
+                #{productNum,jdbcType=INTEGER},
+            </if>
+            <if test="productPrice != null" >
+                #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productSettlePrice != null" >
+                #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="detailPic != null" >
+                #{detailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusNjshopingcar" >
+        update t_bus_njshopingcar
+        <set >
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                PERSON_ID = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                PRODUCT_BRAND_NAME = #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                PRODUCT_CATEGORY_NAME = #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productNum != null" >
+                PRODUCT_NUM = #{productNum,jdbcType=INTEGER},
+            </if>
+            <if test="productPrice != null" >
+                PRODUCT_PRICE = #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productSettlePrice != null" >
+                PRODUCT_SETTLE_PRICE = #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="detailPic != null" >
+                DETAIL_PIC = #{detailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where SHOPING_CAR_ID = #{shopingCarId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusNjshopingcar" >
+        update t_bus_njshopingcar
+        set ORG_ID = #{orgId,jdbcType=VARCHAR},
+            ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            PERSON_ID = #{personId,jdbcType=VARCHAR},
+            MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+            PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+            PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+            PRODUCT_BRAND_NAME = #{productBrandName,jdbcType=VARCHAR},
+            PRODUCT_CATEGORY_NAME = #{productCategoryName,jdbcType=VARCHAR},
+            PRODUCT_NUM = #{productNum,jdbcType=INTEGER},
+            PRODUCT_PRICE = #{productPrice,jdbcType=VARCHAR},
+            PRODUCT_SETTLE_PRICE = #{productSettlePrice,jdbcType=VARCHAR},
+            DETAIL_PIC = #{detailPic,jdbcType=VARCHAR},
+            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+        where SHOPING_CAR_ID = #{shopingCarId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="quertShoppingCarList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njshopingcar
+        where ORG_ID in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+    </select>
+</mapper>

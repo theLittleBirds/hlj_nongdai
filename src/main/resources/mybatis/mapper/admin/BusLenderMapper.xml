@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusLenderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusLender" >
+        <id column="LENDER_ID" property="lenderId" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+        <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+        <result column="LENDER_BANK" property="lenderBank" jdbcType="VARCHAR" />
+        <result column="LENDER_NAME" property="lenderName" jdbcType="VARCHAR" />
+        <result column="LENDER_CARD_NO" property="lenderCardNo" jdbcType="VARCHAR" />
+        <result column="LENDER_WECHAT" property="lenderWechat" jdbcType="VARCHAR" />
+        <result column="LENDER_ALIPAY" property="lenderAlipay" jdbcType="VARCHAR" />
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+        <result column="RATE" property="rate" jdbcType="DECIMAL" />
+        <result column="TYPE" property="type" jdbcType="TINYINT" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        LENDER_ID, NAME, ID_CARD, PHONE, LENDER_BANK, LENDER_NAME, LENDER_CARD_NO, LENDER_WECHAT, 
+        LENDER_ALIPAY, ADDRESS, RATE, TYPE, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+        CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_lender
+        where LENDER_ID = #{lenderId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_lender
+        where NAME = #{name,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusLender" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_lender
+        <where>
+        	IS_DELETED != 1 
+        	<if test="name != null" >
+               		and NAME like "%"#{name,jdbcType=VARCHAR}"%" 
+	        </if>
+	        <if test="idCard != null" >
+	                and ID_CARD like "%"#{idCard,jdbcType=VARCHAR}"%" 
+	        </if>
+        </where> 
+        order by ID_CARD DESC ,NAME ASC limit #{startIndex,jdbcType=VARCHAR},#{pageSize,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectTotalNum" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.BusLender" >
+        select count(*) from t_bus_lender
+        <where>
+        	IS_DELETED != 1 
+        	<if test="name != null" >
+               		and NAME like "%"#{name,jdbcType=VARCHAR}"%" 
+	        </if>
+	        <if test="idCard != null" >
+	                and ID_CARD like "%"#{idCard,jdbcType=VARCHAR}"%" 
+	        </if>
+        </where> 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_lender
+        where LENDER_ID = #{lenderId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusLender" >
+        insert into t_bus_lender (LENDER_ID, NAME, ID_CARD, 
+            PHONE, LENDER_BANK, LENDER_NAME, 
+            LENDER_CARD_NO, LENDER_WECHAT, LENDER_ALIPAY, 
+            ADDRESS, RATE, TYPE, 
+            IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+            CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+            UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+            )
+        values (#{lenderId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{lenderBank,jdbcType=VARCHAR}, #{lenderName,jdbcType=VARCHAR}, 
+            #{lenderCardNo,jdbcType=VARCHAR}, #{lenderWechat,jdbcType=VARCHAR}, #{lenderAlipay,jdbcType=VARCHAR}, 
+            #{address,jdbcType=VARCHAR}, #{rate,jdbcType=DECIMAL}, #{type,jdbcType=TINYINT}, 
+            #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusLender" >
+        insert into t_bus_lender
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="lenderId != null" >
+                LENDER_ID,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="idCard != null" >
+                ID_CARD,
+            </if>
+            <if test="phone != null" >
+                PHONE,
+            </if>
+            <if test="lenderBank != null" >
+                LENDER_BANK,
+            </if>
+            <if test="lenderName != null" >
+                LENDER_NAME,
+            </if>
+            <if test="lenderCardNo != null" >
+                LENDER_CARD_NO,
+            </if>
+            <if test="lenderWechat != null" >
+                LENDER_WECHAT,
+            </if>
+            <if test="lenderAlipay != null" >
+                LENDER_ALIPAY,
+            </if>
+            <if test="address != null" >
+                ADDRESS,
+            </if>
+            <if test="rate != null" >
+                RATE,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="lenderId != null" >
+                #{lenderId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderBank != null" >
+                #{lenderBank,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderName != null" >
+                #{lenderName,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderCardNo != null" >
+                #{lenderCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderWechat != null" >
+                #{lenderWechat,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderAlipay != null" >
+                #{lenderAlipay,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null" >
+                #{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusLender" >
+        update t_bus_lender
+        <set >
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                ID_CARD = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderBank != null" >
+                LENDER_BANK = #{lenderBank,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderName != null" >
+                LENDER_NAME = #{lenderName,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderCardNo != null" >
+                LENDER_CARD_NO = #{lenderCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderWechat != null" >
+                LENDER_WECHAT = #{lenderWechat,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderAlipay != null" >
+                LENDER_ALIPAY = #{lenderAlipay,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null" >
+                RATE = #{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LENDER_ID = #{lenderId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusLender" >
+        update t_bus_lender
+        set NAME = #{name,jdbcType=VARCHAR},
+            ID_CARD = #{idCard,jdbcType=VARCHAR},
+            PHONE = #{phone,jdbcType=VARCHAR},
+            LENDER_BANK = #{lenderBank,jdbcType=VARCHAR},
+            LENDER_NAME = #{lenderName,jdbcType=VARCHAR},
+            LENDER_CARD_NO = #{lenderCardNo,jdbcType=VARCHAR},
+            LENDER_WECHAT = #{lenderWechat,jdbcType=VARCHAR},
+            LENDER_ALIPAY = #{lenderAlipay,jdbcType=VARCHAR},
+            ADDRESS = #{address,jdbcType=VARCHAR},
+            RATE = #{rate,jdbcType=DECIMAL},
+            TYPE = #{type,jdbcType=TINYINT},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where LENDER_ID = #{lenderId,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 根据orgId查询出借人 -->
+     <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_lender
+        where LENDER_ID in (select LENDER_ID from t_bus_lenderorg where ORG_ID = #{orgId,jdbcType=VARCHAR})
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select 
+        LENDER_ID,name
+        from t_bus_lender
+        where  IS_DELETED = 0
+    </select>
+</mapper>

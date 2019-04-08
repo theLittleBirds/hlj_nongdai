@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusMemberLoginMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        <id column="LOGIN_ID" property="loginId" jdbcType="VARCHAR" />
+        <result column="MEMBER_ID" property="memberId" jdbcType="VARCHAR" />
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+        <result column="TOKEN" property="token" jdbcType="VARCHAR" />
+        <result column="WXTOKEN" property="wxtoken" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="ID_CARD_TYPE" property="idCardType" jdbcType="SMALLINT" />
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+        <result column="BANK" property="bank" jdbcType="VARCHAR" />
+        <result column="BANK_CARD_NO" property="bankCardNo" jdbcType="VARCHAR" />
+        <result column="BANK_PHONE" property="bankPhone" jdbcType="VARCHAR" />
+        <result column="PHOTO" property="photo" jdbcType="VARCHAR" />
+        <result column="JPUSH_ID" property="jpushId" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="TINYINT" />
+        <result column="STATUS" property="status" jdbcType="TINYINT" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        LOGIN_ID, MEMBER_ID, LOGIN_NAME, TOKEN, WXTOKEN, NAME, ID_CARD_TYPE, ID_CARD, BANK, BANK_CARD_NO, 
+        BANK_PHONE, PHOTO, JPUSH_ID, TYPE, STATUS, channel, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+        CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_memberlogin
+        where LOGIN_ID = #{loginId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_memberlogin
+        where LOGIN_ID = #{loginId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        insert into t_bus_memberlogin (LOGIN_ID, MEMBER_ID, LOGIN_NAME, 
+            TOKEN, WXTOKEN, NAME, ID_CARD_TYPE, 
+            ID_CARD, BANK, BANK_CARD_NO, 
+            BANK_PHONE, PHOTO, JPUSH_ID, 
+            TYPE, STATUS, channel, IS_DELETED, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE)
+        values (#{loginId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+            #{token,jdbcType=VARCHAR}, #{wxtoken,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idCardType,jdbcType=SMALLINT}, 
+            #{idCard,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, #{bankCardNo,jdbcType=VARCHAR}, 
+            #{bankPhone,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{jpushId,jdbcType=VARCHAR}, 
+            #{type,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{channel,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        insert into t_bus_memberlogin
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="loginId != null" >
+                LOGIN_ID,
+            </if>
+            <if test="memberId != null" >
+                MEMBER_ID,
+            </if>
+            <if test="loginName != null" >
+                LOGIN_NAME,
+            </if>
+            <if test="token != null" >
+                TOKEN,
+            </if>
+            <if test="wxtoken != null" >
+                WXTOKEN,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="idCardType != null" >
+                ID_CARD_TYPE,
+            </if>
+            <if test="idCard != null" >
+                ID_CARD,
+            </if>
+            <if test="bank != null" >
+                BANK,
+            </if>
+            <if test="bankCardNo != null" >
+                BANK_CARD_NO,
+            </if>
+            <if test="bankPhone != null" >
+                BANK_PHONE,
+            </if>
+            <if test="photo != null" >
+                PHOTO,
+            </if>
+            <if test="jpushId != null" >
+                JPUSH_ID,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="channel != null" >
+                channel,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="loginId != null" >
+                #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null" >
+                #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null" >
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null" >
+                #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="wxtoken != null" >
+                #{wxtoken,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardType != null" >
+                #{idCardType,jdbcType=SMALLINT},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="bank != null" >
+                #{bank,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNo != null" >
+                #{bankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPhone != null" >
+                #{bankPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null" >
+                #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="jpushId != null" >
+                #{jpushId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="channel != null" >
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        update t_bus_memberlogin
+        <set >
+            <if test="memberId != null" >
+                MEMBER_ID = #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null" >
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null" >
+                TOKEN = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="wxtoken != null" >
+                WXTOKEN = #{wxtoken,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardType != null" >
+                ID_CARD_TYPE = #{idCardType,jdbcType=SMALLINT},
+            </if>
+            <if test="idCard != null" >
+                ID_CARD = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="bank != null" >
+                BANK = #{bank,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNo != null" >
+                BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPhone != null" >
+                BANK_PHONE = #{bankPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null" >
+                PHOTO = #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="jpushId != null" >
+                JPUSH_ID = #{jpushId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LOGIN_ID = #{loginId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        update t_bus_memberlogin
+        set MEMBER_ID = #{memberId,jdbcType=VARCHAR},
+            LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+            TOKEN = #{token,jdbcType=VARCHAR},
+            WXTOKEN = #{wxtoken,jdbcType=VARCHAR},
+            NAME = #{name,jdbcType=VARCHAR},
+            ID_CARD_TYPE = #{idCardType,jdbcType=SMALLINT},
+            ID_CARD = #{idCard,jdbcType=VARCHAR},
+            BANK = #{bank,jdbcType=VARCHAR},
+            BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+            BANK_PHONE = #{bankPhone,jdbcType=VARCHAR},
+            PHOTO = #{photo,jdbcType=VARCHAR},
+            JPUSH_ID = #{jpushId,jdbcType=VARCHAR},
+            TYPE = #{type,jdbcType=TINYINT},
+            STATUS = #{status,jdbcType=TINYINT},
+            channel = #{channel,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where LOGIN_ID = #{loginId,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 手写 -->
+    <select id="selectAllByCondition" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_memberlogin
+        where IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        <if test="loginName != null" >
+            and LOGIN_NAME like CONCAT('%',#{loginName},'%')
+        </if>
+        <if test="name != null" >
+            and NAME like CONCAT('%',#{name},'%')
+        </if>
+        <if test="idCard != null" >
+             and ID_CARD like CONCAT('%',#{idCard},'%')
+        </if>
+        <if test="channel != null" >
+             and channel = #{channel,jdbcType=VARCHAR}
+        </if>
+        	order by CRE_DATE desc
+    </select>
+    <select id="selectCountByCondition" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        select 
+        count(LOGIN_ID)
+        from t_bus_memberlogin
+        where IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        <if test="loginName != null" >
+            and LOGIN_NAME like CONCAT('%',#{loginName},'%')
+        </if>
+        <if test="name != null" >
+            and NAME like CONCAT('%',#{name},'%')
+        </if>
+        <if test="idCard != null" >
+             and ID_CARD like CONCAT('%',#{idCard},'%')
+        </if>
+        <if test="channel != null" >
+             and channel = #{channel,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="selectByToken" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_memberlogin
+        where TOKEN = #{token,jdbcType=VARCHAR} 
+    </select>
+    <select id="selectByLoginName" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusMemberLogin" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_memberlogin
+        where LOGIN_NAME = #{loginName,jdbcType=VARCHAR} and channel = #{channel,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByMemberId" resultMap="BaseResultMap" parameterType="hashmap" >
+        select 
+        t1.* 
+        from t_bus_memberlogin t1 left Join t_bus_member t2 on t1.ID_CARD=t2.ID_CARD where t2.MEMBER_ID =#{memberId,jdbcType=VARCHAR} 
+        and t1.channel = #{channel,jdbcType=VARCHAR}
+    </select>
+</mapper>

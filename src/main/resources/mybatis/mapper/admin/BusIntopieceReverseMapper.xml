@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusIntopieceReverseMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusIntopieceReverse" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="capital" property="capital" jdbcType="DECIMAL" />
+        <result column="farmer_reverse" property="farmerReverse" jdbcType="DECIMAL" />
+        <result column="station_reverse" property="stationReverse" jdbcType="DECIMAL" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, org_id, into_piece_id, org_name, member_name, id_card, phone, capital, farmer_reverse, 
+        station_reverse, status, create_date, update_date
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_intopiecereverse
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_intopiecereverse
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceReverse" >
+        insert into t_bus_intopiecereverse (id, org_id, into_piece_id, 
+            org_name, member_name, id_card, 
+            phone, capital, farmer_reverse, 
+            station_reverse, status, create_date, 
+            update_date)
+        values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, 
+            #{orgName,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{capital,jdbcType=DECIMAL}, #{farmerReverse,jdbcType=DECIMAL}, 
+            #{stationReverse,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+            #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceReverse" >
+        insert into t_bus_intopiecereverse
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="memberName != null" >
+                member_name,
+            </if>
+            <if test="idCard != null" >
+                id_card,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="capital != null" >
+                capital,
+            </if>
+            <if test="farmerReverse != null" >
+                farmer_reverse,
+            </if>
+            <if test="stationReverse != null" >
+                station_reverse,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="farmerReverse != null" >
+                #{farmerReverse,jdbcType=DECIMAL},
+            </if>
+            <if test="stationReverse != null" >
+                #{stationReverse,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceReverse" >
+        update t_bus_intopiecereverse
+        <set >
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                member_name = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                capital = #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="farmerReverse != null" >
+                farmer_reverse = #{farmerReverse,jdbcType=DECIMAL},
+            </if>
+            <if test="stationReverse != null" >
+                station_reverse = #{stationReverse,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusIntopieceReverse" >
+        update t_bus_intopiecereverse
+        set org_id = #{orgId,jdbcType=VARCHAR},
+            into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            org_name = #{orgName,jdbcType=VARCHAR},
+            member_name = #{memberName,jdbcType=VARCHAR},
+            id_card = #{idCard,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            capital = #{capital,jdbcType=DECIMAL},
+            farmer_reverse = #{farmerReverse,jdbcType=DECIMAL},
+            station_reverse = #{stationReverse,jdbcType=DECIMAL},
+            status = #{status,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据id查询进件反担保金 -->
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_intopiecereverse
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="hashmap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_intopiecereverse ipr
+        <where>
+        	1=1 
+        	<if test="ipReverse.orgName != null" >
+               		and ipr.org_name like "%"#{ipReverse.orgName}"%" 
+	        </if>
+        	<if test="ipReverse.memberName != null" >
+               		and ipr.member_name like "%"#{ipReverse.memberName}"%" 
+	        </if>
+        	<if test="ipReverse.idCard != null" >
+               		and ipr.id_card like "%"#{ipReverse.idCard}"%" 
+	        </if>
+        	<if test="ipReverse.phone != null" >
+               		and ipr.phone like "%"#{ipReverse.phone}"%" 
+	        </if>
+        	<if test="ipReverse.status != null" >
+               		and ipr.status  = #{ipReverse.status} 
+	        </if>
+	        <if test="orgIds != null" >
+	             and ipr.org_id IN 
+	             <foreach item="orgId" index="index" collection="orgIds"
+	                open="(" separator="," close=")" >  #{orgId}
+	             </foreach>
+        	</if>
+        </where> 
+        order by create_date desc
+    </select>
+    
+    <select id="selectCountByCondition" resultType="java.lang.Integer" parameterType="hashmap" >
+        select 
+        count(ipr.id)
+        from t_bus_intopiecereverse ipr
+        <where>
+        	1=1 
+        	<if test="ipReverse.orgName != null" >
+               		and ipr.org_name like "%"#{ipReverse.orgName}"%" 
+	        </if>
+        	<if test="ipReverse.memberName != null" >
+               		and ipr.member_name like "%"#{ipReverse.memberName}"%" 
+	        </if>
+        	<if test="ipReverse.idCard != null" >
+               		and ipr.id_card like "%"#{ipReverse.idCard}"%" 
+	        </if>
+        	<if test="ipReverse.phone != null" >
+               		and ipr.phone like "%"#{ipReverse.phone}"%" 
+	        </if>
+        	<if test="ipReverse.status != null" >
+               		and ipr.status  = #{ipReverse.status} 
+	        </if>
+	        <if test="orgIds != null" >
+	             and ipr.org_id IN 
+	             <foreach item="orgId" index="index" collection="orgIds"
+	                open="(" separator="," close=")" >  #{orgId}
+	             </foreach>
+        	</if>
+        </where> 
+    </select>
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.AppSectionMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppSection" >
+        <id column="SECTION_ID" property="sectionId" jdbcType="VARCHAR" />
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="DESIGN_TYPE" property="designType" jdbcType="SMALLINT" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="HTML_ID" property="htmlId" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SECTION_ID, APP_ID, DESIGN_TYPE, CNAME, ENAME, HTML_ID, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_section
+        where SECTION_ID = #{sectionId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_app_section
+        where SECTION_ID = #{sectionId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppSection" >
+        insert into t_app_section (SECTION_ID, APP_ID, DESIGN_TYPE, CNAME, 
+            ENAME, HTML_ID, SEQNO
+            )
+        values (#{sectionId,jdbcType=INTEGER}, #{appId,jdbcType=VARCHAR}, #{designType,jdbcType=SMALLINT}, 
+            #{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{htmlId,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.AppSection" >
+        insert into t_app_section
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="sectionId != null" >
+                SECTION_ID,
+            </if>
+            <if test="appId != null" >
+                APP_ID,
+            </if>
+            <if test="designType != null" >
+                DESIGN_TYPE,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="htmlId != null" >
+                HTML_ID,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="sectionId != null" >
+                #{sectionId,jdbcType=INTEGER},
+            </if>
+            <if test="appId != null" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="designType != null" >
+                #{designType,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlId != null" >
+                #{htmlId,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.AppSection" >
+        update t_app_section
+        <set >
+            <if test="appId != null" >
+                APP_ID = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="designType != null" >
+                DESIGN_TYPE = #{designType,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlId != null" >
+                HTML_ID = #{htmlId,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where SECTION_ID = #{sectionId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppSection" >
+        update t_app_section
+        set APP_ID = #{appId,jdbcType=VARCHAR},
+            DESIGN_TYPE = #{designType,jdbcType=SMALLINT},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            HTML_ID = #{htmlId,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where SECTION_ID = #{sectionId,jdbcType=INTEGER}
+    </update>
+    
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_section
+        where APP_ID = #{appId,jdbcType=VARCHAR}
+        order by SEQNO
+    </select>
+    
+    <select id="count" resultType="Integer">
+  	   	select count(SECTION_ID) from t_app_section
+  	   	where APP_ID = #{appId,jdbcType=VARCHAR}
+  	</select>
+    
+</mapper>

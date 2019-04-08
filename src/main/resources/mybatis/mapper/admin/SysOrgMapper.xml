@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysOrgMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysOrg" >
+        <id column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="FULL_CNAME" property="fullCname" jdbcType="VARCHAR" />
+        <result column="FULL_ENAME" property="fullEname" jdbcType="VARCHAR" />
+        <result column="SHORT_CNAME" property="shortCname" jdbcType="VARCHAR" />
+        <result column="SHORT_ENAME" property="shortEname" jdbcType="VARCHAR" />
+        <result column="PARENT_ORG_ID" property="parentOrgId" jdbcType="VARCHAR" />
+        <result column="PARENT_ORG_IDS" property="parentOrgIds" jdbcType="VARCHAR" />
+        <result column="PRODUCT_BRAND" property="productBrand" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="STATUS" property="status" jdbcType="TINYINT" />
+        <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+        <result column="FAX" property="fax" jdbcType="VARCHAR" />
+        <result column="LEADER" property="leader" jdbcType="VARCHAR" />
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+        <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+        <result column="CARD_BANK" property="cardBank" jdbcType="VARCHAR" />
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+        <result column="FILEPATH" property="filepath" jdbcType="VARCHAR" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+        <result column="HOME_URL" property="homeUrl" jdbcType="VARCHAR" />
+        <result column="ADDR_CN" property="addrCn" jdbcType="VARCHAR" />
+        <result column="ADDR_EN" property="addrEn" jdbcType="VARCHAR" />
+        <result column="CONTACT_NAME" property="contactName" jdbcType="VARCHAR" />
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+        <result column="CONTACT_EMAIL" property="contactEmail" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+        <result column="WARRANT_RATE" property="warrantRate" jdbcType="VARCHAR" />
+        <result column="ORG_TYPE" property="orgType" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ORG_ID, FULL_CNAME, FULL_ENAME, SHORT_CNAME, SHORT_ENAME, PARENT_ORG_ID, PARENT_ORG_IDS,PRODUCT_BRAND, 
+        SEQNO, STATUS, PHONE, FAX, LEADER, ID_CARD, CARD_BANK, CARD_NO, ADDRESS, FILEPATH, EMAIL, HOME_URL, ADDR_CN, ADDR_EN, 
+        CONTACT_NAME, CONTACT_PHONE, CONTACT_EMAIL, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+        CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE, WARRANT_RATE, ORG_TYPE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_org
+        where ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_org
+        where FULL_CNAME = #{name,jdbcType=VARCHAR} 
+        order by SEQNO ASC
+    </select>
+    
+    <select id="selectPrList" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_org
+        where PARENT_ORG_ID is null or PARENT_ORG_ID = ''
+        order by SEQNO ASC
+    </select>
+    
+    <select id="selectPList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_org
+	    where PARENT_ORG_ID = #{porgId,jdbcType=VARCHAR}
+	    order by SEQNO ASC
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_org
+	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_sys_org
+        where ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysOrg" >
+        insert into t_sys_org (ORG_ID, FULL_CNAME, FULL_ENAME, 
+            SHORT_CNAME, SHORT_ENAME, PARENT_ORG_ID, 
+            PARENT_ORG_IDS,PRODUCT_BRAND, SEQNO, STATUS, 
+            PHONE, FAX, EMAIL, 
+            HOME_URL, ADDR_CN, ADDR_EN, 
+            CONTACT_NAME, CONTACT_PHONE, CONTACT_EMAIL, 
+            IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+            CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+            UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE, 
+            ID_CARD, CARD_BANK, CARD_NO, 
+            LEADER, ADDRESS, FILEPATH, 
+            WARRANT_RATE, ORG_TYPE)
+        values (#{orgId,jdbcType=VARCHAR}, #{fullCname,jdbcType=VARCHAR}, #{fullEname,jdbcType=VARCHAR}, 
+            #{shortCname,jdbcType=VARCHAR}, #{shortEname,jdbcType=VARCHAR}, #{parentOrgId,jdbcType=VARCHAR}, 
+            #{parentOrgIds,jdbcType=VARCHAR},#{productBrand,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+            #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+            #{homeUrl,jdbcType=VARCHAR}, #{addrCn,jdbcType=VARCHAR}, #{addrEn,jdbcType=VARCHAR}, 
+            #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR}, 
+            #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}, 
+            #{idCard,jdbcType=VARCHAR}, #{cardBank,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+            #{leader,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, 
+            #{warrantRate,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysOrg" >
+        insert into t_sys_org
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="fullCname != null" >
+                FULL_CNAME,
+            </if>
+            <if test="fullEname != null" >
+                FULL_ENAME,
+            </if>
+            <if test="shortCname != null" >
+                SHORT_CNAME,
+            </if>
+            <if test="shortEname != null" >
+                SHORT_ENAME,
+            </if>
+            <if test="parentOrgId != null" >
+                PARENT_ORG_ID,
+            </if>
+            <if test="parentOrgIds != null" >
+                PARENT_ORG_IDS,
+            </if>
+            <if test="productBrand != null" >
+                PRODUCT_BRAND,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="phone != null" >
+                PHONE,
+            </if>
+            <if test="fax != null" >
+                FAX,
+            </if>
+            <if test="email != null" >
+                EMAIL,
+            </if>
+            <if test="homeUrl != null" >
+                HOME_URL,
+            </if>
+            <if test="addrCn != null" >
+                ADDR_CN,
+            </if>
+            <if test="addrEn != null" >
+                ADDR_EN,
+            </if>
+            <if test="contactName != null" >
+                CONTACT_NAME,
+            </if>
+            <if test="contactPhone != null" >
+                CONTACT_PHONE,
+            </if>
+            <if test="contactEmail != null" >
+                CONTACT_EMAIL,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+            <if test="idCard != null" >
+                ID_CARD,
+            </if>
+            <if test="cardBank != null" >
+                CARD_BANK,
+            </if>
+            <if test="cardNo != null" >
+                CARD_NO,
+            </if>
+            <if test="leader != null" >
+                LEADER,
+            </if>
+            <if test="address != null" >
+                ADDRESS,
+            </if>
+            <if test="filepath != null" >
+                FILEPATH,
+            </if>
+            <if test="warrantRate != null" >
+                WARRANT_RATE,
+            </if>
+            <if test="orgType != null" >
+                ORG_TYPE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="fullCname != null" >
+                #{fullCname,jdbcType=VARCHAR},
+            </if>
+            <if test="fullEname != null" >
+                #{fullEname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortCname != null" >
+                #{shortCname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortEname != null" >
+                #{shortEname,jdbcType=VARCHAR},
+            </if>
+            <if test="parentOrgId != null" >
+                #{parentOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentOrgIds != null" >
+                #{parentOrgIds,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrand != null" >
+                #{productBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null" >
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="homeUrl != null" >
+                #{homeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="addrCn != null" >
+                #{addrCn,jdbcType=VARCHAR},
+            </if>
+            <if test="addrEn != null" >
+                #{addrEn,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null" >
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null" >
+                #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactEmail != null" >
+                #{contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="cardBank != null" >
+                #{cardBank,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNo != null" >
+                #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="leader != null" >
+                #{leader,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="filepath != null" >
+                #{filepath,jdbcType=VARCHAR},
+            </if>
+            <if test="warrantRate != null" >
+                #{warrantRate,jdbcType=VARCHAR},
+            </if>
+            <if test="orgType != null" >
+                #{orgType,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysOrg" >
+        update t_sys_org
+        <set >
+            <if test="fullCname != null" >
+                FULL_CNAME = #{fullCname,jdbcType=VARCHAR},
+            </if>
+            <if test="fullEname != null" >
+                FULL_ENAME = #{fullEname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortCname != null" >
+                SHORT_CNAME = #{shortCname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortEname != null" >
+                SHORT_ENAME = #{shortEname,jdbcType=VARCHAR},
+            </if>
+            <if test="parentOrgId != null" >
+                PARENT_ORG_ID = #{parentOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentOrgIds != null" >
+                PARENT_ORG_IDS = #{parentOrgIds,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrand != null" >
+                PRODUCT_BRAND = #{productBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="phone != null" >
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null" >
+                FAX = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="homeUrl != null" >
+                HOME_URL = #{homeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="addrCn != null" >
+                ADDR_CN = #{addrCn,jdbcType=VARCHAR},
+            </if>
+            <if test="addrEn != null" >
+                ADDR_EN = #{addrEn,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null" >
+                CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null" >
+                CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactEmail != null" >
+                CONTACT_EMAIL = #{contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idCard != null" >
+                ID_CARD = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="cardBank != null" >
+                CARD_BANK = #{cardBank,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNo != null" >
+                CARD_NO = #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="leader != null" >
+                LEADER = #{leader,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="filepath != null" >
+                FILEPATH = #{filepath,jdbcType=VARCHAR},
+            </if>
+            <if test="warrantRate != null" >
+                WARRANT_RATE = #{warrantRate,jdbcType=VARCHAR},
+            </if>
+            <if test="orgType != null" >
+                ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysOrg" >
+        update t_sys_org
+        set FULL_CNAME = #{fullCname,jdbcType=VARCHAR},
+            FULL_ENAME = #{fullEname,jdbcType=VARCHAR},
+            SHORT_CNAME = #{shortCname,jdbcType=VARCHAR},
+            SHORT_ENAME = #{shortEname,jdbcType=VARCHAR},
+            PARENT_ORG_ID = #{parentOrgId,jdbcType=VARCHAR},
+            PARENT_ORG_IDS = #{parentOrgIds,jdbcType=VARCHAR},
+            PRODUCT_BRAND = #{productBrand,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            STATUS = #{status,jdbcType=TINYINT},
+            PHONE = #{phone,jdbcType=VARCHAR},
+            FAX = #{fax,jdbcType=VARCHAR},
+            EMAIL = #{email,jdbcType=VARCHAR},
+            HOME_URL = #{homeUrl,jdbcType=VARCHAR},
+            ADDR_CN = #{addrCn,jdbcType=VARCHAR},
+            ADDR_EN = #{addrEn,jdbcType=VARCHAR},
+            CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+            CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+            CONTACT_EMAIL = #{contactEmail,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            ID_CARD = #{idCard,jdbcType=VARCHAR},
+            CARD_BANK = #{cardBank,jdbcType=VARCHAR},
+            CARD_NO = #{cardNo,jdbcType=VARCHAR},
+            LEADER = #{leader,jdbcType=VARCHAR},
+            ADDRESS = #{address,jdbcType=VARCHAR},
+            FILEPATH = #{filepath,jdbcType=VARCHAR},
+            WARRANT_RATE = #{warrantRate,jdbcType=VARCHAR},
+            ORG_TYPE = #{orgType,jdbcType=VARCHAR}
+        where ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </update>
+    <!-- 根据输入的商家名称模糊查询 -->
+    <select id="selectByNameSearch" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.SysOrg" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_org
+        where ORG_TYPE = '1' and FULL_CNAME like "%"#{fullCname,jdbcType=VARCHAR}"%" and
+         (ORG_ID = #{orgId,jdbcType=VARCHAR} or PARENT_ORG_IDS like "%"#{orgId,jdbcType=VARCHAR}"%")
+    </select>
+    <!-- 根据输入的商家名称模糊查询 -->
+    <select id="selectByIdOrParent" resultType="java.lang.String" parameterType="java.lang.String" >
+        select distinct
+        ORG_ID
+        from t_sys_org
+        where ORG_ID = #{orgId,jdbcType=VARCHAR} or PARENT_ORG_IDS like "%"#{orgId,jdbcType=VARCHAR}"%"
+    </select>
+    <!-- 根据角色查询部门 -->
+    <select id="selectOrgsByPerson" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select distinct
+        o.*
+        from t_sys_org o left join t_sys_personorg po on o.ORG_ID=po.ORG_ID where po.PERSON_ID =#{personId,jdbcType=VARCHAR} order by SEQNO
+    </select>
+    
+    <select id="selectBaseOrg" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_org
+        where PARENT_ORG_ID ='' and STATUS = 1 order by SEQNO
+    </select>
+    <!-- 根据角色查询部门 -->
+    <select id="selectipOrgs" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select distinct
+        o.*
+        from t_sys_org o left join t_sys_personorg po on o.ORG_ID=po.ORG_ID where po.PERSON_ID =#{personId,jdbcType=VARCHAR} and o.ORG_TYPE = '1' order by SEQNO
+    </select>
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.FleFlowrightMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.FleFlowright" >
+        <id column="FLOWRIGHT_ID" property="flowrightId" jdbcType="INTEGER" />
+        <result column="FLOW_ID" property="flowId" jdbcType="VARCHAR" />
+        <result column="CONTROL_TYPE" property="controlType" jdbcType="TINYINT" />
+        <result column="OBJECT_TYPE" property="objectType" jdbcType="TINYINT" />
+        <result column="OBJECT_CODE" property="objectCode" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        FLOWRIGHT_ID, FLOW_ID, CONTROL_TYPE, OBJECT_TYPE, OBJECT_CODE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_fle_flowright
+        where FLOWRIGHT_ID = #{flowrightId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByFlowCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_fle_flowright
+        where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_fle_flowright
+        where FLOWRIGHT_ID = #{flowrightId,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByFlowCode" parameterType="java.lang.String" >
+        delete from t_fle_flowright
+        where FLOW_ID = #{flowId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.FleFlowright" >
+        insert into t_fle_flowright (FLOWRIGHT_ID, FLOW_ID, CONTROL_TYPE,
+            OBJECT_TYPE, OBJECT_CODE)
+        values (#{flowrightId,jdbcType=INTEGER}, #{flowId,jdbcType=VARCHAR}, #{controlType,jdbcType=TINYINT},
+            #{objectType,jdbcType=TINYINT}, #{objectCode,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.FleFlowright" >
+        insert into t_fle_flowright
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="flowrightId != null" >
+                FLOWRIGHT_ID,
+            </if>
+            <if test="flowId != null" >
+                FLOW_ID,
+            </if>
+            <if test="controlType != null" >
+                CONTROL_TYPE,
+            </if>
+            <if test="objectType != null" >
+                OBJECT_TYPE,
+            </if>
+            <if test="objectCode != null" >
+                OBJECT_CODE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="flowrightId != null" >
+                #{flowrightId,jdbcType=INTEGER},
+            </if>
+            <if test="flowId != null" >
+                #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlType != null" >
+                #{controlType,jdbcType=TINYINT},
+            </if>
+            <if test="objectType != null" >
+                #{objectType,jdbcType=TINYINT},
+            </if>
+            <if test="objectCode != null" >
+                #{objectCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.FleFlowright" >
+        update t_fle_flowright
+        <set >
+            <if test="flowId != null" >
+                FLOW_ID = #{flowId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlType != null" >
+                CONTROL_TYPE = #{controlType,jdbcType=TINYINT},
+            </if>
+            <if test="objectType != null" >
+                OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
+            </if>
+            <if test="objectCode != null" >
+                OBJECT_CODE = #{objectCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where FLOWRIGHT_ID = #{flowrightId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.FleFlowright" >
+        update t_fle_flowright
+        set FLOW_ID = #{flowId,jdbcType=VARCHAR},
+            CONTROL_TYPE = #{controlType,jdbcType=TINYINT},
+            OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
+            OBJECT_CODE = #{objectCode,jdbcType=VARCHAR}
+        where FLOWRIGHT_ID = #{flowrightId,jdbcType=INTEGER}
+    </update>
+</mapper>

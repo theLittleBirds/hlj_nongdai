@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.NjProductOrderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.NjProductOrder" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="person_id" property="personId" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="order_name" property="orderName" jdbcType="VARCHAR" />
+        <result column="order_price" property="orderPrice" jdbcType="VARCHAR" />
+        <result column="order_settleprice" property="orderSettleprice" jdbcType="VARCHAR" />
+        <result column="order_productinfo" property="orderProductinfo" jdbcType="LONGVARCHAR" />
+        <result column="order_desc" property="orderDesc" jdbcType="LONGVARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="order_productids" property="orderProductids" jdbcType="VARCHAR" />
+        <result column="cover_pic" property="coverPic" jdbcType="VARCHAR" />
+        <result column="detail_pic" property="detailPic" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, person_id, org_id, order_name, order_price, order_settleprice, order_productinfo, 
+        order_desc, status, order_productids, cover_pic, detail_pic, create_date, update_date
+    </sql>
+
+    <select id="queryNjProductOrderProductids" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njproductorder
+        where order_productids like "%"#{orderProductids,jdbcType=VARCHAR}"%"
+    </select>   	
+
+    <select id="queryNjProductOrderSelective" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.NjProductOrder" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njproductorder
+        where 
+			1 = 1
+		<if test="orderName != null" >
+            and order_name like "%"#{orderName}"%"
+        </if>
+        <if test="status != null" >
+            and status = #{status}
+        </if>
+        <if test="personId != null" >
+           	and org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId})
+       	</if>
+    </select>
+
+    <select id="queryProductOrderByPK" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njproductorder
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteProductOrderByPK" parameterType="java.lang.String" >
+        delete from t_bus_njproductorder
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.NjProductOrder" >
+        insert into t_bus_njproductorder (id, person_id, org_id, 
+            order_name, order_price, order_settleprice, 
+            order_productinfo, order_desc, 
+            status, order_productids, cover_pic, detail_pic, 
+            create_date, update_date)
+        values (#{id,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+            #{orderName,jdbcType=VARCHAR}, #{orderPrice,jdbcType=VARCHAR}, #{orderSettleprice,jdbcType=VARCHAR}, 
+            #{orderProductinfo,jdbcType=LONGVARCHAR}, #{orderDesc,jdbcType=LONGVARCHAR}, 
+            #{status,jdbcType=VARCHAR}, #{orderProductids,jdbcType=VARCHAR}, #{coverPic,jdbcType=VARCHAR}, #{detailPic,jdbcType=VARCHAR}, 
+            #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="addProductOrderSelective" parameterType="com.nongyeos.loan.admin.entity.NjProductOrder" >
+        insert into t_bus_njproductorder
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="personId != null" >
+                person_id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orderName != null" >
+                order_name,
+            </if>
+            <if test="orderPrice != null" >
+                order_price,
+            </if>
+            <if test="orderSettleprice != null" >
+                order_settleprice,
+            </if>
+            <if test="orderProductinfo != null" >
+                order_productinfo,
+            </if>
+            <if test="orderDesc != null" >
+                order_desc,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="orderProductids != null" >
+                order_productids,
+            </if>
+            <if test="coverPic != null" >
+                cover_pic,
+            </if>
+            <if test="detailPic != null" >
+                detail_pic,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderName != null" >
+                #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null" >
+                #{orderPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSettleprice != null" >
+                #{orderSettleprice,jdbcType=VARCHAR},
+            </if>
+            <if test="orderProductinfo != null" >
+                #{orderProductinfo,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="orderDesc != null" >
+                #{orderDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="orderProductids != null" >
+                #{orderProductids,jdbcType=VARCHAR},
+            </if>
+            <if test="coverPic != null" >
+                #{coverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="detailPic != null" >
+                #{detailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateProductOrderByPKSelective" parameterType="com.nongyeos.loan.admin.entity.NjProductOrder" >
+        update t_bus_njproductorder
+        <set >
+            <if test="personId != null" >
+                person_id = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderName != null" >
+                order_name = #{orderName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null" >
+                order_price = #{orderPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="orderSettleprice != null" >
+                order_settleprice = #{orderSettleprice,jdbcType=VARCHAR},
+            </if>
+            <if test="orderProductinfo != null" >
+                order_productinfo = #{orderProductinfo,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="orderDesc != null" >
+                order_desc = #{orderDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="orderProductids != null" >
+                order_productids = #{orderProductids,jdbcType=VARCHAR},
+            </if>
+            <if test="coverPic != null" >
+                cover_pic = #{coverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="detailPic != null" >
+                detail_pic = #{detailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.NjProductOrder" >
+        update t_bus_njproductorder
+        set person_id = #{personId,jdbcType=VARCHAR},
+            org_id = #{orgId,jdbcType=VARCHAR},
+            order_name = #{orderName,jdbcType=VARCHAR},
+            order_price = #{orderPrice,jdbcType=VARCHAR},
+            order_settleprice = #{orderSettleprice,jdbcType=VARCHAR},
+            order_productinfo = #{orderProductinfo,jdbcType=LONGVARCHAR},
+            order_desc = #{orderDesc,jdbcType=LONGVARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            order_productids = #{orderProductids,jdbcType=VARCHAR},
+            cover_pic = #{coverPic,jdbcType=VARCHAR},
+            detail_pic = #{detailPic,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,189 @@
+.initeditdiv {
+    /*border: 2px solid #e8f0f9;*/
+    /*box-shadow: 10px 10px 5px #888888;*/
+    padding-top: 2px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /*background-color: #E8F0F9;*/
+} 
+
+.contai {
+    /* margin-top: 5px;
+    padding-top: 10px; */
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.nav {
+    height: 20px;
+    border-bottom: 2px solid #2694d1;
+    color: #2445d1;
+    font-weight: 700;
+    font-size: 16px;
+    padding-bottom: 24px;
+    letter-spacing: 1px;
+    /*text-shadow: #2494d1 2px 0px 4px;
+    filter: shadow(#2494d1, 135);*/
+}
+
+.m_left {
+    width: 100%;
+    margin-top: 1%;
+}
+
+.m_left {
+    height: 265px;
+    margin-right: 1%;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.n_top {
+    border: 1px solid #DDDDDD;
+    border-bottom: none;
+}
+
+.n_top>div {
+	height: 60px;
+	line-height:60px;
+    padding-left: 3px;
+    border-left: 1px solid #DDDDDD;
+    background-color: #E8F0F9;
+    text-align: center;
+}
+
+.n_top>div>span {
+
+}
+
+.m_left .text_dashed {
+    padding: 3px;
+}
+
+.m_left .mudi>div {
+    height: 60px;
+    padding: 1px;
+    border: 1px solid #DDDDDD;
+    background-color: #E8F0F9;
+}
+
+.m_left .mudi>div textarea {
+    width: 100%;
+    /* max-width: 750px; */
+    height: 55px;
+    max-height: 100px;
+    border: 1px dashed #DDDDDD;
+    background-color: #fff;
+    resize: none;
+    overflow-y: auto;
+}
+
+.m_left .xtime {
+    border-right: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+    background-color: #E8F0F9;
+}
+
+.m_left .xtime>div {
+    height: 60px;
+    border-top: 0;
+}
+
+#s_time {
+    padding-left: 15px;
+    padding-top: 3px;
+    width: 35%;
+    float: left;
+    border:none;
+    /* style=\"padding-left: 15px;padding-top: 3px;  
+
+width:40%; float:left\" */
+}
+
+#zhi{
+	border:none;
+}
+
+#s_time,
+#e_time {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 13px;
+    width: 35%;
+    padding-bottom: 14px;
+    float: left;
+}
+
+#e_time {
+    padding-right: 8px;
+    border:none;
+}
+
+.m_left .text_middle {
+    line-height: 60px;
+    text-align: center;
+    border-right: 1px solid #DDDDDD !important;
+}
+
+.m_left .yijian>div {
+    line-height: 75px;
+    height: 75px;
+    border: 1px solid #DDDDDD;
+    background-color: #E8F0F9;
+}
+
+.m_left .yijian>div textarea {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    /*font-weight: 700;*/
+    line-height: 34px;
+    border: 1px dashed #DDDDDD;
+    background-color: #fff;
+    resize: none;
+    overflow-y: auto;
+    /* text-align: center;
+    vertical-align: middle; */
+}
+ 
+#rtop {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    height: 300px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#rdown {
+    width: 20%;
+    margin: 0 auto;
+    letter-spacing: 2px;
+    font-size: 20px;
+    display: table;
+}
+
+#rdown button {
+    font-size: 20px;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#rdown .btn_css {
+    font-weight: 700 !important;
+    border: 1px solid #DDDDDD !important;
+    background-color: #aee1fe !important;
+}
+
+#rdown .btn_css span {
+    line-height: 20px;
+    font-size: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    color: #c2a380;
+}

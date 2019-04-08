@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.IntServiceimplMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.IntServiceimpl" >
+        <id column="SERVIMPL_CODE" property="servimplCode" jdbcType="VARCHAR" />
+        <result column="SERVIFA_CODE" property="servifaCode" jdbcType="VARCHAR" />
+        <result column="PROVIDER_CODE" property="providerCode" jdbcType="VARCHAR" />
+        <result column="REMOTE_PRDCODE" property="remotePrdcode" jdbcType="VARCHAR" />
+        <result column="LOCAL_PRDCODE" property="localPrdcode" jdbcType="VARCHAR" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="VERSION" property="version" jdbcType="VARCHAR" />
+        <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
+        <result column="CLASS_METHOD" property="classMethod" jdbcType="VARCHAR" />
+        <result column="SITE" property="site" jdbcType="TINYINT" />
+        <result column="COST_PERTIME_LOCAL" property="costPertimeLocal" jdbcType="REAL" />
+        <result column="COST_PERTIME_SOURCE" property="costPertimeSource" jdbcType="REAL" />
+        <result column="VALID_RESULT" property="validResult" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="SMALLINT" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="TINYINT" />
+    </resultMap>
+	
+	<resultMap id="intServiceimplMap" type="com.nongyeos.loan.admin.resultMap.IntServiceimplMap" extends="BaseResultMap">
+    	<result column="tardata_id" property="tardataId" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        SERVIMPL_CODE, SERVIFA_CODE, PROVIDER_CODE, REMOTE_PRDCODE, LOCAL_PRDCODE, CNAME, 
+        ENAME, VERSION, CLASS_NAME, CLASS_METHOD, SITE, COST_PERTIME_LOCAL, COST_PERTIME_SOURCE, 
+        VALID_RESULT, STATUS, SEQNO, IS_DELETE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceimpl
+        where SERVIMPL_CODE = #{servimplCode,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectAll" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_int_serviceimpl
+	    order by SEQNO ASC
+	</select>
+	
+	<select id="count" resultType="Integer">
+  	   	select count(SERVIMPL_CODE) from t_int_serviceimpl
+  	</select>
+  	
+  	<select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceimpl
+        where CNAME = #{name,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+    <select id="selectByLocalPCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceimpl
+        where LOCAL_PRDCODE = #{code,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+	
+	<select id="selectByEventAndRunTime" resultMap="intServiceimplMap" parameterType="com.nongyeos.loan.app.entity.FlowNevent" >
+        select 
+        tis.*,tas.tardata_id
+        from t_int_serviceimpl tis left join t_app_srvunit tas on tis.SERVIMPL_CODE = tas.SERVIMPL_ID left join t_flow_nevent tfn on tfn.SRVUN_ID = tas.SRVUN_ID 
+        where tfn.NODE_ID = #{nodeId,jdbcType=VARCHAR} and tfn.RUNTIME = #{runtime,jdbcType=SMALLINT}
+        order by tfn.SEQNO ASC
+    </select>
+    
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_serviceimpl
+        where SERVIMPL_CODE = #{servimplCode,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.IntServiceimpl" >
+        insert into t_int_serviceimpl (SERVIMPL_CODE, SERVIFA_CODE, PROVIDER_CODE, 
+            REMOTE_PRDCODE, LOCAL_PRDCODE, CNAME, 
+            ENAME, VERSION, CLASS_NAME, 
+            CLASS_METHOD, SITE, COST_PERTIME_LOCAL, 
+            COST_PERTIME_SOURCE, VALID_RESULT, STATUS, 
+            SEQNO, IS_DELETE)
+        values (#{servimplCode,jdbcType=VARCHAR}, #{servifaCode,jdbcType=VARCHAR}, #{providerCode,jdbcType=VARCHAR}, 
+            #{remotePrdcode,jdbcType=VARCHAR}, #{localPrdcode,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+            #{ename,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
+            #{classMethod,jdbcType=VARCHAR}, #{site,jdbcType=TINYINT}, #{costPertimeLocal,jdbcType=REAL}, 
+            #{costPertimeSource,jdbcType=REAL}, #{validResult,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+            #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.IntServiceimpl" >
+        insert into t_int_serviceimpl
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="servimplCode != null" >
+                SERVIMPL_CODE,
+            </if>
+            <if test="servifaCode != null" >
+                SERVIFA_CODE,
+            </if>
+            <if test="providerCode != null" >
+                PROVIDER_CODE,
+            </if>
+            <if test="remotePrdcode != null" >
+                REMOTE_PRDCODE,
+            </if>
+            <if test="localPrdcode != null" >
+                LOCAL_PRDCODE,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="version != null" >
+                VERSION,
+            </if>
+            <if test="className != null" >
+                CLASS_NAME,
+            </if>
+            <if test="classMethod != null" >
+                CLASS_METHOD,
+            </if>
+            <if test="site != null" >
+                SITE,
+            </if>
+            <if test="costPertimeLocal != null" >
+                COST_PERTIME_LOCAL,
+            </if>
+            <if test="costPertimeSource != null" >
+                COST_PERTIME_SOURCE,
+            </if>
+            <if test="validResult != null" >
+                VALID_RESULT,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="servimplCode != null" >
+                #{servimplCode,jdbcType=VARCHAR},
+            </if>
+            <if test="servifaCode != null" >
+                #{servifaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="providerCode != null" >
+                #{providerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remotePrdcode != null" >
+                #{remotePrdcode,jdbcType=VARCHAR},
+            </if>
+            <if test="localPrdcode != null" >
+                #{localPrdcode,jdbcType=VARCHAR},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null" >
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="classMethod != null" >
+                #{classMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null" >
+                #{site,jdbcType=TINYINT},
+            </if>
+            <if test="costPertimeLocal != null" >
+                #{costPertimeLocal,jdbcType=REAL},
+            </if>
+            <if test="costPertimeSource != null" >
+                #{costPertimeSource,jdbcType=REAL},
+            </if>
+            <if test="validResult != null" >
+                #{validResult,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.IntServiceimpl" >
+        update t_int_serviceimpl
+        <set >
+            <if test="servifaCode != null" >
+                SERVIFA_CODE = #{servifaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="providerCode != null" >
+                PROVIDER_CODE = #{providerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remotePrdcode != null" >
+                REMOTE_PRDCODE = #{remotePrdcode,jdbcType=VARCHAR},
+            </if>
+            <if test="localPrdcode != null" >
+                LOCAL_PRDCODE = #{localPrdcode,jdbcType=VARCHAR},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                VERSION = #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null" >
+                CLASS_NAME = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="classMethod != null" >
+                CLASS_METHOD = #{classMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null" >
+                SITE = #{site,jdbcType=TINYINT},
+            </if>
+            <if test="costPertimeLocal != null" >
+                COST_PERTIME_LOCAL = #{costPertimeLocal,jdbcType=REAL},
+            </if>
+            <if test="costPertimeSource != null" >
+                COST_PERTIME_SOURCE = #{costPertimeSource,jdbcType=REAL},
+            </if>
+            <if test="validResult != null" >
+                VALID_RESULT = #{validResult,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=TINYINT},
+            </if>
+        </set>
+        where SERVIMPL_CODE = #{servimplCode,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.IntServiceimpl" >
+        update t_int_serviceimpl
+        set SERVIFA_CODE = #{servifaCode,jdbcType=VARCHAR},
+            PROVIDER_CODE = #{providerCode,jdbcType=VARCHAR},
+            REMOTE_PRDCODE = #{remotePrdcode,jdbcType=VARCHAR},
+            LOCAL_PRDCODE = #{localPrdcode,jdbcType=VARCHAR},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            VERSION = #{version,jdbcType=VARCHAR},
+            CLASS_NAME = #{className,jdbcType=VARCHAR},
+            CLASS_METHOD = #{classMethod,jdbcType=VARCHAR},
+            SITE = #{site,jdbcType=TINYINT},
+            COST_PERTIME_LOCAL = #{costPertimeLocal,jdbcType=REAL},
+            COST_PERTIME_SOURCE = #{costPertimeSource,jdbcType=REAL},
+            VALID_RESULT = #{validResult,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=SMALLINT},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=TINYINT}
+        where SERVIMPL_CODE = #{servimplCode,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysWebUserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysWebUser" >
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+        <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+        <result column="SALT" property="salt" jdbcType="VARCHAR" />
+        <result column="TOKEN" property="token" jdbcType="VARCHAR" />
+        <result column="WXTOKEN" property="wxtoken" jdbcType="VARCHAR" />
+        <result column="TOKEN_EXPIRED" property="tokenExpired" jdbcType="TIMESTAMP" />
+        <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+        <result column="PHOTO_URL" property="photoUrl" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="TINYINT" />
+        <result column="STATUS" property="status" jdbcType="TINYINT" />
+        <result column="LAST_IP" property="lastIp" jdbcType="VARCHAR" />
+        <result column="LAST_TIME" property="lastTime" jdbcType="TIMESTAMP" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        USER_ID, USERNAME, PASSWORD, SALT, TOKEN, WXTOKEN, TOKEN_EXPIRED, NICKNAME, PHOTO_URL, TYPE, 
+        STATUS, LAST_IP, LAST_TIME, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, 
+        UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_webuser
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_webuser
+        where USERNAME = #{name,jdbcType=VARCHAR}
+    </select>
+	
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_webuser
+	</select>
+	
+	<select id="count" resultType="Integer">
+  	   	select count(USER_ID) from t_sys_webuser
+  	</select>
+  
+	<!--注意这里的参数类型是parameterType而不是parameterMap，因为返回的是单个类型    
+	<select id="findUserByName"  parameterType="map"  resultType="com.nongyeos.loan.admin.entity.FwUser">  
+	    select t.LOGIN_NAME as loginName,t.LOGIN_PASSWORD as loginPassword from t_fw_user t where LOGIN_NAME=#{name}  
+	</select>  -->
+  
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_sys_webuser
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysWebUser" >
+        insert into t_sys_webuser (USER_ID, USERNAME, PASSWORD, 
+            SALT, TOKEN, WXTOKEN, TOKEN_EXPIRED, 
+            NICKNAME, PHOTO_URL, TYPE, 
+            STATUS, LAST_IP, LAST_TIME, 
+            IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+            CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+            UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+            )
+        values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+            #{salt,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{wxtoken,jdbcType=VARCHAR}, #{tokenExpired,jdbcType=TIMESTAMP}, 
+            #{nickname,jdbcType=VARCHAR}, #{photoUrl,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+            #{status,jdbcType=TINYINT}, #{lastIp,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+            #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysWebUser" >
+        insert into t_sys_webuser
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                USER_ID,
+            </if>
+            <if test="username != null" >
+                USERNAME,
+            </if>
+            <if test="password != null" >
+                PASSWORD,
+            </if>
+            <if test="salt != null" >
+                SALT,
+            </if>
+            <if test="token != null" >
+                TOKEN,
+            </if>
+            <if test="wxtoken != null" >
+                WXTOKEN,
+            </if>
+            <if test="tokenExpired != null" >
+                TOKEN_EXPIRED,
+            </if>
+            <if test="nickname != null" >
+                NICKNAME,
+            </if>
+            <if test="photoUrl != null" >
+                PHOTO_URL,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="lastIp != null" >
+                LAST_IP,
+            </if>
+            <if test="lastTime != null" >
+                LAST_TIME,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null" >
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null" >
+                #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="wxtoken != null" >
+                #{wxtoken,jdbcType=VARCHAR},
+            </if>
+            <if test="tokenExpired != null" >
+                #{tokenExpired,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nickname != null" >
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="photoUrl != null" >
+                #{photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="lastIp != null" >
+                #{lastIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastTime != null" >
+                #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysWebUser" >
+        update t_sys_webuser
+        <set >
+            <if test="username != null" >
+                USERNAME = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null" >
+                SALT = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null" >
+                TOKEN = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="wxtoken != null" >
+                WXTOKEN = #{wxtoken,jdbcType=VARCHAR},
+            </if>
+            <if test="tokenExpired != null" >
+                TOKEN_EXPIRED = #{tokenExpired,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nickname != null" >
+                NICKNAME = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="photoUrl != null" >
+                PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="lastIp != null" >
+                LAST_IP = #{lastIp,jdbcType=VARCHAR},
+            </if>
+            <if test="lastTime != null" >
+                LAST_TIME = #{lastTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysWebUser" >
+        update t_sys_webuser
+        set USERNAME = #{username,jdbcType=VARCHAR},
+            PASSWORD = #{password,jdbcType=VARCHAR},
+            SALT = #{salt,jdbcType=VARCHAR},
+            TOKEN = #{token,jdbcType=VARCHAR},
+            WXTOKEN = #{wxtoken,jdbcType=VARCHAR},
+            TOKEN_EXPIRED = #{tokenExpired,jdbcType=TIMESTAMP},
+            NICKNAME = #{nickname,jdbcType=VARCHAR},
+            PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+            TYPE = #{type,jdbcType=TINYINT},
+            STATUS = #{status,jdbcType=TINYINT},
+            LAST_IP = #{lastIp,jdbcType=VARCHAR},
+            LAST_TIME = #{lastTime,jdbcType=TIMESTAMP},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.AppApprightMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppAppright" >
+        <id column="APPRIGHT_ID" property="apprightId" jdbcType="INTEGER" />
+        <result column="ENTITY_ID" property="entityId" jdbcType="VARCHAR" />
+        <result column="CONTROL_TYPE" property="controlType" jdbcType="TINYINT" />
+        <result column="OBJECT_TYPE" property="objectType" jdbcType="TINYINT" />
+        <result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        APPRIGHT_ID, ENTITY_ID, CONTROL_TYPE, OBJECT_TYPE, OBJECT_ID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_appright
+        where APPRIGHT_ID = #{apprightId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByEntityId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_appright
+        where ENTITY_ID = #{entityId,jdbcType=VARCHAR}
+    </select>
+    
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_app_appright
+        where APPRIGHT_ID = #{apprightId,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByEntityId" parameterType="java.lang.String" >
+        delete from t_app_appright
+        where ENTITY_ID = #{entityId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppAppright" >
+        insert into t_app_appright (APPRIGHT_ID, ENTITY_ID, CONTROL_TYPE, 
+            OBJECT_TYPE, OBJECT_ID)
+        values (#{apprightId,jdbcType=INTEGER}, #{entityId,jdbcType=VARCHAR}, #{controlType,jdbcType=TINYINT}, 
+            #{objectType,jdbcType=TINYINT}, #{objectId,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.AppAppright" >
+        insert into t_app_appright
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="apprightId != null" >
+                APPRIGHT_ID,
+            </if>
+            <if test="entityId != null" >
+                ENTITY_ID,
+            </if>
+            <if test="controlType != null" >
+                CONTROL_TYPE,
+            </if>
+            <if test="objectType != null" >
+                OBJECT_TYPE,
+            </if>
+            <if test="objectId != null" >
+                OBJECT_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="apprightId != null" >
+                #{apprightId,jdbcType=INTEGER},
+            </if>
+            <if test="entityId != null" >
+                #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlType != null" >
+                #{controlType,jdbcType=TINYINT},
+            </if>
+            <if test="objectType != null" >
+                #{objectType,jdbcType=TINYINT},
+            </if>
+            <if test="objectId != null" >
+                #{objectId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.AppAppright" >
+        update t_app_appright
+        <set >
+            <if test="entityId != null" >
+                ENTITY_ID = #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlType != null" >
+                CONTROL_TYPE = #{controlType,jdbcType=TINYINT},
+            </if>
+            <if test="objectType != null" >
+                OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
+            </if>
+            <if test="objectId != null" >
+                OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where APPRIGHT_ID = #{apprightId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppAppright" >
+        update t_app_appright
+        set ENTITY_ID = #{entityId,jdbcType=VARCHAR},
+            CONTROL_TYPE = #{controlType,jdbcType=TINYINT},
+            OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
+            OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+        where APPRIGHT_ID = #{apprightId,jdbcType=INTEGER}
+    </update>
+</mapper>

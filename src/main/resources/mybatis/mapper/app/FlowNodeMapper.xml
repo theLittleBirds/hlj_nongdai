@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongyeos.loan.app.mapper.FlowNodeMapper">
+  <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.FlowNode">
+    <id column="NODE_ID" jdbcType="VARCHAR" property="nodeId" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+    <result column="TYPE" jdbcType="SMALLINT" property="type" />
+    <result column="CNAME" jdbcType="VARCHAR" property="cname" />
+    <result column="ENAME" jdbcType="VARCHAR" property="ename" />
+    <result column="APPROVER_TYPE" jdbcType="SMALLINT" property="approverType" />
+    <result column="APPROVER_COUNT" jdbcType="SMALLINT" property="approverCount" />
+    <result column="APPROVE_MODE" jdbcType="SMALLINT" property="approveMode" />
+    <result column="APPROVER_IDS" jdbcType="VARCHAR" property="approverIds" />
+    <result column="NODE_STATUS" jdbcType="SMALLINT" property="nodeStatus" />
+    <result column="INIT_STATUS" jdbcType="SMALLINT" property="initStatus" />
+    <result column="OPEN_STATUS" jdbcType="SMALLINT" property="openStatus" />
+    <result column="SAVE_STATUS" jdbcType="SMALLINT" property="saveStatus" />
+    <result column="EDIT_SECTIONS" jdbcType="VARCHAR" property="editSections" />
+    <result column="EDIT_ITEMS" jdbcType="VARCHAR" property="editItems" />
+    <result column="READONLY_ITEMS" jdbcType="VARCHAR" property="readonlyItems" />
+    <result column="HIDE_ITEMS" jdbcType="VARCHAR" property="hideItems" />
+    <result column="CHECK_ITEMS" jdbcType="VARCHAR" property="checkItems" />
+    <result column="COMMENT_ITEMS" jdbcType="VARCHAR" property="commentItems" />
+    <result column="HIDE_SECTIONS" jdbcType="VARCHAR" property="hideSections" />
+    <result column="ACTIONS" jdbcType="VARCHAR" property="actions" />
+    <result column="NEXT_NODE_CODE" jdbcType="VARCHAR" property="nextNodeCode" />
+    <result column="BACK_NODE_CODE" jdbcType="VARCHAR" property="backNodeCode" />
+    <result column="TRACE_STEP" jdbcType="TINYINT" property="traceStep" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="SEQNO" jdbcType="INTEGER" property="seqno" />
+    <result column="IS_DELETE" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    NODE_ID, APP_ID, TYPE, CNAME, ENAME, APPROVER_TYPE, APPROVER_COUNT, APPROVE_MODE, 
+    APPROVER_IDS, NODE_STATUS, INIT_STATUS, OPEN_STATUS, SAVE_STATUS, EDIT_SECTIONS, 
+    EDIT_ITEMS, READONLY_ITEMS, HIDE_ITEMS, CHECK_ITEMS, COMMENT_ITEMS, HIDE_SECTIONS, 
+    ACTIONS, NEXT_NODE_CODE, BACK_NODE_CODE, TRACE_STEP, MEMO, SEQNO, IS_DELETE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_node
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_node
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_flow_node
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nongyeos.loan.app.entity.FlowNode">
+    insert into t_flow_node (NODE_ID, APP_ID, TYPE, 
+      CNAME, ENAME, APPROVER_TYPE, 
+      APPROVER_COUNT, APPROVE_MODE, APPROVER_IDS, 
+      NODE_STATUS, INIT_STATUS, OPEN_STATUS, 
+      SAVE_STATUS, EDIT_SECTIONS, EDIT_ITEMS, 
+      READONLY_ITEMS, HIDE_ITEMS, CHECK_ITEMS, 
+      COMMENT_ITEMS, HIDE_SECTIONS, ACTIONS, 
+      NEXT_NODE_CODE, BACK_NODE_CODE, TRACE_STEP, 
+      MEMO, SEQNO, IS_DELETE
+      )
+    values (#{nodeId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
+      #{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{approverType,jdbcType=SMALLINT}, 
+      #{approverCount,jdbcType=SMALLINT}, #{approveMode,jdbcType=SMALLINT}, #{approverIds,jdbcType=VARCHAR}, 
+      #{nodeStatus,jdbcType=SMALLINT}, #{initStatus,jdbcType=SMALLINT}, #{openStatus,jdbcType=SMALLINT}, 
+      #{saveStatus,jdbcType=SMALLINT}, #{editSections,jdbcType=VARCHAR}, #{editItems,jdbcType=VARCHAR}, 
+      #{readonlyItems,jdbcType=VARCHAR}, #{hideItems,jdbcType=VARCHAR}, #{checkItems,jdbcType=VARCHAR}, 
+      #{commentItems,jdbcType=VARCHAR}, #{hideSections,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, 
+      #{nextNodeCode,jdbcType=VARCHAR}, #{backNodeCode,jdbcType=VARCHAR}, #{traceStep,jdbcType=TINYINT}, 
+      #{memo,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.FlowNode">
+    insert into t_flow_node
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nodeId != null">
+        NODE_ID,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="cname != null">
+        CNAME,
+      </if>
+      <if test="ename != null">
+        ENAME,
+      </if>
+      <if test="approverType != null">
+        APPROVER_TYPE,
+      </if>
+      <if test="approverCount != null">
+        APPROVER_COUNT,
+      </if>
+      <if test="approveMode != null">
+        APPROVE_MODE,
+      </if>
+      <if test="approverIds != null">
+        APPROVER_IDS,
+      </if>
+      <if test="nodeStatus != null">
+        NODE_STATUS,
+      </if>
+      <if test="initStatus != null">
+        INIT_STATUS,
+      </if>
+      <if test="openStatus != null">
+        OPEN_STATUS,
+      </if>
+      <if test="saveStatus != null">
+        SAVE_STATUS,
+      </if>
+      <if test="editSections != null">
+        EDIT_SECTIONS,
+      </if>
+      <if test="editItems != null">
+        EDIT_ITEMS,
+      </if>
+      <if test="readonlyItems != null">
+        READONLY_ITEMS,
+      </if>
+      <if test="hideItems != null">
+        HIDE_ITEMS,
+      </if>
+      <if test="checkItems != null">
+        CHECK_ITEMS,
+      </if>
+      <if test="commentItems != null">
+        COMMENT_ITEMS,
+      </if>
+      <if test="hideSections != null">
+        HIDE_SECTIONS,
+      </if>
+      <if test="actions != null">
+        ACTIONS,
+      </if>
+      <if test="nextNodeCode != null">
+        NEXT_NODE_CODE,
+      </if>
+      <if test="backNodeCode != null">
+        BACK_NODE_CODE,
+      </if>
+      <if test="traceStep != null">
+        TRACE_STEP,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="seqno != null">
+        SEQNO,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nodeId != null">
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null">
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="approverType != null">
+        #{approverType,jdbcType=SMALLINT},
+      </if>
+      <if test="approverCount != null">
+        #{approverCount,jdbcType=SMALLINT},
+      </if>
+      <if test="approveMode != null">
+        #{approveMode,jdbcType=SMALLINT},
+      </if>
+      <if test="approverIds != null">
+        #{approverIds,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeStatus != null">
+        #{nodeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="initStatus != null">
+        #{initStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="openStatus != null">
+        #{openStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="saveStatus != null">
+        #{saveStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="editSections != null">
+        #{editSections,jdbcType=VARCHAR},
+      </if>
+      <if test="editItems != null">
+        #{editItems,jdbcType=VARCHAR},
+      </if>
+      <if test="readonlyItems != null">
+        #{readonlyItems,jdbcType=VARCHAR},
+      </if>
+      <if test="hideItems != null">
+        #{hideItems,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItems != null">
+        #{checkItems,jdbcType=VARCHAR},
+      </if>
+      <if test="commentItems != null">
+        #{commentItems,jdbcType=VARCHAR},
+      </if>
+      <if test="hideSections != null">
+        #{hideSections,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null">
+        #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="nextNodeCode != null">
+        #{nextNodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="backNodeCode != null">
+        #{backNodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="traceStep != null">
+        #{traceStep,jdbcType=TINYINT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        #{seqno,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.FlowNode">
+    update t_flow_node
+    <set>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="cname != null">
+        CNAME = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null">
+        ENAME = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="approverType != null">
+        APPROVER_TYPE = #{approverType,jdbcType=SMALLINT},
+      </if>
+      <if test="approverCount != null">
+        APPROVER_COUNT = #{approverCount,jdbcType=SMALLINT},
+      </if>
+      <if test="approveMode != null">
+        APPROVE_MODE = #{approveMode,jdbcType=SMALLINT},
+      </if>
+      <if test="approverIds != null">
+        APPROVER_IDS = #{approverIds,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeStatus != null">
+        NODE_STATUS = #{nodeStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="initStatus != null">
+        INIT_STATUS = #{initStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="openStatus != null">
+        OPEN_STATUS = #{openStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="saveStatus != null">
+        SAVE_STATUS = #{saveStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="editSections != null">
+        EDIT_SECTIONS = #{editSections,jdbcType=VARCHAR},
+      </if>
+      <if test="editItems != null">
+        EDIT_ITEMS = #{editItems,jdbcType=VARCHAR},
+      </if>
+      <if test="readonlyItems != null">
+        READONLY_ITEMS = #{readonlyItems,jdbcType=VARCHAR},
+      </if>
+      <if test="hideItems != null">
+        HIDE_ITEMS = #{hideItems,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItems != null">
+        CHECK_ITEMS = #{checkItems,jdbcType=VARCHAR},
+      </if>
+      <if test="commentItems != null">
+        COMMENT_ITEMS = #{commentItems,jdbcType=VARCHAR},
+      </if>
+      <if test="hideSections != null">
+        HIDE_SECTIONS = #{hideSections,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null">
+        ACTIONS = #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="nextNodeCode != null">
+        NEXT_NODE_CODE = #{nextNodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="backNodeCode != null">
+        BACK_NODE_CODE = #{backNodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="traceStep != null">
+        TRACE_STEP = #{traceStep,jdbcType=TINYINT},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        SEQNO = #{seqno,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.FlowNode">
+    update t_flow_node
+    set APP_ID = #{appId,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=SMALLINT},
+      CNAME = #{cname,jdbcType=VARCHAR},
+      ENAME = #{ename,jdbcType=VARCHAR},
+      APPROVER_TYPE = #{approverType,jdbcType=SMALLINT},
+      APPROVER_COUNT = #{approverCount,jdbcType=SMALLINT},
+      APPROVE_MODE = #{approveMode,jdbcType=SMALLINT},
+      APPROVER_IDS = #{approverIds,jdbcType=VARCHAR},
+      NODE_STATUS = #{nodeStatus,jdbcType=SMALLINT},
+      INIT_STATUS = #{initStatus,jdbcType=SMALLINT},
+      OPEN_STATUS = #{openStatus,jdbcType=SMALLINT},
+      SAVE_STATUS = #{saveStatus,jdbcType=SMALLINT},
+      EDIT_SECTIONS = #{editSections,jdbcType=VARCHAR},
+      EDIT_ITEMS = #{editItems,jdbcType=VARCHAR},
+      READONLY_ITEMS = #{readonlyItems,jdbcType=VARCHAR},
+      HIDE_ITEMS = #{hideItems,jdbcType=VARCHAR},
+      CHECK_ITEMS = #{checkItems,jdbcType=VARCHAR},
+      COMMENT_ITEMS = #{commentItems,jdbcType=VARCHAR},
+      HIDE_SECTIONS = #{hideSections,jdbcType=VARCHAR},
+      ACTIONS = #{actions,jdbcType=VARCHAR},
+      NEXT_NODE_CODE = #{nextNodeCode,jdbcType=VARCHAR},
+      BACK_NODE_CODE = #{backNodeCode,jdbcType=VARCHAR},
+      TRACE_STEP = #{traceStep,jdbcType=TINYINT},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      SEQNO = #{seqno,jdbcType=INTEGER},
+      IS_DELETE = #{isDelete,jdbcType=TINYINT}
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="selectByAppId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_node
+    where APP_ID = #{appId,jdbcType=VARCHAR}
+    order by SEQNO asc
+  </select>
+  
+   <select id="selectByNodeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_node
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </select>
+
+   <select id="queryByEnameAndModel" parameterType="com.nongyeos.loan.app.entity.FlowNode" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_node
+    where 1=1
+    <if test="appId != null">
+     and APP_ID = #{appId,jdbcType=VARCHAR}
+    </if>
+    <if test="ename != null">
+     and ENAME = #{ename,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+</mapper>

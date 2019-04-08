@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusNjmerorderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusNjmerorder" >
+        <id column="MER_ORDER_ID" property="merOrderId" jdbcType="INTEGER" />
+        <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+        <result column="TOTAL_PRICE" property="totalPrice" jdbcType="VARCHAR" />
+        <result column="TOTAL_SETTLE_PRICE" property="totalSettlePrice" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <result column="PAY_PIC" property="payPic" jdbcType="VARCHAR" />
+        <result column="PAY_PIC_TAIL" property="payPicTail" jdbcType="VARCHAR" />
+        <result column="SEND_PIC" property="sendPic" jdbcType="VARCHAR" />
+        <result column="RECEIVE_PIC" property="receivePic" jdbcType="VARCHAR" />
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        MER_ORDER_ID, ORDER_ID, ORG_ID, ORG_NAME, TOTAL_PRICE, TOTAL_SETTLE_PRICE, STATUS, 
+        PAY_PIC, PAY_PIC_TAIL,SEND_PIC,RECEIVE_PIC, CREATE_DATE, UPDATE_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njmerorder
+        where MER_ORDER_ID = #{merOrderId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByOrderIdAndOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njmerorder
+        where ORDER_ID = #{orderId,jdbcType=VARCHAR} and ORG_ID = #{orgId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectNjmerorderList" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusNjmerorder" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njmerorder
+        <where>
+            <if test="njmerorder.orgName != null and njmerorder.orgName != ''" >
+                and ORG_NAME = #{njmerorder.orgName,jdbcType=VARCHAR}
+            </if>
+            <if test="njmerorder.status != null and njmerorder.status != ''" >
+                and STATUS = #{njmerorder.status,jdbcType=VARCHAR}
+            </if>
+            <if test="personId != null" >
+                and ORG_ID in (select org_id from t_sys_personorg where PERSON_ID = #{personId})
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_bus_njmerorder
+        where MER_ORDER_ID = #{merOrderId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusNjmerorder" >
+        insert into t_bus_njmerorder (MER_ORDER_ID, ORDER_ID, ORG_ID, 
+            ORG_NAME, TOTAL_PRICE, TOTAL_SETTLE_PRICE, 
+            STATUS, PAY_PIC, PAY_PIC_TAIL,RECEIVE_PIC,SEND_PIC,
+            CREATE_DATE, UPDATE_DATE)
+        values (#{merOrderId,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+            #{orgName,jdbcType=VARCHAR}, #{totalPrice,jdbcType=VARCHAR}, #{totalSettlePrice,jdbcType=VARCHAR}, 
+            #{status,jdbcType=VARCHAR}, #{payPic,jdbcType=VARCHAR}, #{payPicTail,jdbcType=VARCHAR},
+            #{sendPic,jdbcType=VARCHAR},#{receivePic,jdbcType=VARCHAR},
+            #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusNjmerorder" >
+        insert into t_bus_njmerorder
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="merOrderId != null" >
+                MER_ORDER_ID,
+            </if>
+            <if test="orderId != null" >
+                ORDER_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME,
+            </if>
+            <if test="totalPrice != null" >
+                TOTAL_PRICE,
+            </if>
+            <if test="totalSettlePrice != null" >
+                TOTAL_SETTLE_PRICE,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="payPic != null" >
+                PAY_PIC,
+            </if>
+            <if test="payPicTail != null" >
+                PAY_PIC_TAIL,
+            </if>
+            <if test="sendPic != null" >
+                SEND_PIC,
+            </if>
+            <if test="receivePic != null" >
+                RECEIVE_PIC,
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE,
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="merOrderId != null" >
+                #{merOrderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null" >
+                #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalSettlePrice != null" >
+                #{totalSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="payPic != null" >
+                #{payPic,jdbcType=VARCHAR},
+            </if>
+            <if test="payPicTail != null" >
+                #{payPicTail,jdbcType=VARCHAR},
+            </if>
+            <if test="sendPic != null" >
+                #{sendPic,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePic != null" >
+                #{receivePic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusNjmerorder" >
+        update t_bus_njmerorder
+        <set >
+            <if test="orderId != null" >
+                ORDER_ID = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null" >
+                TOTAL_PRICE = #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalSettlePrice != null" >
+                TOTAL_SETTLE_PRICE = #{totalSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="payPic != null" >
+                PAY_PIC = #{payPic,jdbcType=VARCHAR},
+            </if>
+            <if test="payPicTail != null" >
+                PAY_PIC_TAIL = #{payPicTail,jdbcType=VARCHAR},
+            </if>
+            <if test="sendPic != null" >
+                SEND_PIC = #{sendPic,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePic != null" >
+                RECEIVE_PIC = #{receivePic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MER_ORDER_ID = #{merOrderId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusNjmerorder" >
+        update t_bus_njmerorder
+        set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+            ORG_ID = #{orgId,jdbcType=VARCHAR},
+            ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            TOTAL_PRICE = #{totalPrice,jdbcType=VARCHAR},
+            TOTAL_SETTLE_PRICE = #{totalSettlePrice,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=VARCHAR},
+            PAY_PIC = #{payPic,jdbcType=VARCHAR},
+            SEND_PIC = #{sendPic,jdbcType=VARCHAR},
+            RECEIVE_PIC = #{receivePic,jdbcType=VARCHAR},
+            PAY_PIC_TAIL = #{payPicTail,jdbcType=VARCHAR},
+            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+        where MER_ORDER_ID = #{merOrderId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectNjmerorderListByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njmerorder
+        where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+    </select>
+</mapper>

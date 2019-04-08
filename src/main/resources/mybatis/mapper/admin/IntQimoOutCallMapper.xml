@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.IntQimoOutCallMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.IntQimoOutCall" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="familySituationId" property="familysituationid" jdbcType="VARCHAR" />
+        <result column="intoPieceId" property="intopieceid" jdbcType="VARCHAR" />
+        <result column="actionId" property="actionid" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="idCard" property="idcard" jdbcType="VARCHAR" />
+        <result column="phoneNo" property="phoneno" jdbcType="VARCHAR" />
+        <result column="voiceUrl" property="voiceurl" jdbcType="VARCHAR" />
+        <result column="qimoStart" property="qimostart" jdbcType="VARCHAR" />
+        <result column="qimoEnd" property="qimoend" jdbcType="VARCHAR" />
+        <result column="qimoVoiceUrl" property="qimovoiceurl" jdbcType="VARCHAR" />
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, familySituationId, intoPieceId, actionId, name, idCard, phoneNo, voiceUrl, qimoStart, 
+        qimoEnd, qimoVoiceUrl, createTime, updateTime
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_qimo_outcall
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_qimo_outcall
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.IntQimoOutCall" >
+        insert into t_int_qimo_outcall (id, familySituationId, intoPieceId, 
+            actionId, name, idCard, 
+            phoneNo, voiceUrl, qimoStart, 
+            qimoEnd, qimoVoiceUrl, createTime, 
+            updateTime)
+        values (#{id,jdbcType=VARCHAR}, #{familysituationid,jdbcType=VARCHAR}, #{intopieceid,jdbcType=VARCHAR}, 
+            #{actionid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+            #{phoneno,jdbcType=VARCHAR}, #{voiceurl,jdbcType=VARCHAR}, #{qimostart,jdbcType=VARCHAR}, 
+            #{qimoend,jdbcType=VARCHAR}, #{qimovoiceurl,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+            #{updatetime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.IntQimoOutCall" >
+        insert into t_int_qimo_outcall
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="familysituationid != null" >
+                familySituationId,
+            </if>
+            <if test="intopieceid != null" >
+                intoPieceId,
+            </if>
+            <if test="actionid != null" >
+                actionId,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="idcard != null" >
+                idCard,
+            </if>
+            <if test="phoneno != null" >
+                phoneNo,
+            </if>
+            <if test="voiceurl != null" >
+                voiceUrl,
+            </if>
+            <if test="qimostart != null" >
+                qimoStart,
+            </if>
+            <if test="qimoend != null" >
+                qimoEnd,
+            </if>
+            <if test="qimovoiceurl != null" >
+                qimoVoiceUrl,
+            </if>
+            <if test="createtime != null" >
+                createTime,
+            </if>
+            <if test="updatetime != null" >
+                updateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="familysituationid != null" >
+                #{familysituationid,jdbcType=VARCHAR},
+            </if>
+            <if test="intopieceid != null" >
+                #{intopieceid,jdbcType=VARCHAR},
+            </if>
+            <if test="actionid != null" >
+                #{actionid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null" >
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneno != null" >
+                #{phoneno,jdbcType=VARCHAR},
+            </if>
+            <if test="voiceurl != null" >
+                #{voiceurl,jdbcType=VARCHAR},
+            </if>
+            <if test="qimostart != null" >
+                #{qimostart,jdbcType=VARCHAR},
+            </if>
+            <if test="qimoend != null" >
+                #{qimoend,jdbcType=VARCHAR},
+            </if>
+            <if test="qimovoiceurl != null" >
+                #{qimovoiceurl,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null" >
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.IntQimoOutCall" >
+        update t_int_qimo_outcall
+        <set >
+            <if test="familysituationid != null" >
+                familySituationId = #{familysituationid,jdbcType=VARCHAR},
+            </if>
+            <if test="intopieceid != null" >
+                intoPieceId = #{intopieceid,jdbcType=VARCHAR},
+            </if>
+            <if test="actionid != null" >
+                actionId = #{actionid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null" >
+                idCard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneno != null" >
+                phoneNo = #{phoneno,jdbcType=VARCHAR},
+            </if>
+            <if test="voiceurl != null" >
+                voiceUrl = #{voiceurl,jdbcType=VARCHAR},
+            </if>
+            <if test="qimostart != null" >
+                qimoStart = #{qimostart,jdbcType=VARCHAR},
+            </if>
+            <if test="qimoend != null" >
+                qimoEnd = #{qimoend,jdbcType=VARCHAR},
+            </if>
+            <if test="qimovoiceurl != null" >
+                qimoVoiceUrl = #{qimovoiceurl,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null" >
+                updateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.IntQimoOutCall" >
+        update t_int_qimo_outcall
+        set familySituationId = #{familysituationid,jdbcType=VARCHAR},
+            intoPieceId = #{intopieceid,jdbcType=VARCHAR},
+            actionId = #{actionid,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            idCard = #{idcard,jdbcType=VARCHAR},
+            phoneNo = #{phoneno,jdbcType=VARCHAR},
+            voiceUrl = #{voiceurl,jdbcType=VARCHAR},
+            qimoStart = #{qimostart,jdbcType=VARCHAR},
+            qimoEnd = #{qimoend,jdbcType=VARCHAR},
+            qimoVoiceUrl = #{qimovoiceurl,jdbcType=VARCHAR},
+            createTime = #{createtime,jdbcType=TIMESTAMP},
+            updateTime = #{updatetime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_qimo_outcall
+        where intoPieceId = #{intopieceid,jdbcType=VARCHAR} and voiceUrl is not null order by createTime
+    </select>
+</mapper>

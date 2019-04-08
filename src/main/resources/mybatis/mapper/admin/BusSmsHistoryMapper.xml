@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusSmsHistoryMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusSmsHistory" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="base_org_id" property="baseOrgId" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="result" property="result" jdbcType="INTEGER" />
+        <result column="error_code" property="errorCode" jdbcType="INTEGER" />
+        <result column="send_date" property="sendDate" jdbcType="TIMESTAMP" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, base_org_id, phone, content, result, error_code, send_date, IS_DELETED
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_smshistory
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_smshistory
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusSmsHistory" >
+        insert into t_bus_smshistory (id, base_org_id, phone, content, 
+            result, error_code, send_date, 
+            IS_DELETED)
+        values (#{id,jdbcType=VARCHAR}, #{baseOrgId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+            #{result,jdbcType=INTEGER}, #{errorCode,jdbcType=INTEGER}, #{sendDate,jdbcType=TIMESTAMP}, 
+            #{isDeleted,jdbcType=TINYINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusSmsHistory" >
+        insert into t_bus_smshistory
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="baseOrgId != null" >
+                base_org_id,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="result != null" >
+                result,
+            </if>
+            <if test="errorCode != null" >
+                error_code,
+            </if>
+            <if test="sendDate != null" >
+                send_date,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="baseOrgId != null" >
+                #{baseOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null" >
+                #{result,jdbcType=INTEGER},
+            </if>
+            <if test="errorCode != null" >
+                #{errorCode,jdbcType=INTEGER},
+            </if>
+            <if test="sendDate != null" >
+                #{sendDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusSmsHistory" >
+        update t_bus_smshistory
+        <set >
+        	<if test="baseOrgId != null" >
+                base_org_id = #{baseOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null" >
+                result = #{result,jdbcType=INTEGER},
+            </if>
+            <if test="errorCode != null" >
+                error_code = #{errorCode,jdbcType=INTEGER},
+            </if>
+            <if test="sendDate != null" >
+                send_date = #{sendDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusSmsHistory" >
+        update t_bus_smshistory
+        set base_org_id = #{baseOrgId,jdbcType=VARCHAR},
+        	phone = #{phone,jdbcType=VARCHAR},
+            content = #{content,jdbcType=VARCHAR},
+            result = #{result,jdbcType=INTEGER},
+            error_code = #{errorCode,jdbcType=INTEGER},
+            send_date = #{sendDate,jdbcType=TIMESTAMP},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusSmsHistory">
+        select 
+        s.id, o.FULL_CNAME as base_org_id, s.phone, s.content, s.result, s.error_code, s.send_date
+        from t_bus_smshistory s left join t_sys_org o on s.base_org_id = o.org_id
+        where s.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        <if test="phone != null" >
+            and s.phone like CONCAT('%',#{phone},'%')
+        </if>
+        order by s.send_date
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.BusSmsHistory">
+        select 
+        count(id)
+        from t_bus_smshistory
+        where IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        <if test="phone != null" >
+          and  phone like CONCAT('%',#{phone},'%')
+        </if>
+    </select>
+</mapper>

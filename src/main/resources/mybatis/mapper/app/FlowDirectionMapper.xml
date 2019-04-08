@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongyeos.loan.app.mapper.FlowDirectionMapper">
+  <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.FlowDirection">
+    <id column="DIRECTION_ID" jdbcType="INTEGER" property="directionId" />
+    <result column="NODE_ID" jdbcType="VARCHAR" property="nodeId" />
+    <result column="TYPE" jdbcType="SMALLINT" property="type" />
+    <result column="PC_ID" jdbcType="VARCHAR" property="pcId" />
+    <result column="RESULT_ID" jdbcType="VARCHAR" property="resultId" />
+    <result column="TO_NODE_IDS" jdbcType="VARCHAR" property="toNodeIds" />
+    <result column="SEQNO" jdbcType="INTEGER" property="seqno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DIRECTION_ID, NODE_ID, TYPE, PC_ID, RESULT_ID, TO_NODE_IDS, SEQNO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_flow_direction
+    where DIRECTION_ID = #{directionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_flow_direction
+    where DIRECTION_ID = #{directionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nongyeos.loan.app.entity.FlowDirection">
+    insert into t_flow_direction (DIRECTION_ID, NODE_ID, TYPE,
+    PC_ID, RESULT_ID, TO_NODE_IDS,
+    SEQNO)
+    values (#{directionId,jdbcType=INTEGER}, #{nodeId,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT},
+    #{pcId,jdbcType=VARCHAR}, #{resultId,jdbcType=VARCHAR}, #{toNodeIds,jdbcType=VARCHAR},
+    #{seqno,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.FlowDirection">
+    insert into t_flow_direction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="directionId != null">
+        DIRECTION_ID,
+      </if>
+      <if test="nodeId != null">
+        NODE_ID,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="pcId != null">
+        PC_ID,
+      </if>
+      <if test="resultId != null">
+        RESULT_ID,
+      </if>
+      <if test="toNodeIds != null">
+        TO_NODE_IDS,
+      </if>
+      <if test="seqno != null">
+        SEQNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="directionId != null">
+        #{directionId,jdbcType=INTEGER},
+      </if>
+      <if test="nodeId != null">
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="pcId != null">
+        #{pcId,jdbcType=VARCHAR},
+      </if>
+      <if test="resultId != null">
+        #{resultId,jdbcType=VARCHAR},
+      </if>
+      <if test="toNodeIds != null">
+        #{toNodeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        #{seqno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.FlowDirection">
+    update t_flow_direction
+    <set>
+      <if test="nodeId != null">
+        NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="pcId != null">
+        PC_ID = #{pcId,jdbcType=VARCHAR},
+      </if>
+      <if test="resultId != null">
+        RESULT_ID = #{resultId,jdbcType=VARCHAR},
+      </if>
+      <if test="toNodeIds != null">
+        TO_NODE_IDS = #{toNodeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="seqno != null">
+        SEQNO = #{seqno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where DIRECTION_ID = #{directionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.FlowDirection">
+    update t_flow_direction
+    set NODE_ID = #{nodeId,jdbcType=VARCHAR},
+    TYPE = #{type,jdbcType=SMALLINT},
+    PC_ID = #{pcId,jdbcType=VARCHAR},
+    RESULT_ID = #{resultId,jdbcType=VARCHAR},
+    TO_NODE_IDS = #{toNodeIds,jdbcType=VARCHAR},
+    SEQNO = #{seqno,jdbcType=INTEGER}
+    where DIRECTION_ID = #{directionId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByNodeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_flow_direction
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR}
+    order by SEQNO asc
+  </select>
+  
+  <select id="selectByNodeIdAndType" parameterType="com.nongyeos.loan.app.entity.FlowDirection" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_flow_direction
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR} and TYPE = #{type,jdbcType=SMALLINT}
+    order by SEQNO asc
+  </select>
+</mapper>

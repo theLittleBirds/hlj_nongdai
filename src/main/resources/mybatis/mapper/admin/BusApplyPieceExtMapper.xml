@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusApplyPieceExtMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusApplyPieceExt" >
+        <id column="EXT_ID" property="extId" jdbcType="VARCHAR" />
+        <result column="INTO_PIECE_ID" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+        <result column="ITEM_VALUE" property="itemValue" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        EXT_ID, INTO_PIECE_ID, ITEM_ID, ITEM_VALUE
+    </sql>
+
+    <select id="queryByApplyPieceAndItem" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_applypieceext
+        where INTO_PIECE_ID = #{intoPieceId,jdbcType=VARCHAR} and ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_applypieceext
+        where EXT_ID = #{extId,jdbcType=VARCHAR}
+    </select>
+
+	<select id="getByItemIdAndIntoPieceId" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_applypieceext
+        where INTO_PIECE_ID = #{arg0} and ITEM_ID = #{arg1}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_applypieceext
+        where EXT_ID = #{extId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusApplyPieceExt" >
+        insert into t_bus_applypieceext (EXT_ID, INTO_PIECE_ID, ITEM_ID, 
+            ITEM_VALUE)
+        values (#{extId,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+            #{itemValue,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusApplyPieceExt" >
+        insert into t_bus_applypieceext
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="extId != null" >
+                EXT_ID,
+            </if>
+            <if test="intoPieceId != null" >
+                INTO_PIECE_ID,
+            </if>
+            <if test="itemId != null" >
+                ITEM_ID,
+            </if>
+            <if test="itemValue != null" >
+                ITEM_VALUE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="extId != null" >
+                #{extId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemValue != null" >
+                #{itemValue,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusApplyPieceExt" >
+        update t_bus_applypieceext
+        <set >
+            <if test="intoPieceId != null" >
+                INTO_PIECE_ID = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemValue != null" >
+                ITEM_VALUE = #{itemValue,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where EXT_ID = #{extId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusApplyPieceExt" >
+        update t_bus_applypieceext
+        set INTO_PIECE_ID = #{intoPieceId,jdbcType=VARCHAR},
+            ITEM_ID = #{itemId,jdbcType=VARCHAR},
+            ITEM_VALUE = #{itemValue,jdbcType=VARCHAR}
+        where EXT_ID = #{extId,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <resultMap id="DynamicDataMap" type="com.nongyeos.loan.admin.resultMap.DynamicDataMap" >
+        <id column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+        <result column="ENTITY_ID" property="entityId" jdbcType="VARCHAR" />
+        <result column="DESIGN_TYPE" property="designType" jdbcType="SMALLINT" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+        <result column="HTML_ID" property="htmlId" jdbcType="VARCHAR" />
+        <result column="DATA_TYPE" property="dataType" jdbcType="SMALLINT" />
+        <result column="INPUT_TYPE" property="inputType" jdbcType="SMALLINT" />
+        <result column="OPTIONS_GROUP" property="optionsGroup" jdbcType="VARCHAR" />
+        <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+        <result column="INPUT_WIDTH" property="inputWidth" jdbcType="INTEGER" />
+        <result column="IS_EMPTY" property="isEmpty" jdbcType="SMALLINT" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+		<result column="ITEM_VALUE" property="itemValue" jdbcType="VARCHAR" />
+		<result column="SECTION_ID" property="sectionId" jdbcType="VARCHAR" />
+		<result column="INTO_PIECE_ID" property="intoPieceId" jdbcType="VARCHAR" />
+    </resultMap>
+     <select id="selectBySectionId" resultMap="DynamicDataMap" parameterType="com.nongyeos.loan.admin.resultMap.DynamicDataMap" >
+        select 
+        ai.ITEM_ID,ai.ENTITY_ID,ai.DESIGN_TYPE,ai.CNAME,ai.ENAME,ai.FIELD_NAME,ai.HTML_ID,ai.DATA_TYPE,ai.INPUT_TYPE,ai.OPTIONS_GROUP,ai.UNIT,ai.INPUT_WIDTH,ai.IS_EMPTY,ais.SEQNO,bap.ITEM_VALUE
+        from t_app_item ai left join  t_app_itemsection ais on ai.ITEM_ID = ais.ITEM_ID left join (select ITEM_ID,EXT_ID,ITEM_VALUE from t_bus_applypieceext where INTO_PIECE_ID = #{intoPieceId,jdbcType=VARCHAR}) bap on ai.ITEM_ID = bap.ITEM_ID 
+        where ais.SECTION_ID = #{sectionId,jdbcType=VARCHAR}
+        order by ais.SEQNO
+    </select>
+    <delete id="deleteByIpAndItem" parameterType="com.nongyeos.loan.admin.resultMap.DynamicDataMap" >
+        delete from t_bus_applypieceext
+        where INTO_PIECE_ID = #{intoPieceId,jdbcType=VARCHAR} and ITEM_ID in (select ITEM_ID from t_app_itemsection where SECTION_ID = #{sectionId,jdbcType=VARCHAR} )
+    </delete>
+    
+    <select id="selectByParentItemId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_applypieceext
+        where into_piece_id = #{mainId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_applypieceext
+        where into_piece_id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

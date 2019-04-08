@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusLenderOrgMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusLenderOrg" >
+        <id column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="LENDER_ID" property="lenderId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, LENDER_ID, ORG_ID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_lenderorg
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+	<select id="selectByLenderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_lenderorg
+        where LENDER_ID = #{lenderId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_lenderorg
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <delete id="deleteByLenderId" parameterType="java.lang.String" >
+        delete from t_bus_lenderorg
+        where LENDER_ID = #{lenderId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusLenderOrg" >
+        insert into t_bus_lenderorg (ID, LENDER_ID, ORG_ID
+            )
+        values (#{id,jdbcType=VARCHAR}, #{lenderId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusLenderOrg" >
+        insert into t_bus_lenderorg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="lenderId != null" >
+                LENDER_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderId != null" >
+                #{lenderId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusLenderOrg" >
+        update t_bus_lenderorg
+        <set >
+            <if test="lenderId != null" >
+                LENDER_ID = #{lenderId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusLenderOrg" >
+        update t_bus_lenderorg
+        set LENDER_ID = #{lenderId,jdbcType=VARCHAR},
+            ORG_ID = #{orgId,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

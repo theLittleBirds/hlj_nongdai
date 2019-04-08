@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusStationBondMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusStationBond" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="capital" property="capital" jdbcType="DECIMAL" />
+        <result column="recieve_nong_zi" property="recieveNongZi" jdbcType="DECIMAL" />
+        <result column="bond" property="bond" jdbcType="DECIMAL" />
+        <result column="payer" property="payer" jdbcType="VARCHAR" />
+        <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="pay_date" property="payDate" jdbcType="VARCHAR" />
+        <result column="upd_date" property="updDate" jdbcType="TIMESTAMP" />
+        <result column="upd_oper_id" property="updOperId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, org_id, member_name, id_card, capital, recieve_nong_zi, bond, 
+        payer, pay_way, status, pay_date, upd_date, upd_oper_id
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_stationbond
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_stationbond
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusStationBond" >
+        insert into t_bus_stationbond (id, into_piece_id, org_id, 
+            member_name, id_card, capital, 
+            recieve_nong_zi, bond, payer, 
+            pay_way, status, pay_date, 
+            upd_date, upd_oper_id)
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+            #{memberName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{capital,jdbcType=DECIMAL}, 
+            #{recieveNongZi,jdbcType=DECIMAL}, #{bond,jdbcType=DECIMAL}, #{payer,jdbcType=VARCHAR}, 
+            #{payWay,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{payDate,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusStationBond" >
+        insert into t_bus_stationbond
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="memberName != null" >
+                member_name,
+            </if>
+            <if test="idCard != null" >
+                id_card,
+            </if>
+            <if test="capital != null" >
+                capital,
+            </if>
+            <if test="recieveNongZi != null" >
+                recieve_nong_zi,
+            </if>
+            <if test="bond != null" >
+                bond,
+            </if>
+            <if test="payer != null" >
+                payer,
+            </if>
+            <if test="payWay != null" >
+                pay_way,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="payDate != null" >
+                pay_date,
+            </if>
+            <if test="updDate != null" >
+                upd_date,
+            </if>
+            <if test="updOperId != null" >
+                upd_oper_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="recieveNongZi != null" >
+                #{recieveNongZi,jdbcType=DECIMAL},
+            </if>
+            <if test="bond != null" >
+                #{bond,jdbcType=DECIMAL},
+            </if>
+            <if test="payer != null" >
+                #{payer,jdbcType=VARCHAR},
+            </if>
+            <if test="payWay != null" >
+                #{payWay,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="payDate != null" >
+                #{payDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusStationBond" >
+        update t_bus_stationbond
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                member_name = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                capital = #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="recieveNongZi != null" >
+                recieve_nong_zi = #{recieveNongZi,jdbcType=DECIMAL},
+            </if>
+            <if test="bond != null" >
+                bond = #{bond,jdbcType=DECIMAL},
+            </if>
+            <if test="payer != null" >
+                payer = #{payer,jdbcType=VARCHAR},
+            </if>
+            <if test="payWay != null" >
+                pay_way = #{payWay,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="payDate != null" >
+                pay_date = #{payDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                upd_date = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                upd_oper_id = #{updOperId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusStationBond" >
+        update t_bus_stationbond
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            org_id = #{orgId,jdbcType=VARCHAR},
+            member_name = #{memberName,jdbcType=VARCHAR},
+            id_card = #{idCard,jdbcType=VARCHAR},
+            capital = #{capital,jdbcType=DECIMAL},
+            recieve_nong_zi = #{recieveNongZi,jdbcType=DECIMAL},
+            bond = #{bond,jdbcType=DECIMAL},
+            payer = #{payer,jdbcType=VARCHAR},
+            pay_way = #{payWay,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            pay_date = #{payDate,jdbcType=VARCHAR},
+            upd_date = #{updDate,jdbcType=TIMESTAMP},
+            upd_oper_id = #{updOperId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="queryAll" resultMap="BaseResultMap" parameterType="hashmap" >
+        select 
+        sb.id, sb.into_piece_id, org.full_cname as org_id, sb.member_name, sb.id_card, sb.capital, sb.recieve_nong_zi, sb.bond, sb.payer, sb.pay_way, sb.status
+        from t_bus_stationbond sb left join t_sys_org org on sb.org_id = org.org_id
+        where 1 = 1 
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+         <if test="memberName != null" >
+             and sb.member_name = #{memberName,jdbcType=VARCHAR}
+         </if>
+         <if test="idCard != null" >
+             and sb.id_card = #{idCard,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and sb.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+        </if>
+         order by sb.upd_date desc
+    </select>
+    <select id="queryAllCount" resultType="java.lang.Integer" parameterType="hashmap" >
+        select 
+        count(sb.id)
+        from t_bus_stationbond sb left join t_sys_org org on sb.org_id = org.org_id
+        where 1 = 1 
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+         <if test="memberName != null" >
+             and sb.member_name = #{memberName,jdbcType=VARCHAR}
+         </if>
+         <if test="idCard != null" >
+             and sb.id_card = #{idCard,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and sb.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+        </if>
+    </select>
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_stationbond
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+    </select>
+</mapper>

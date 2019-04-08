@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.ScoreScoreMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.ScoreScore" >
+        <id column="SCORE_ID" property="scoreId" jdbcType="VARCHAR" />
+        <result column="FINS_ID" property="finsId" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="SMALLINT" />
+        <result column="CATEGORY" property="category" jdbcType="SMALLINT" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="VERSION" property="version" jdbcType="VARCHAR" />
+        <result column="STATUS" property="status" jdbcType="SMALLINT" />
+        <result column="RELEASE_DATE" property="releaseDate" jdbcType="TIMESTAMP" />
+        <result column="EFFECTIVE_DATE" property="effectiveDate" jdbcType="TIMESTAMP" />
+        <result column="EXPIRED_DATE" property="expiredDate" jdbcType="TIMESTAMP" />
+        <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT" />
+        <result column="CRE_OPER_CODE" property="creOperCode" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_CODE" property="creOrgCode" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_CODE" property="updOperCode" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_CODE" property="updOrgCode" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SCORE_ID, FINS_ID, CATEGORY,TYPE, CNAME, ENAME, VERSION, STATUS, RELEASE_DATE, EFFECTIVE_DATE, 
+        EXPIRED_DATE, MEMO, SEQNO, IS_DELETE, CRE_OPER_CODE, CRE_OPER_NAME, CRE_ORG_CODE, 
+        CRE_DATE, UPD_OPER_CODE, UPD_OPER_NAME, UPD_ORG_CODE, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_score_score
+        where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByFinsId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_score_score
+        where FINS_ID = #{finsId,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+     <select id="selectAll" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_score_score
+    </select>
+    
+    <select id="selectByCategory" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_score_score
+        where CATEGORY = #{value,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+    <select id="selectByCategoryAndIDList" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_score_score
+        where CATEGORY = #{value}
+        <if test="idSet != null and idSet.size() > 0">
+	        and SCORE_ID in
+	        <foreach collection="idSet" index="index" item="item" open="(" separator="," close=")">  
+	            #{item}  
+	        </foreach>
+	      </if>
+	      <if test="idSet == null or idSet.size() == 0">
+	      	and 1=2
+	      </if>
+        order by SEQNO ASC
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_score_score
+        where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.ScoreScore" >
+        insert into t_score_score (SCORE_ID, FINS_ID, CATEGORY, 
+            TYPE, CNAME, ENAME, VERSION, 
+            STATUS, RELEASE_DATE, EFFECTIVE_DATE, 
+            EXPIRED_DATE, MEMO, SEQNO, 
+            IS_DELETE, CRE_OPER_CODE, CRE_OPER_NAME, 
+            CRE_ORG_CODE, CRE_DATE, UPD_OPER_CODE, 
+            UPD_OPER_NAME, UPD_ORG_CODE, UPD_DATE
+            )
+        values (#{scoreId,jdbcType=VARCHAR}, #{finsId,jdbcType=VARCHAR}, 
+        	#{type,jdbcType=SMALLINT}, #{category,jdbcType=SMALLINT}, 
+            #{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+            #{status,jdbcType=SMALLINT}, #{releaseDate,jdbcType=TIMESTAMP}, #{effectiveDate,jdbcType=TIMESTAMP}, 
+            #{expiredDate,jdbcType=TIMESTAMP}, #{memo,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, 
+            #{isDelete,jdbcType=SMALLINT}, #{creOperCode,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgCode,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperCode,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgCode,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.ScoreScore" >
+        insert into t_score_score
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="scoreId != null" >
+                SCORE_ID,
+            </if>
+            <if test="finsId != null" >
+                FINS_ID,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="category != null" >
+                CATEGORY,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="version != null" >
+                VERSION,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="releaseDate != null" >
+                RELEASE_DATE,
+            </if>
+            <if test="effectiveDate != null" >
+                EFFECTIVE_DATE,
+            </if>
+            <if test="expiredDate != null" >
+                EXPIRED_DATE,
+            </if>
+            <if test="memo != null" >
+                MEMO,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="scoreId != null" >
+                #{scoreId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="category != null" >
+                #{category,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="releaseDate != null" >
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effectiveDate != null" >
+                #{effectiveDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expiredDate != null" >
+                #{expiredDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memo != null" >
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperCode != null" >
+                #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.ScoreScore" >
+        update t_score_score
+        <set >
+            <if test="finsId != null" >
+                FINS_ID = #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="category != null" >
+                CATEGORY = #{category,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                VERSION = #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="releaseDate != null" >
+                RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effectiveDate != null" >
+                EFFECTIVE_DATE = #{effectiveDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expiredDate != null" >
+                EXPIRED_DATE = #{expiredDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memo != null" >
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.ScoreScore" >
+        update t_score_score
+        set FINS_ID = #{finsId,jdbcType=VARCHAR},
+            TYPE = #{type,jdbcType=SMALLINT},
+            CATEGORY = #{category,jdbcType=SMALLINT},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            VERSION = #{version,jdbcType=VARCHAR},
+            STATUS = #{status,jdbcType=SMALLINT},
+            RELEASE_DATE = #{releaseDate,jdbcType=TIMESTAMP},
+            EFFECTIVE_DATE = #{effectiveDate,jdbcType=TIMESTAMP},
+            EXPIRED_DATE = #{expiredDate,jdbcType=TIMESTAMP},
+            MEMO = #{memo,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+    </update>
+</mapper>

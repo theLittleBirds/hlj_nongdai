@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusBankCardMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusBankCard" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+        <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+        <result column="account_no" property="accountNo" jdbcType="VARCHAR" />
+        <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="cre_date" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="upd_date" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, loan_id, account_name, account_no, idcard, phone, cre_date, upd_date
+    </sql>
+
+    <select id="queryByLoanId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_bankcard
+        where loan_id = #{loanId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_bankcard
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_bankcard
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusBankCard" >
+        insert into t_bus_bankcard (id, into_piece_id, loan_id, 
+            account_name, account_no, idcard, 
+            phone, cre_date, upd_date
+            )
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{loanId,jdbcType=VARCHAR}, 
+            #{accountName,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusBankCard" >
+        insert into t_bus_bankcard
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="loanId != null" >
+                loan_id,
+            </if>
+            <if test="accountName != null" >
+                account_name,
+            </if>
+            <if test="accountNo != null" >
+                account_no,
+            </if>
+            <if test="idcard != null" >
+                idcard,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="creDate != null" >
+                cre_date,
+            </if>
+            <if test="updDate != null" >
+                upd_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null" >
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountNo != null" >
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null" >
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusBankCard" >
+        update t_bus_bankcard
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                loan_id = #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null" >
+                account_name = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="accountNo != null" >
+                account_no = #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null" >
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                cre_date = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updDate != null" >
+                upd_date = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusBankCard" >
+        update t_bus_bankcard
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            loan_id = #{loanId,jdbcType=VARCHAR},
+            account_name = #{accountName,jdbcType=VARCHAR},
+            account_no = #{accountNo,jdbcType=VARCHAR},
+            idcard = #{idcard,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            cre_date = #{creDate,jdbcType=TIMESTAMP},
+            upd_date = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

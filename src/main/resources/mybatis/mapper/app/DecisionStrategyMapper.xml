@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.DecisionStrategyMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.DecisionStrategy" >
+        <id column="STRATEGY_ID" property="strategyId" jdbcType="VARCHAR" />
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="TINYINT" />
+        <result column="CATEGORY" property="category" jdbcType="TINYINT" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        STRATEGY_ID, APP_ID, TYPE, CATEGORY, NAME, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_strategy
+        where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByAppIdAndCategory" parameterType="java.util.Map" resultMap="BaseResultMap">
+	    select
+	    <include refid="Base_Column_List" />
+	    from t_decision_strategy
+	    where APP_ID = #{appId,jdbcType=VARCHAR} AND CATEGORY = #{value,jdbcType=SMALLINT} order by SEQNO asc
+    </select>
+
+	<select id="selectByAppId" parameterType="java.lang.String" resultMap="BaseResultMap">
+	    select
+	    <include refid="Base_Column_List" />
+	    from t_decision_strategy
+	    where APP_ID = #{appId,jdbcType=VARCHAR}
+    </select>
+    
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_decision_strategy
+        where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.DecisionStrategy" >
+        insert into t_decision_strategy (STRATEGY_ID, APP_ID, TYPE, CATEGORY, 
+            NAME, SEQNO)
+        values (#{strategyId,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{category,jdbcType=TINYINT}, 
+            #{name,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.DecisionStrategy" >
+        insert into t_decision_strategy
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="strategyId != null" >
+                STRATEGY_ID,
+            </if>
+            <if test="appId != null" >
+                APP_ID,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="category != null" >
+                CATEGORY,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="strategyId != null" >
+                #{strategyId,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="category != null" >
+                #{category,jdbcType=TINYINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.DecisionStrategy" >
+        update t_decision_strategy
+        <set >
+            <if test="appId != null" >
+                APP_ID = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="category != null" >
+                CATEGORY = #{category,jdbcType=TINYINT},
+            </if>
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.DecisionStrategy" >
+        update t_decision_strategy
+        set APP_ID = #{appId,jdbcType=VARCHAR},
+            TYPE = #{type,jdbcType=TINYINT},
+            CATEGORY = #{category,jdbcType=TINYINT},
+            NAME = #{name,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+    </update>
+</mapper>

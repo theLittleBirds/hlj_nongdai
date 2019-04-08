@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.AppItemMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppItem" >
+        <id column="ITEM_ID" property="itemId" jdbcType="VARCHAR" />
+        <result column="ENTITY_ID" property="entityId" jdbcType="VARCHAR" />
+        <result column="DESIGN_TYPE" property="designType" jdbcType="SMALLINT" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+        <result column="HTML_ID" property="htmlId" jdbcType="VARCHAR" />
+        <result column="PC_ID" property="pcId" jdbcType="VARCHAR" />
+        <result column="DATA_TYPE" property="dataType" jdbcType="SMALLINT" />
+        <result column="INPUT_TYPE" property="inputType" jdbcType="SMALLINT" />
+        <result column="OPTIONS_GROUP" property="optionsGroup" jdbcType="VARCHAR" />
+        <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+        <result column="INPUT_WIDTH" property="inputWidth" jdbcType="INTEGER" />
+        <result column="IS_EMPTY" property="isEmpty" jdbcType="SMALLINT" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ITEM_ID, ENTITY_ID, DESIGN_TYPE, CNAME, ENAME, FIELD_NAME, HTML_ID, PC_ID, DATA_TYPE, INPUT_TYPE, OPTIONS_GROUP, 
+        UNIT, INPUT_WIDTH, IS_EMPTY, SEQNO, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+        UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_item
+        where ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_item
+    </select>
+    
+    <select id="queryAppItemByDegisnAndEmpty" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.app.entity.AppItem" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_item
+        where DESIGN_TYPE = #{designType,jdbcType=SMALLINT} and IS_EMPTY = #{isEmpty,jdbcType=SMALLINT}
+    </select>
+
+    <select id="selectByEntityId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_item
+        where ENTITY_ID = #{entityId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByFiledName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_item
+        where FIELD_NAME = #{filedName,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_app_item
+        where ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppItem" >
+        insert into t_app_item (ITEM_ID, ENTITY_ID, DESIGN_TYPE, 
+            CNAME, ENAME, FIELD_NAME, 
+            HTML_ID, PC_ID, DATA_TYPE,INPUT_TYPE, OPTIONS_GROUP, 
+            UNIT,INPUT_WIDTH, IS_EMPTY, SEQNO, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE)
+        values (#{itemId,jdbcType=VARCHAR}, #{entityId,jdbcType=VARCHAR}, #{designType,jdbcType=SMALLINT}, 
+            #{cname,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+            #{htmlId,jdbcType=VARCHAR}, #{pcId,jdbcType=VARCHAR}, #{dataType,jdbcType=SMALLINT}, #{inputType,jdbcType=SMALLINT}, 
+            #{optionsGroup,jdbcType=VARCHAR},  #{unit,jdbcType=VARCHAR}, 
+            #{inputWidth,jdbcType=INTEGER}, #{isEmpty,jdbcType=SMALLINT}, #{seqno,jdbcType=INTEGER}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.AppItem" >
+        insert into t_app_item
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="itemId != null" >
+                ITEM_ID,
+            </if>
+            <if test="entityId != null" >
+                ENTITY_ID,
+            </if>
+            <if test="designType != null" >
+                DESIGN_TYPE,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="fieldName != null" >
+                FIELD_NAME,
+            </if>
+            <if test="htmlId != null" >
+                HTML_ID,
+            </if>
+            <if test="pcId != null" >
+                PC_ID,
+            </if>
+            <if test="dataType != null" >
+                DATA_TYPE,
+            </if>
+            <if test="inputType != null" >
+                INPUT_TYPE,
+            </if>
+            <if test="optionsGroup != null" >
+                OPTIONS_GROUP,
+            </if>
+            <if test="unit != null" >
+                UNIT,
+            </if>
+            <if test="inputWidth != null" >
+                INPUT_WIDTH,
+            </if>
+            <if test="isEmpty != null" >
+                IS_EMPTY,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="itemId != null" >
+                #{itemId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null" >
+                #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="designType != null" >
+                #{designType,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="fieldName != null" >
+                #{fieldName,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlId != null" >
+                #{htmlId,jdbcType=VARCHAR},
+            </if>
+            <if test="pcId != null" >
+                #{pcId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null" >
+                #{dataType,jdbcType=SMALLINT},
+            </if>
+            <if test="inputType != null" >
+                #{inputType,jdbcType=SMALLINT},
+            </if>
+            <if test="optionsGroup != null" >
+                #{optionsGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null" >
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="inputWidth != null" >
+                #{inputWidth,jdbcType=INTEGER},
+            </if>
+            <if test="isEmpty != null" >
+                #{isEmpty,jdbcType=SMALLINT},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.AppItem" >
+        update t_app_item
+        <set >
+            <if test="entityId != null" >
+                ENTITY_ID = #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="designType != null" >
+                DESIGN_TYPE = #{designType,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="fieldName != null" >
+                FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlId != null" >
+                HTML_ID = #{htmlId,jdbcType=VARCHAR},
+            </if>
+            <if test="pcId != null" >
+                PC_ID = #{pcId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null" >
+                DATA_TYPE = #{dataType,jdbcType=SMALLINT},
+            </if>
+            <if test="inputType != null" >
+                INPUT_TYPE = #{inputType,jdbcType=SMALLINT},
+            </if>
+            <if test="optionsGroup != null" >
+                OPTIONS_GROUP = #{optionsGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null" >
+                UNIT = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="inputWidth != null" >
+                INPUT_WIDTH = #{inputWidth,jdbcType=INTEGER},
+            </if>
+            <if test="isEmpty != null" >
+                IS_EMPTY = #{isEmpty,jdbcType=SMALLINT},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppItem" >
+        update t_app_item
+        set ENTITY_ID = #{entityId,jdbcType=VARCHAR},
+            DESIGN_TYPE = #{designType,jdbcType=SMALLINT},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+            HTML_ID = #{htmlId,jdbcType=VARCHAR},
+            PC_ID = #{pcId,jdbcType=VARCHAR},
+            DATA_TYPE = #{dataType,jdbcType=SMALLINT},
+            INPUT_TYPE = #{inputType,jdbcType=SMALLINT},
+            OPTIONS_GROUP = #{optionsGroup,jdbcType=VARCHAR},
+            UNIT = #{unit,jdbcType=VARCHAR},
+            INPUT_WIDTH = #{inputWidth,jdbcType=INTEGER},
+            IS_EMPTY = #{isEmpty,jdbcType=SMALLINT},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where ITEM_ID = #{itemId,jdbcType=VARCHAR}
+    </update>
+</mapper>

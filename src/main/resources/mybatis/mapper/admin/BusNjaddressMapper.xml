@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusNjaddressMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusNjaddress" >
+        <id column="ADDRESS_ID" property="addressId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+        <result column="PERSON_ID" property="personId" jdbcType="VARCHAR" />
+        <result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+        <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+        <result column="ADDRESS_ZH" property="addressZh" jdbcType="VARCHAR" />
+        <result column="IS_DEFAULT" property="isDefault" jdbcType="VARCHAR" />
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ADDRESS_ID, ORG_ID, ORG_NAME, PERSON_ID, MEMBER_NAME, CONTACT, PHONE, ADDRESS_ZH, 
+        IS_DEFAULT, CREATE_DATE, UPDATE_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njaddress
+        where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_njaddress
+        where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusNjaddress" >
+        insert into t_bus_njaddress (ADDRESS_ID, ORG_ID, ORG_NAME, 
+            PERSON_ID, MEMBER_NAME, CONTACT, 
+            PHONE, ADDRESS_ZH, IS_DEFAULT, 
+            CREATE_DATE, UPDATE_DATE)
+        values (#{addressId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+            #{personId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{addressZh,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}, 
+            #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusNjaddress" >
+        insert into t_bus_njaddress
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="addressId != null" >
+                ADDRESS_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME,
+            </if>
+            <if test="personId != null" >
+                PERSON_ID,
+            </if>
+            <if test="memberName != null" >
+                MEMBER_NAME,
+            </if>
+            <if test="contact != null" >
+                CONTACT,
+            </if>
+            <if test="phone != null" >
+                PHONE,
+            </if>
+            <if test="addressZh != null" >
+                ADDRESS_ZH,
+            </if>
+            <if test="isDefault != null" >
+                IS_DEFAULT,
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE,
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="addressId != null" >
+                #{addressId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null" >
+                #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addressZh != null" >
+                #{addressZh,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null" >
+                #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusNjaddress" >
+        update t_bus_njaddress
+        <set >
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                PERSON_ID = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="contact != null" >
+                CONTACT = #{contact,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addressZh != null" >
+                ADDRESS_ZH = #{addressZh,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null" >
+                IS_DEFAULT = #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusNjaddress" >
+        update t_bus_njaddress
+        set ORG_ID = #{orgId,jdbcType=VARCHAR},
+            ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            PERSON_ID = #{personId,jdbcType=VARCHAR},
+            MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+            CONTACT = #{contact,jdbcType=VARCHAR},
+            PHONE = #{phone,jdbcType=VARCHAR},
+            ADDRESS_ZH = #{addressZh,jdbcType=VARCHAR},
+            IS_DEFAULT = #{isDefault,jdbcType=VARCHAR},
+            CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+        where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="queryAddressListAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njaddress
+        where ORG_ID in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+        order by IS_DEFAULT asc
+    </select>
+
+    <select id="queryAddressByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_njaddress
+        where ORG_ID in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR}) and IS_DEFAULT = '1'
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+[
+    {
+        "swtype": "司局收文",
+        "wjheadline": "国家标准公文",
+        "zbsection": "国库处",
+        "swzhh": "行收文字号",
+        "wjzt":"流转中文件"
+    },
+    {
+        "swtype": "行政复议类",
+        "wjheadline": "各部门拟办文件",
+        "zbsection": "内审处",
+        "swzhh": "司局收文字号",
+        "wjzt":"已完成文件"
+    },
+    {
+        "swtype": "法律文书",
+        "wjheadline": "各单位标准公文",
+        "zbsection": "金融研究处",
+        "swzhh": "办公厅收文字号",
+        "wjzt":"流转中文件"
+    }
+]

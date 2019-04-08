@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.ReportEntryMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.ReportEntry" >
+        <id column="RPT_ID" property="rptId" jdbcType="VARCHAR" />
+        <result column="FINS_ID" property="finsId" jdbcType="VARCHAR" />
+        <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        RPT_ID, FINS_ID, GROUP_ID, NAME, SEQNO, IS_DELETE, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+        CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_entry
+        where RPT_ID = #{rptId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_report_entry
+        where RPT_ID = #{rptId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.ReportEntry" >
+        insert into t_report_entry (RPT_ID, FINS_ID, GROUP_ID, 
+            NAME, SEQNO, IS_DELETE, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE)
+        values (#{rptId,jdbcType=VARCHAR}, #{finsId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+            #{name,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=SMALLINT}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.ReportEntry" >
+        insert into t_report_entry
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rptId != null" >
+                RPT_ID,
+            </if>
+            <if test="finsId != null" >
+                FINS_ID,
+            </if>
+            <if test="groupId != null" >
+                GROUP_ID,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rptId != null" >
+                #{rptId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null" >
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.ReportEntry" >
+        update t_report_entry
+        <set >
+            <if test="finsId != null" >
+                FINS_ID = #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId != null" >
+                GROUP_ID = #{groupId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where RPT_ID = #{rptId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.ReportEntry" >
+        update t_report_entry
+        set FINS_ID = #{finsId,jdbcType=VARCHAR},
+            GROUP_ID = #{groupId,jdbcType=VARCHAR},
+            NAME = #{name,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where RPT_ID = #{rptId,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_entry
+        where GROUP_ID = #{groupId,jdbcType=VARCHAR} order by SEQNO asc
+    </select>
+    
+    <select id="selectByFinsId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_report_entry
+        where FINS_ID = #{finsId,jdbcType=VARCHAR} order by SEQNO asc
+    </select>
+    
+    <select id="doSql" parameterType="java.lang.String" resultType="java.util.LinkedHashMap">
+        ${value}
+    </select>
+    
+</mapper>

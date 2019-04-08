@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.ScoreParaMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.ScorePara" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+        <result column="GROUP_DESCR" property="groupDescr" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="VALUE" property="value" jdbcType="VARCHAR" />
+        <result column="DESCR" property="descr" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, GROUP_NAME, GROUP_DESCR, NAME, VALUE, DESCR, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_score_para
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    
+     <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	 select 
+	    <include refid="Base_Column_List"/>
+	    from t_score_para
+	    order by SEQNO ASC
+    </select>
+    
+     <select id="count" resultType="Integer">
+  	   	select count(ID) from t_score_para
+  	</select>
+  	
+  	<select id="selectParaDS" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	select 
+	    <include refid="Base_Column_List"/>
+	    from t_score_para
+	    where id in (
+	        select MIN(ID) from t_score_para group by GROUP_NAME
+	    )
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_score_para
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.ScorePara" >
+        insert into t_score_para (ID, GROUP_NAME, GROUP_DESCR, 
+            NAME, VALUE, DESCR, 
+            SEQNO)
+        values (#{id,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{groupDescr,jdbcType=VARCHAR}, 
+            #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{descr,jdbcType=VARCHAR}, 
+            #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.ScorePara" >
+        insert into t_score_para
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="groupName != null" >
+                GROUP_NAME,
+            </if>
+            <if test="groupDescr != null" >
+                GROUP_DESCR,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="value != null" >
+                VALUE,
+            </if>
+            <if test="descr != null" >
+                DESCR,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="groupName != null" >
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupDescr != null" >
+                #{groupDescr,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null" >
+                #{value,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null" >
+                #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.ScorePara" >
+        update t_score_para
+        <set >
+            <if test="groupName != null" >
+                GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupDescr != null" >
+                GROUP_DESCR = #{groupDescr,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null" >
+                VALUE = #{value,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null" >
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.ScorePara" >
+        update t_score_para
+        set GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+            GROUP_DESCR = #{groupDescr,jdbcType=VARCHAR},
+            NAME = #{name,jdbcType=VARCHAR},
+            VALUE = #{value,jdbcType=VARCHAR},
+            DESCR = #{descr,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

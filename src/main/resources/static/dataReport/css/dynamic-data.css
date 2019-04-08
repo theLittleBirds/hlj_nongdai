@@ -1,0 +1,86 @@
+/* tip */
+.param-tip {
+    cursor: pointer;
+    color: #999;
+    margin-left: 3px;
+}
+
+.info {
+    border-bottom: 1px solid #C9C9C9;
+}
+
+/* 导航条tab */
+.info ul {
+    padding: 9px 0;
+    border-bottom: 1px solid #C9C9C9;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+.info li {
+    list-style: none;
+    display: inline;
+    padding: 11px;
+    margin-left: 10px;
+    background: #E3E3E3;
+    border: 1px solid #C9C9C9;
+    border-bottom: 1px solid #FFF;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    cursor: pointer;
+}
+.info li.active, .info li:hover {
+    border-top: 2px solid #58B850;
+    border-bottom: 1px solid #FFF;
+    background: #FFF;
+    font-weight: bold;
+}
+
+.info input {
+    padding: 2px;
+}
+
+#data {
+    border-left: 1px solid #C9C9C9;
+    border-right: 1px solid #C9C9C9;
+}
+
+#data table {
+    margin-top: 30px;
+}
+
+.info td {
+    font-size: 13px;
+    border: 1px solid #C9C9C9;
+    padding: 5px 0 5px 10px;
+    color: #000000;
+}
+
+.secondTitle {
+    padding: 5px 0 0 0 !important;
+    font-size: 14px;
+    border-bottom: 1px solid #C9C9C9;
+    margin: 0 0 -20px 0;
+}
+
+.secondTitle span {
+    border-bottom: 2px solid #FFA00C;
+    color: #58B850;
+}
+
+.unit {
+    margin-left: 5px;
+}
+
+textarea {
+    margin: 10px 10px 0 0;
+}
+
+.info input[type='radio'], .info input[type='checkbox'] {
+    width: 20px;
+    margin-top: -1px;
+    vertical-align: middle;
+}
+
+.info input[type='radio']:not(:first-child), .info input[type='checkbox']:not(:first-child) {
+    margin-left: 20px;
+}

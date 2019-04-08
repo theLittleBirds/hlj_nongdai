@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysMenuRightMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysMenuRight" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="MENU_ID" property="menuId" jdbcType="VARCHAR" />
+        <result column="CONTROL_TYPE" property="controlType" jdbcType="TINYINT" />
+        <result column="OBJECT_TYPE" property="objectType" jdbcType="TINYINT" />
+        <result column="OBJECT_ID" property="objectId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, MENU_ID, CONTROL_TYPE, OBJECT_TYPE, OBJECT_ID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_menuright
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_menuright
+        where MENU_ID = #{menuId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_menuright
+        where OBJECT_ID = #{roleId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectMenuByRoleId" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_menuright
+        where CONTROL_TYPE = 1
+        and OBJECT_TYPE = 1
+        and OBJECT_ID in 
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+             #{item}
+        </foreach>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_sys_menuright
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByMenuId" parameterType="java.lang.String" >
+        delete from t_sys_menuright
+        where MENU_ID = #{menuId,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByRoleId" parameterType="java.lang.String" >
+        delete from t_sys_menuright
+        where OBJECT_ID = #{roleId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysMenuRight" >
+        insert into t_sys_menuright (ID, MENU_ID, CONTROL_TYPE, 
+            OBJECT_TYPE, OBJECT_ID)
+        values (#{id,jdbcType=INTEGER}, #{menuId,jdbcType=VARCHAR}, #{controlType,jdbcType=TINYINT}, 
+            #{objectType,jdbcType=TINYINT}, #{objectId,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysMenuRight" >
+        insert into t_sys_menuright
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="menuId != null" >
+                MENU_ID,
+            </if>
+            <if test="controlType != null" >
+                CONTROL_TYPE,
+            </if>
+            <if test="objectType != null" >
+                OBJECT_TYPE,
+            </if>
+            <if test="objectId != null" >
+                OBJECT_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="menuId != null" >
+                #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlType != null" >
+                #{controlType,jdbcType=TINYINT},
+            </if>
+            <if test="objectType != null" >
+                #{objectType,jdbcType=TINYINT},
+            </if>
+            <if test="objectId != null" >
+                #{objectId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysMenuRight" >
+        update t_sys_menuright
+        <set >
+            <if test="menuId != null" >
+                MENU_ID = #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="controlType != null" >
+                CONTROL_TYPE = #{controlType,jdbcType=TINYINT},
+            </if>
+            <if test="objectType != null" >
+                OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
+            </if>
+            <if test="objectId != null" >
+                OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysMenuRight" >
+        update t_sys_menuright
+        set MENU_ID = #{menuId,jdbcType=VARCHAR},
+            CONTROL_TYPE = #{controlType,jdbcType=TINYINT},
+            OBJECT_TYPE = #{objectType,jdbcType=TINYINT},
+            OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

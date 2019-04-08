@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusMessageReminderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="member_login_id" property="memberLoginId" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="apply_no" property="applyNo" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, member_login_id, into_piece_id, title, content, type, apply_no, create_date, 
+        IS_DELETE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_messagereminder
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_messagereminder
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        insert into t_bus_messagereminder (id, member_login_id, into_piece_id, 
+            title, content, type, 
+            apply_no, create_date, IS_DELETE
+            )
+        values (#{id,jdbcType=VARCHAR}, #{memberLoginId,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, 
+            #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+            #{applyNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        insert into t_bus_messagereminder
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="memberLoginId != null" >
+                member_login_id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="applyNo != null" >
+                apply_no,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="memberLoginId != null" >
+                #{memberLoginId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="applyNo != null" >
+                #{applyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        update t_bus_messagereminder
+        <set >
+            <if test="memberLoginId != null" >
+                member_login_id = #{memberLoginId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="applyNo != null" >
+                apply_no = #{applyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        update t_bus_messagereminder
+        set member_login_id = #{memberLoginId,jdbcType=VARCHAR},
+            into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            title = #{title,jdbcType=VARCHAR},
+            content = #{content,jdbcType=VARCHAR},
+            type = #{type,jdbcType=INTEGER},
+            apply_no = #{applyNo,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            IS_DELETE = #{isDelete,jdbcType=BIT}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <!-- 手写 -->
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_messagereminder
+        where 1 = 1
+        <if test="isDelete != null" >
+               and IS_DELETE = #{isDelete,jdbcType=BIT}
+        </if>
+        <if test="memberLoginId != null" >
+               and member_login_id = #{memberLoginId,jdbcType=VARCHAR}
+        </if>
+        <if test="intoPieceId != null" >
+               and into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null" >
+               and type = #{type,jdbcType=INTEGER}
+        </if>
+        order by create_date desc
+    </select>
+    
+    <select id="queryMRByTypeAndDelete" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusMessageReminder" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_messagereminder
+        where 1 = 1
+        <if test="isDelete != null" >
+               and IS_DELETE = #{isDelete,jdbcType=BIT}
+        </if>
+        <if test="intoPieceId != null" >
+               and into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null" >
+               and type = #{type,jdbcType=INTEGER}
+        </if>
+    </select>
+    
+</mapper>

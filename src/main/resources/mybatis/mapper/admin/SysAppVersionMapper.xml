@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysAppVersionMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="version_number" property="versionNumber" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="force_update" property="forceUpdate" jdbcType="INTEGER" />
+        <result column="newest" property="newest" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="comment" property="comment" jdbcType="VARCHAR" />
+        <result column="host" property="host" jdbcType="VARCHAR" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, version_number, url, force_update, newest, type, comment, host, channel, IS_DELETED, 
+        CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, 
+        UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_appversion
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_sys_appversion
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        insert into t_sys_appversion (id, version_number, url, 
+            force_update, newest, type, 
+            comment, host, channel, 
+            IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+            CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, 
+            UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+            )
+        values (#{id,jdbcType=VARCHAR}, #{versionNumber,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+            #{forceUpdate,jdbcType=INTEGER}, #{newest,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+            #{comment,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+            #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        insert into t_sys_appversion
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="versionNumber != null" >
+                version_number,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+            <if test="forceUpdate != null" >
+                force_update,
+            </if>
+            <if test="newest != null" >
+                newest,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="comment != null" >
+                comment,
+            </if>
+            <if test="host != null" >
+                host,
+            </if>
+            <if test="channel != null" >
+                channel,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="versionNumber != null" >
+                #{versionNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="forceUpdate != null" >
+                #{forceUpdate,jdbcType=INTEGER},
+            </if>
+            <if test="newest != null" >
+                #{newest,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null" >
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null" >
+                #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        update t_sys_appversion
+        <set >
+            <if test="versionNumber != null" >
+                version_number = #{versionNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="forceUpdate != null" >
+                force_update = #{forceUpdate,jdbcType=INTEGER},
+            </if>
+            <if test="newest != null" >
+                newest = #{newest,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null" >
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null" >
+                host = #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        update t_sys_appversion
+        set version_number = #{versionNumber,jdbcType=VARCHAR},
+            url = #{url,jdbcType=VARCHAR},
+            force_update = #{forceUpdate,jdbcType=INTEGER},
+            newest = #{newest,jdbcType=INTEGER},
+            type = #{type,jdbcType=INTEGER},
+            comment = #{comment,jdbcType=VARCHAR},
+            host = #{host,jdbcType=VARCHAR},
+            channel = #{channel,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <!-- 手写 -->
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_appversion
+        where 1=1
+        <if test="isDeleted != null" >
+             and IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="versionNumber != null" >
+             and version_number like "%"#{versionNumber}"%"
+        </if>
+        <if test="type != null" >
+             and type = #{type,jdbcType=INTEGER}
+         </if>
+         order by CRE_DATE desc
+    </select>
+    
+    <select id="selectCountByCondition" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        select count(id) 
+        from t_sys_appversion
+        where 1=1
+        <if test="isDeleted != null" >
+             and IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="versionNumber != null" >
+             and version_number like CONCAT('%',#{versionNumber},'%')
+        </if>
+        <if test="type != null" >
+             and type = #{type,jdbcType=INTEGER}
+         </if>
+        <if test="channel != null" >
+             and channel = #{channel}
+         </if>
+    </select>
+    <select id="newForceVersions" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_appversion
+        where 1=1
+        <if test="isDeleted != null" >
+             and IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="versionNumber != null" >
+             and version_number > #{versionNumber}
+        </if>
+        <if test="type != null" >
+             and type = #{type,jdbcType=INTEGER}
+         </if>
+        <if test="forceUpdate != null" >
+             and force_update = #{forceUpdate,jdbcType=INTEGER}
+         </if>
+    </select>
+    <select id="selectNewest" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.SysAppVersion" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_appversion
+        where 1=1
+        <if test="isDeleted != null" >
+             and IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="type != null" >
+             and type = #{type,jdbcType=INTEGER}
+         </if>
+        order by version_number desc limit 0,1;
+    </select>
+</mapper>

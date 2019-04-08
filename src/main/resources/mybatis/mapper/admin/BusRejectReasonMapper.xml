@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusRejectReasonMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusRejectReason" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
+        <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, id_card_no, reject_reason, create_time, del_flag
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_rejectreason
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_rejectreason
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusRejectReason" >
+        insert into t_bus_rejectreason (id, into_piece_id, id_card_no, 
+            reject_reason, create_time, del_flag
+            )
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{idCardNo,jdbcType=VARCHAR}, 
+            #{rejectReason,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusRejectReason" >
+        insert into t_bus_rejectreason
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no,
+            </if>
+            <if test="rejectReason != null" >
+                reject_reason,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="delFlag != null" >
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardNo != null" >
+                #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rejectReason != null" >
+                #{rejectReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null" >
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusRejectReason" >
+        update t_bus_rejectreason
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rejectReason != null" >
+                reject_reason = #{rejectReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusRejectReason" >
+        update t_bus_rejectreason
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            reject_reason = #{rejectReason,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            del_flag = #{delFlag,jdbcType=INTEGER}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_rejectreason
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and del_flag=0 order by create_time desc
+    </select>
+</mapper>

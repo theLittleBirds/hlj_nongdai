@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.NjMerGatherMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.NjMerGather" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="person_id" property="personId" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+        <result column="mer_org_id" property="merOrgId" jdbcType="VARCHAR" />
+        <result column="mer_name" property="merName" jdbcType="VARCHAR" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="product_brand_name" property="productBrandName" jdbcType="VARCHAR" />
+        <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
+        <result column="product_category_name" property="productCategoryName" jdbcType="VARCHAR" />
+        <result column="product_category" property="productCategory" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="down_totalprice" property="downTotalprice" jdbcType="VARCHAR" />
+        <result column="settle_totalprice" property="settleTotalprice" jdbcType="VARCHAR" />
+        <result column="product_num" property="productNum" jdbcType="VARCHAR" />
+        <result column="consignment_pic" property="consignmentPic" jdbcType="VARCHAR" />
+        <result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+        <result column="down_pricetime" property="downPricetime" jdbcType="VARCHAR" />
+        <result column="receive_doc_time" property="receiveDocTime" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, order_id, into_piece_id, person_id, org_id, org_name, member_name, mer_org_id, mer_name, 
+        product_name, product_brand_name, product_brand, product_category_name, product_category, 
+        status, down_totalprice, settle_totalprice, product_num, consignment_pic, is_deleted, down_pricetime, 
+        receive_doc_time, create_date, update_date
+    </sql>
+
+    <select id="queryMerGatherSelective" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.NjMerGather" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njmergather t
+        where 
+			1 = 1
+		<if test="orgName != null" >
+            and org_name like "%"#{orgName}"%"
+        </if>
+        <if test="memberName != null" >
+            and member_name like "%"#{memberName}"%"
+        </if>
+        <if test="productName != null" >
+            and product_name like "%"#{productName}"%"
+        </if>
+        <if test="status != null" >
+            and status = #{status}
+        </if>
+        <if test="personId != null" >
+           	and mer_org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId})
+       	</if>
+        order by create_date desc
+    </select>
+
+    <select id="queryMerGatherByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njmergather
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryMerGatherByPK" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njmergather
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_njmergather
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.NjMerGather" >
+        insert into t_bus_njmergather (id, order_id, into_piece_id, person_id, 
+            org_id, org_name, member_name, 
+            mer_org_id, mer_name, product_name, 
+            product_brand_name, product_brand, product_category_name, 
+            product_category, status, down_totalprice, 
+            settle_totalprice, product_num, consignment_pic, is_deleted,
+            down_pricetime, receive_doc_time, create_date, update_date
+            )
+        values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, 
+            #{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, 
+            #{merOrgId,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+            #{productBrandName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, #{productCategoryName,jdbcType=VARCHAR}, 
+            #{productCategory,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{downTotalprice,jdbcType=VARCHAR}, 
+            #{settleTotalprice,jdbcType=VARCHAR}, #{productNum,jdbcType=VARCHAR}, #{consignmentPic,jdbcType=VARCHAR}, #{isDeleted,jdbcType=VARCHAR},
+            #{downPricetime,jdbcType=VARCHAR}, #{receiveDocTime,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="addMerGatherSelective" parameterType="com.nongyeos.loan.admin.entity.NjMerGather" >
+        insert into t_bus_njmergather
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="orderId != null" >
+                order_id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="personId != null" >
+                person_id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="memberName != null" >
+                member_name,
+            </if>
+            <if test="merOrgId != null" >
+                mer_org_id,
+            </if>
+            <if test="merName != null" >
+                mer_name,
+            </if>
+            <if test="productName != null" >
+                product_name,
+            </if>
+            <if test="productBrandName != null" >
+                product_brand_name,
+            </if>
+            <if test="productBrand != null" >
+                product_brand,
+            </if>
+            <if test="productCategoryName != null" >
+                product_category_name,
+            </if>
+            <if test="productCategory != null" >
+                product_category,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="downTotalprice != null" >
+                down_totalprice,
+            </if>
+            <if test="settleTotalprice != null" >
+                settle_totalprice,
+            </if>
+            <if test="productNum != null" >
+                product_num,
+            </if>
+            <if test="consignmentPic != null" >
+                consignment_pic,
+            </if>
+            <if test="isDeleted != null" >
+                is_deleted,
+            </if>
+            <if test="downPricetime != null" >
+                down_pricetime,
+            </if>
+            <if test="receiveDocTime != null" >
+                receive_doc_time
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="merOrgId != null" >
+                #{merOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="merName != null" >
+                #{merName,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrand != null" >
+                #{productBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategory != null" >
+                #{productCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="downTotalprice != null" >
+                #{downTotalprice,jdbcType=VARCHAR},
+            </if>
+            <if test="settleTotalprice != null" >
+                #{settleTotalprice,jdbcType=VARCHAR},
+            </if>
+            <if test="productNum != null" >
+                #{productNum,jdbcType=VARCHAR},
+            </if>
+            <if test="consignmentPic != null" >
+                #{consignmentPic,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=VARCHAR},
+            </if>
+            <if test="downPricetime != null" >
+                #{downPricetime,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveDocTime != null" >
+                #{receiveDocTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateMerGatherByPKSelective" parameterType="com.nongyeos.loan.admin.entity.NjMerGather" >
+        update t_bus_njmergather
+        <set >
+        	<if test="orderId != null" >
+                order_id = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                person_id = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                member_name = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="merOrgId != null" >
+                mer_org_id = #{merOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="merName != null" >
+                mer_name = #{merName,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                product_brand_name = #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrand != null" >
+                product_brand = #{productBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                product_category_name = #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategory != null" >
+                product_category = #{productCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="downTotalprice != null" >
+                down_totalprice = #{downTotalprice,jdbcType=VARCHAR},
+            </if>
+            <if test="settleTotalprice != null" >
+                settle_totalprice = #{settleTotalprice,jdbcType=VARCHAR},
+            </if>
+            <if test="productNum != null" >
+                product_num = #{productNum,jdbcType=VARCHAR},
+            </if>
+            <if test="consignmentPic != null" >
+                consignment_pic = #{consignmentPic,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                is_deleted = #{isDeleted,jdbcType=VARCHAR},
+            </if>
+            <if test="downPricetime != null" >
+                down_pricetime = #{downPricetime,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveDocTime != null" >
+                receive_doc_time = #{receiveDocTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.NjMerGather" >
+        update t_bus_njmergather
+        set order_id = #{orderId,jdbcType=VARCHAR},
+        	into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            person_id = #{personId,jdbcType=VARCHAR},
+            org_id = #{orgId,jdbcType=VARCHAR},
+            org_name = #{orgName,jdbcType=VARCHAR},
+            member_name = #{memberName,jdbcType=VARCHAR},
+            mer_org_id = #{merOrgId,jdbcType=VARCHAR},
+            mer_name = #{merName,jdbcType=VARCHAR},
+            product_name = #{productName,jdbcType=VARCHAR},
+            product_brand_name = #{productBrandName,jdbcType=VARCHAR},
+            product_brand = #{productBrand,jdbcType=VARCHAR},
+            product_category_name = #{productCategoryName,jdbcType=VARCHAR},
+            product_category = #{productCategory,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            down_totalprice = #{downTotalprice,jdbcType=VARCHAR},
+            settle_totalprice = #{settleTotalprice,jdbcType=VARCHAR},
+            product_num = #{productNum,jdbcType=VARCHAR},
+            consignment_pic = #{consignmentPic,jdbcType=VARCHAR},
+            is_deleted = #{isDeleted,jdbcType=VARCHAR},
+            down_pricetime = #{downPricetime,jdbcType=VARCHAR},
+            receive_doc_time = #{receiveDocTime,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

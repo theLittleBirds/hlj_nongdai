@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusLoanDetailMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+        <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+        <result column="capital" property="capital" jdbcType="DECIMAL" />
+        <result column="intrest" property="intrest" jdbcType="DECIMAL" />
+        <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+        <result column="overplus_money" property="overplusMoney" jdbcType="DECIMAL" />
+        <result column="receive_capital" property="receiveCapital" jdbcType="DECIMAL" />
+        <result column="receive_interest" property="receiveInterest" jdbcType="DECIMAL" />
+        <result column="receive_service_fee" property="receiveServiceFee" jdbcType="DECIMAL" />
+        <result column="receive_overdue" property="receiveOverdue" jdbcType="DECIMAL" />
+        <result column="deadline_date" property="deadlineDate" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="recent_wait_rep" property="recentWaitRep" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="total" property="total" jdbcType="INTEGER" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, order_id, loan_id, capital, intrest, service_fee, overplus_money, receive_capital, 
+        receive_interest, receive_service_fee, receive_overdue, deadline_date, status, recent_wait_rep, 
+        sort, total, remarks, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, 
+        UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="queryLoanDetail" resultType="java.util.Map" parameterType="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        select 
+        	t1.*, t2.sign_status 
+        from 
+        	t_bus_loandetail t1 left join t_bus_loan t2 
+        on 
+        	t1.loan_id = t2.id  
+        where 
+        	1 = 1 and t1.loan_id = #{loanId} and t1.IS_DELETED = #{isDeleted} 
+        order by 
+        	t1.sort, t1.deadline_date
+    </select>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loandetail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_loandetail
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        insert into t_bus_loandetail (id, order_id, loan_id, 
+            capital, intrest, service_fee, 
+            overplus_money, receive_capital, receive_interest, 
+            receive_service_fee, receive_overdue, deadline_date, 
+            status, recent_wait_rep, sort, 
+            total, remarks, IS_DELETED, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE)
+        values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{loanId,jdbcType=VARCHAR}, 
+            #{capital,jdbcType=DECIMAL}, #{intrest,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, 
+            #{overplusMoney,jdbcType=DECIMAL}, #{receiveCapital,jdbcType=DECIMAL}, #{receiveInterest,jdbcType=DECIMAL}, 
+            #{receiveServiceFee,jdbcType=DECIMAL}, #{receiveOverdue,jdbcType=DECIMAL}, #{deadlineDate,jdbcType=TIMESTAMP}, 
+            #{status,jdbcType=INTEGER}, #{recentWaitRep,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+            #{total,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        insert into t_bus_loandetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="orderId != null" >
+                order_id,
+            </if>
+            <if test="loanId != null" >
+                loan_id,
+            </if>
+            <if test="capital != null" >
+                capital,
+            </if>
+            <if test="intrest != null" >
+                intrest,
+            </if>
+            <if test="serviceFee != null" >
+                service_fee,
+            </if>
+            <if test="overplusMoney != null" >
+                overplus_money,
+            </if>
+            <if test="receiveCapital != null" >
+                receive_capital,
+            </if>
+            <if test="receiveInterest != null" >
+                receive_interest,
+            </if>
+            <if test="receiveServiceFee != null" >
+                receive_service_fee,
+            </if>
+            <if test="receiveOverdue != null" >
+                receive_overdue,
+            </if>
+            <if test="deadlineDate != null" >
+                deadline_date,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="recentWaitRep != null" >
+                recent_wait_rep,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="total != null" >
+                total,
+            </if>
+            <if test="remarks != null" >
+                remarks,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="intrest != null" >
+                #{intrest,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceFee != null" >
+                #{serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="overplusMoney != null" >
+                #{overplusMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveCapital != null" >
+                #{receiveCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveInterest != null" >
+                #{receiveInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveServiceFee != null" >
+                #{receiveServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveOverdue != null" >
+                #{receiveOverdue,jdbcType=DECIMAL},
+            </if>
+            <if test="deadlineDate != null" >
+                #{deadlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="recentWaitRep != null" >
+                #{recentWaitRep,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="total != null" >
+                #{total,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null" >
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        update t_bus_loandetail
+        <set >
+            <if test="orderId != null" >
+                order_id = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="loanId != null" >
+                loan_id = #{loanId,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                capital = #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="intrest != null" >
+                intrest = #{intrest,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceFee != null" >
+                service_fee = #{serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="overplusMoney != null" >
+                overplus_money = #{overplusMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveCapital != null" >
+                receive_capital = #{receiveCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveInterest != null" >
+                receive_interest = #{receiveInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveServiceFee != null" >
+                receive_service_fee = #{receiveServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveOverdue != null" >
+                receive_overdue = #{receiveOverdue,jdbcType=DECIMAL},
+            </if>
+            <if test="deadlineDate != null" >
+                deadline_date = #{deadlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="recentWaitRep != null" >
+                recent_wait_rep = #{recentWaitRep,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="total != null" >
+                total = #{total,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null" >
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        update t_bus_loandetail
+        set order_id = #{orderId,jdbcType=VARCHAR},
+            loan_id = #{loanId,jdbcType=VARCHAR},
+            capital = #{capital,jdbcType=DECIMAL},
+            intrest = #{intrest,jdbcType=DECIMAL},
+            service_fee = #{serviceFee,jdbcType=DECIMAL},
+            overplus_money = #{overplusMoney,jdbcType=DECIMAL},
+            receive_capital = #{receiveCapital,jdbcType=DECIMAL},
+            receive_interest = #{receiveInterest,jdbcType=DECIMAL},
+            receive_service_fee = #{receiveServiceFee,jdbcType=DECIMAL},
+            receive_overdue = #{receiveOverdue,jdbcType=DECIMAL},
+            deadline_date = #{deadlineDate,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=INTEGER},
+            recent_wait_rep = #{recentWaitRep,jdbcType=INTEGER},
+            sort = #{sort,jdbcType=INTEGER},
+            total = #{total,jdbcType=INTEGER},
+            remarks = #{remarks,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 根据loanId删除还款明细 -->
+    <delete id="deleteByLoanId" parameterType="java.lang.String" >
+        delete from t_bus_loandetail
+        where loan_id = #{loanId,jdbcType=VARCHAR}
+    </delete>
+    
+    <select id="selectByLoanId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loandetail
+        where loan_id = #{loanId,jdbcType=VARCHAR} order by sort
+    </select>
+    <select id="selectNextRepay" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusLoanDetail" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loandetail
+        where loan_id = #{loanId,jdbcType=VARCHAR} and sort = #{sort,jdbcType=INTEGER}
+    </select>
+    <select id="selectNowRepay" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loandetail
+        where loan_id = #{loanId,jdbcType=VARCHAR} and recent_wait_rep = 1
+    </select>
+    <select id="selectNonRepay" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loandetail
+        where loan_id = #{loanId,jdbcType=VARCHAR} and status = 1 order by sort
+    </select>
+    <select id="selectLastComplete" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select t.* from t_bus_loandetail t left join t_bus_loan t1 on t.loan_id = t1.id where t1.into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and t.status = 4 and t.recent_wait_rep = 0 and t.IS_DELETED = 0 order by t.deadline_date desc limit 0,1
+    </select>
+</mapper>

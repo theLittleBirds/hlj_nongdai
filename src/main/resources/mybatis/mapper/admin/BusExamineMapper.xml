@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusExamineMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusExamine" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="node" property="node" jdbcType="VARCHAR" />
+        <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        <result column="capital" property="capital" jdbcType="DECIMAL" />
+        <result column="term" property="term" jdbcType="INTEGER" />
+        <result column="examine_by" property="examineBy" jdbcType="VARCHAR" />
+        <result column="examine_name" property="examineName" jdbcType="VARCHAR" />
+        <result column="examine_date" property="examineDate" jdbcType="TIMESTAMP" />
+        <result column="examine_opinion" property="examineOpinion" jdbcType="VARCHAR" />
+        <result column="product_settle_price" property="productSettlePrice" jdbcType="VARCHAR" />
+        <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
+        <result column="product_list_info" property="productListInfo" jdbcType="LONGVARCHAR" />
+        <result column="recieve_nong_zi" property="recieveNongZi" jdbcType="VARCHAR" />
+        <result column="recieve_cash" property="recieveCash" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, node, product_id, capital, term, examine_by, examine_name, examine_date, 
+        examine_opinion, product_settle_price, product_price, product_list_info, recieve_nong_zi, 
+        recieve_cash
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_examine
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_examine
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusExamine" >
+        insert into t_bus_examine (id, into_piece_id, node, 
+            product_id, capital, term, 
+            examine_by, examine_name, examine_date, 
+            examine_opinion, product_settle_price, product_price, 
+            product_list_info, recieve_nong_zi, recieve_cash
+            )
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{node,jdbcType=VARCHAR}, 
+            #{productId,jdbcType=VARCHAR}, #{capital,jdbcType=DECIMAL}, #{term,jdbcType=INTEGER}, 
+            #{examineBy,jdbcType=VARCHAR}, #{examineName,jdbcType=VARCHAR}, #{examineDate,jdbcType=TIMESTAMP}, 
+            #{examineOpinion,jdbcType=VARCHAR}, #{productSettlePrice,jdbcType=VARCHAR}, #{productPrice,jdbcType=VARCHAR}, 
+            #{productListInfo,jdbcType=LONGVARCHAR}, #{recieveNongZi,jdbcType=VARCHAR}, #{recieveCash,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusExamine" >
+        insert into t_bus_examine
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="node != null" >
+                node,
+            </if>
+            <if test="productId != null" >
+                product_id,
+            </if>
+            <if test="capital != null" >
+                capital,
+            </if>
+            <if test="term != null" >
+                term,
+            </if>
+            <if test="examineBy != null" >
+                examine_by,
+            </if>
+            <if test="examineName != null" >
+                examine_name,
+            </if>
+            <if test="examineDate != null" >
+                examine_date,
+            </if>
+            <if test="examineOpinion != null" >
+                examine_opinion,
+            </if>
+            <if test="productSettlePrice != null" >
+                product_settle_price,
+            </if>
+            <if test="productPrice != null" >
+                product_price,
+            </if>
+            <if test="productListInfo != null" >
+                product_list_info,
+            </if>
+            <if test="recieveNongZi != null" >
+                recieve_nong_zi,
+            </if>
+            <if test="recieveCash != null" >
+                recieve_cash,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="node != null" >
+                #{node,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="term != null" >
+                #{term,jdbcType=INTEGER},
+            </if>
+            <if test="examineBy != null" >
+                #{examineBy,jdbcType=VARCHAR},
+            </if>
+            <if test="examineName != null" >
+                #{examineName,jdbcType=VARCHAR},
+            </if>
+            <if test="examineDate != null" >
+                #{examineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="examineOpinion != null" >
+                #{examineOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="productSettlePrice != null" >
+                #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null" >
+                #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productListInfo != null" >
+                #{productListInfo,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="recieveNongZi != null" >
+                #{recieveNongZi,jdbcType=VARCHAR},
+            </if>
+            <if test="recieveCash != null" >
+                #{recieveCash,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusExamine" >
+        update t_bus_examine
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="node != null" >
+                node = #{node,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                product_id = #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                capital = #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="term != null" >
+                term = #{term,jdbcType=INTEGER},
+            </if>
+            <if test="examineBy != null" >
+                examine_by = #{examineBy,jdbcType=VARCHAR},
+            </if>
+            <if test="examineName != null" >
+                examine_name = #{examineName,jdbcType=VARCHAR},
+            </if>
+            <if test="examineDate != null" >
+                examine_date = #{examineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="examineOpinion != null" >
+                examine_opinion = #{examineOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="productSettlePrice != null" >
+                product_settle_price = #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null" >
+                product_price = #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productListInfo != null" >
+                product_list_info = #{productListInfo,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="recieveNongZi != null" >
+                recieve_nong_zi = #{recieveNongZi,jdbcType=VARCHAR},
+            </if>
+            <if test="recieveCash != null" >
+                recieve_cash = #{recieveCash,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusExamine" >
+        update t_bus_examine
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            node = #{node,jdbcType=VARCHAR},
+            product_id = #{productId,jdbcType=VARCHAR},
+            capital = #{capital,jdbcType=DECIMAL},
+            term = #{term,jdbcType=INTEGER},
+            examine_by = #{examineBy,jdbcType=VARCHAR},
+            examine_name = #{examineName,jdbcType=VARCHAR},
+            examine_date = #{examineDate,jdbcType=TIMESTAMP},
+            examine_opinion = #{examineOpinion,jdbcType=VARCHAR},
+            product_settle_price = #{productSettlePrice,jdbcType=VARCHAR},
+            product_price = #{productPrice,jdbcType=VARCHAR},
+            product_list_info = #{productListInfo,jdbcType=LONGVARCHAR},
+            recieve_nong_zi = #{recieveNongZi,jdbcType=VARCHAR},
+            recieve_cash = #{recieveCash,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="historyByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select be.node,be.examine_name,be.examine_date,be.capital,be.term,be.examine_opinion,
+        bp.name product_id,be.recieve_cash,be.recieve_nong_zi,be.product_list_info
+        from t_bus_examine be left join t_bus_product bp on be.product_id = bp.product_id
+        where be.into_piece_id = #{intoPieceId,jdbcType=VARCHAR} order by be.examine_date
+    </select>
+    <select id="selectByIpIdNode" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.BusExamine" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_examine
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and node = #{node,jdbcType=VARCHAR} order by examine_date desc limit 1
+    </select>
+    <select id="selectByIpIdLast" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_bus_examine
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR}  order by  examine_date desc limit 1
+    </select>
+</mapper>

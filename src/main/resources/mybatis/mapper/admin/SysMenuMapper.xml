@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.SysMenuMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.SysMenu" >
+        <id column="MENU_ID" property="menuId" jdbcType="VARCHAR" />
+        <result column="NAME_CN" property="nameCn" jdbcType="VARCHAR" />
+        <result column="NAME_EN" property="nameEn" jdbcType="VARCHAR" />
+        <result column="PARENT_MENU_ID" property="parentMenuId" jdbcType="VARCHAR" />
+        <result column="PARENT_MENU_IDS" property="parentMenuIds" jdbcType="VARCHAR" />
+        <result column="HTML_ID" property="htmlId" jdbcType="VARCHAR" />
+        <result column="ACTION_JS" property="actionJs" jdbcType="VARCHAR" />
+        <result column="ACTION_URL" property="actionUrl" jdbcType="VARCHAR" />
+        <result column="LOGO_URL" property="logoUrl" jdbcType="VARCHAR" />
+        <result column="IS_LEAF" property="isLeaf" jdbcType="TINYINT" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="STATUS" property="status" jdbcType="TINYINT" />
+        <result column="CATEGORY" property="category" jdbcType="TINYINT" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        MENU_ID, NAME_CN, NAME_EN, PARENT_MENU_ID, PARENT_MENU_IDS, HTML_ID, ACTION_JS, ACTION_URL, 
+        LOGO_URL, IS_LEAF, SEQNO, STATUS, CATEGORY, IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, 
+        CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_menu
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </select>
+
+	<select id="selectAllMenuList" parameterType="java.lang.String" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_menu order by SEQNO ASC
+	</select>
+	
+	<select id="selectMenuByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_menu 
+	    where NAME_CN = #{nameCn,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectFatherMenuList"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_menu
+	    where
+		(PARENT_MENU_ID is null or PARENT_MENU_ID = '')
+			<if test="list != null and list.size() > 0">
+		        and MENU_ID in
+		        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+		                #{item}
+		        </foreach>
+	        </if>
+		order by SEQNO ASC
+	</select>
+	
+	<select id="selectAllFatherMenuList"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_menu
+	    where
+		(PARENT_MENU_ID is null or PARENT_MENU_ID = '')
+		order by SEQNO ASC
+	</select>
+	
+	<select id="selectChildMenuList"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_menu
+	    where 
+	    PARENT_MENU_ID = #{parentMenuId	,jdbcType=VARCHAR} 
+		    <if test="menuIdList != null and menuIdList.size() > 0">
+			    and MENU_ID in
+		        <foreach item="item" index="index" collection="menuIdList" open="(" separator="," close=")">
+		                #{item}
+		        </foreach>
+	        </if>
+	    order by SEQNO ASC
+	</select>
+	
+	<select id="selectAllChildMenuList"  resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_sys_menu
+	    where 
+	    PARENT_MENU_ID = #{parentMenuId	,jdbcType=VARCHAR} 
+	    order by SEQNO ASC
+	</select>
+  
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_sys_menu
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.SysMenu" >
+        insert into t_sys_menu (MENU_ID, NAME_CN, NAME_EN, 
+            PARENT_MENU_ID, PARENT_MENU_IDS, HTML_ID, 
+            ACTION_JS, ACTION_URL, LOGO_URL, 
+            IS_LEAF, SEQNO, STATUS, 
+            CATEGORY, IS_DELETED, CRE_OPER_ID, 
+            CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, 
+            UPD_OPER_ID, UPD_OPER_NAME, UPD_ORG_ID, 
+            UPD_DATE)
+        values (#{menuId,jdbcType=VARCHAR}, #{nameCn,jdbcType=VARCHAR}, #{nameEn,jdbcType=VARCHAR}, 
+            #{parentMenuId,jdbcType=VARCHAR}, #{parentMenuIds,jdbcType=VARCHAR}, #{htmlId,jdbcType=VARCHAR}, 
+            #{actionJs,jdbcType=VARCHAR}, #{actionUrl,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR}, 
+            #{isLeaf,jdbcType=TINYINT}, #{seqno,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+            #{category,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{creOperId,jdbcType=VARCHAR}, 
+            #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, 
+            #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, #{updOrgId,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.SysMenu" >
+        insert into t_sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="menuId != null" >
+                MENU_ID,
+            </if>
+            <if test="nameCn != null" >
+                NAME_CN,
+            </if>
+            <if test="nameEn != null" >
+                NAME_EN,
+            </if>
+            <if test="parentMenuId != null" >
+                PARENT_MENU_ID,
+            </if>
+            <if test="parentMenuIds != null" >
+                PARENT_MENU_IDS,
+            </if>
+            <if test="htmlId != null" >
+                HTML_ID,
+            </if>
+            <if test="actionJs != null" >
+                ACTION_JS,
+            </if>
+            <if test="actionUrl != null" >
+                ACTION_URL,
+            </if>
+            <if test="logoUrl != null" >
+                LOGO_URL,
+            </if>
+            <if test="isLeaf != null" >
+                IS_LEAF,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="status != null" >
+                STATUS,
+            </if>
+            <if test="category != null" >
+                CATEGORY,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="menuId != null" >
+                #{menuId,jdbcType=VARCHAR},
+            </if>
+            <if test="nameCn != null" >
+                #{nameCn,jdbcType=VARCHAR},
+            </if>
+            <if test="nameEn != null" >
+                #{nameEn,jdbcType=VARCHAR},
+            </if>
+            <if test="parentMenuId != null" >
+                #{parentMenuId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentMenuIds != null" >
+                #{parentMenuIds,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlId != null" >
+                #{htmlId,jdbcType=VARCHAR},
+            </if>
+            <if test="actionJs != null" >
+                #{actionJs,jdbcType=VARCHAR},
+            </if>
+            <if test="actionUrl != null" >
+                #{actionUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="logoUrl != null" >
+                #{logoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isLeaf != null" >
+                #{isLeaf,jdbcType=TINYINT},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="category != null" >
+                #{category,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.SysMenu" >
+        update t_sys_menu
+        <set >
+            <if test="nameCn != null" >
+                NAME_CN = #{nameCn,jdbcType=VARCHAR},
+            </if>
+            <if test="nameEn != null" >
+                NAME_EN = #{nameEn,jdbcType=VARCHAR},
+            </if>
+            <if test="parentMenuId != null" >
+                PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentMenuIds != null" >
+                PARENT_MENU_IDS = #{parentMenuIds,jdbcType=VARCHAR},
+            </if>
+            <if test="htmlId != null" >
+                HTML_ID = #{htmlId,jdbcType=VARCHAR},
+            </if>
+            <if test="actionJs != null" >
+                ACTION_JS = #{actionJs,jdbcType=VARCHAR},
+            </if>
+            <if test="actionUrl != null" >
+                ACTION_URL = #{actionUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="logoUrl != null" >
+                LOGO_URL = #{logoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isLeaf != null" >
+                IS_LEAF = #{isLeaf,jdbcType=TINYINT},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                STATUS = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="category != null" >
+                CATEGORY = #{category,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.SysMenu" >
+        update t_sys_menu
+        set NAME_CN = #{nameCn,jdbcType=VARCHAR},
+            NAME_EN = #{nameEn,jdbcType=VARCHAR},
+            PARENT_MENU_ID = #{parentMenuId,jdbcType=VARCHAR},
+            PARENT_MENU_IDS = #{parentMenuIds,jdbcType=VARCHAR},
+            HTML_ID = #{htmlId,jdbcType=VARCHAR},
+            ACTION_JS = #{actionJs,jdbcType=VARCHAR},
+            ACTION_URL = #{actionUrl,jdbcType=VARCHAR},
+            LOGO_URL = #{logoUrl,jdbcType=VARCHAR},
+            IS_LEAF = #{isLeaf,jdbcType=TINYINT},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            STATUS = #{status,jdbcType=TINYINT},
+            CATEGORY = #{category,jdbcType=TINYINT},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    </update>
+</mapper>

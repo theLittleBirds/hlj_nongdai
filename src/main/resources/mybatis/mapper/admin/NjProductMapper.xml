@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.NjProductMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.NjProduct" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="person_id" property="personId" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="product_brand_name" property="productBrandName" jdbcType="VARCHAR" />
+        <result column="product_brand" property="productBrand" jdbcType="VARCHAR" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="product_category_name" property="productCategoryName" jdbcType="VARCHAR" />
+        <result column="product_category" property="productCategory" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="VARCHAR" />
+        <result column="settle_price" property="settlePrice" jdbcType="VARCHAR" />
+        <result column="standard" property="standard" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="product_desc" property="productDesc" jdbcType="LONGVARCHAR" />
+        <result column="cover_pic" property="coverPic" jdbcType="VARCHAR" />
+        <result column="detail_pic" property="detailPic" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, person_id, org_id, product_brand_name, product_brand, product_name, product_category_name, 
+        product_category, price, settle_price, standard, status, product_desc, cover_pic, 
+        detail_pic, create_date, update_date
+    </sql>
+
+    <select id="queryAllNjProduct" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njproduct
+        where status = 1
+    </select>
+
+    <select id="queryNjProductSelective" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.NjProduct" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njproduct
+        where 
+			1 = 1
+		<if test="productBrand != null" >
+            and product_brand = #{productBrand}
+        </if>
+        <if test="productName != null" >
+            and product_name like "%"#{productName}"%"
+        </if>
+        <if test="productCategory != null" >
+            and product_category = #{productCategory}
+        </if>
+        <if test="status != null" >
+            and status = #{status}
+        </if>
+        <if test="personId != null" >
+           	and org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId})
+       	</if>
+    </select>
+
+    <select id="queryNjProductByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_njproduct
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteNjProductByPK" parameterType="java.lang.String" >
+        delete from t_bus_njproduct
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.NjProduct" >
+        insert into t_bus_njproduct (id, person_id, org_id, product_brand_name, 
+            product_brand, product_name, product_category_name, 
+            product_category, price, settle_price, 
+            standard, status, product_desc, 
+            cover_pic, detail_pic, create_date, 
+            update_date)
+        values (#{id,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{productBrandName,jdbcType=VARCHAR}, 
+            #{productBrand,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productCategoryName,jdbcType=VARCHAR}, 
+            #{productCategory,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{settlePrice,jdbcType=VARCHAR}, 
+            #{standard,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{productDesc,jdbcType=LONGVARCHAR}, 
+            #{coverPic,jdbcType=VARCHAR}, #{detailPic,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+            #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="addNjProductSelective" parameterType="com.nongyeos.loan.admin.entity.NjProduct" >
+        insert into t_bus_njproduct
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="personId != null" >
+                person_id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="productBrandName != null" >
+                product_brand_name,
+            </if>
+            <if test="productBrand != null" >
+                product_brand,
+            </if>
+            <if test="productName != null" >
+                product_name,
+            </if>
+            <if test="productCategoryName != null" >
+                product_category_name,
+            </if>
+            <if test="productCategory != null" >
+                product_category,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="settlePrice != null" >
+                settle_price,
+            </if>
+            <if test="standard != null" >
+                standard,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="productDesc != null" >
+                product_desc,
+            </if>
+            <if test="coverPic != null" >
+                cover_pic,
+            </if>
+            <if test="detailPic != null" >
+                detail_pic,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="personId != null" >
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrand != null" >
+                #{productBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategory != null" >
+                #{productCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=VARCHAR},
+            </if>
+            <if test="settlePrice != null" >
+                #{settlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="standard != null" >
+                #{standard,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="productDesc != null" >
+                #{productDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="coverPic != null" >
+                #{coverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="detailPic != null" >
+                #{detailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateNjProductPKSelective" parameterType="com.nongyeos.loan.admin.entity.NjProduct" >
+        update t_bus_njproduct
+        <set >
+            <if test="personId != null" >
+                person_id = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrandName != null" >
+                product_brand_name = #{productBrandName,jdbcType=VARCHAR},
+            </if>
+            <if test="productBrand != null" >
+                product_brand = #{productBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null" >
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategoryName != null" >
+                product_category_name = #{productCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCategory != null" >
+                product_category = #{productCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                price = #{price,jdbcType=VARCHAR},
+            </if>
+            <if test="settlePrice != null" >
+                settle_price = #{settlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="standard != null" >
+                standard = #{standard,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="productDesc != null" >
+                product_desc = #{productDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="coverPic != null" >
+                cover_pic = #{coverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="detailPic != null" >
+                detail_pic = #{detailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.NjProduct" >
+        update t_bus_njproduct
+        set person_id = #{personId,jdbcType=VARCHAR},
+            org_id = #{orgId,jdbcType=VARCHAR},
+            product_brand_name = #{productBrandName,jdbcType=VARCHAR},
+            product_brand = #{productBrand,jdbcType=VARCHAR},
+            product_name = #{productName,jdbcType=VARCHAR},
+            product_category_name = #{productCategoryName,jdbcType=VARCHAR},
+            product_category = #{productCategory,jdbcType=VARCHAR},
+            price = #{price,jdbcType=VARCHAR},
+            settle_price = #{settlePrice,jdbcType=VARCHAR},
+            standard = #{standard,jdbcType=VARCHAR},
+            status = #{status,jdbcType=VARCHAR},
+            product_desc = #{productDesc,jdbcType=LONGVARCHAR},
+            cover_pic = #{coverPic,jdbcType=VARCHAR},
+            detail_pic = #{detailPic,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.BusFinsMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.BusFins" >
+        <id column="FINS_ID" property="finsId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="SHORT_CNAME" property="shortCname" jdbcType="VARCHAR" />
+        <result column="SHORT_ENAME" property="shortEname" jdbcType="VARCHAR" />
+        <result column="MGR_ROLE_CODE" property="mgrRoleCode" jdbcType="VARCHAR" />
+        <result column="PBC_CODE" property="pbcCode" jdbcType="VARCHAR" />
+        <result column="UNION_CODE" property="unionCode" jdbcType="VARCHAR" />
+        <result column="LOGO" property="logo" jdbcType="VARCHAR" />
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+        <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+        <result column="FAX" property="fax" jdbcType="VARCHAR" />
+        <result column="POSTCODE" property="postcode" jdbcType="VARCHAR" />
+        <result column="CONTACT_PERSON" property="contactPerson" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="TINYINT" />
+        <result column="CRE_OPER_CODE" property="creOperCode" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_CODE" property="creOrgCode" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_CODE" property="updOperCode" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_CODE" property="updOrgCode" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        FINS_ID, ORG_ID, CNAME, ENAME, SHORT_CNAME, SHORT_ENAME, MGR_ROLE_CODE, PBC_CODE,
+        UNION_CODE, LOGO, ADDRESS, PHONE, FAX, POSTCODE, CONTACT_PERSON, SEQNO, IS_DELETE, 
+        CRE_OPER_CODE, CRE_OPER_NAME, CRE_ORG_CODE, CRE_DATE, UPD_OPER_CODE, UPD_OPER_NAME, 
+        UPD_ORG_CODE, UPD_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_fins
+        where FINS_ID = #{finsId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_fins
+        where FINS_ID = #{finsId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.BusFins" >
+        insert into t_bus_fins (FINS_ID, ORG_ID, CNAME,
+            ENAME, SHORT_CNAME, SHORT_ENAME, 
+            MGR_ROLE_CODE, PBC_CODE, UNION_CODE, 
+            LOGO, ADDRESS, PHONE, 
+            FAX, POSTCODE, CONTACT_PERSON, 
+            SEQNO, IS_DELETE, CRE_OPER_CODE, 
+            CRE_OPER_NAME, CRE_ORG_CODE, CRE_DATE, 
+            UPD_OPER_CODE, UPD_OPER_NAME, UPD_ORG_CODE, 
+            UPD_DATE)
+        values (#{finsId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR},
+            #{ename,jdbcType=VARCHAR}, #{shortCname,jdbcType=VARCHAR}, #{shortEname,jdbcType=VARCHAR}, 
+            #{mgrRoleCode,jdbcType=VARCHAR}, #{pbcCode,jdbcType=VARCHAR}, #{unionCode,jdbcType=VARCHAR}, 
+            #{logo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+            #{fax,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{contactPerson,jdbcType=VARCHAR}, 
+            #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}, #{creOperCode,jdbcType=VARCHAR}, 
+            #{creOperName,jdbcType=VARCHAR}, #{creOrgCode,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, 
+            #{updOperCode,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, #{updOrgCode,jdbcType=VARCHAR}, 
+            #{updDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.BusFins" >
+        insert into t_bus_fins
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="finsId != null" >
+                FINS_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="shortCname != null" >
+                SHORT_CNAME,
+            </if>
+            <if test="shortEname != null" >
+                SHORT_ENAME,
+            </if>
+            <if test="mgrRoleCode != null" >
+                MGR_ROLE_CODE,
+            </if>
+            <if test="pbcCode != null" >
+                PBC_CODE,
+            </if>
+            <if test="unionCode != null" >
+                UNION_CODE,
+            </if>
+            <if test="logo != null" >
+                LOGO,
+            </if>
+            <if test="address != null" >
+                ADDRESS,
+            </if>
+            <if test="phone != null" >
+                PHONE,
+            </if>
+            <if test="fax != null" >
+                FAX,
+            </if>
+            <if test="postcode != null" >
+                POSTCODE,
+            </if>
+            <if test="contactPerson != null" >
+                CONTACT_PERSON,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="shortCname != null" >
+                #{shortCname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortEname != null" >
+                #{shortEname,jdbcType=VARCHAR},
+            </if>
+            <if test="mgrRoleCode != null" >
+                #{mgrRoleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pbcCode != null" >
+                #{pbcCode,jdbcType=VARCHAR},
+            </if>
+            <if test="unionCode != null" >
+                #{unionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null" >
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null" >
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null" >
+                #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null" >
+                #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="creOperCode != null" >
+                #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.BusFins" >
+        update t_bus_fins
+        <set >
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="shortCname != null" >
+                SHORT_CNAME = #{shortCname,jdbcType=VARCHAR},
+            </if>
+            <if test="shortEname != null" >
+                SHORT_ENAME = #{shortEname,jdbcType=VARCHAR},
+            </if>
+            <if test="mgrRoleCode != null" >
+                MGR_ROLE_CODE = #{mgrRoleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pbcCode != null" >
+                PBC_CODE = #{pbcCode,jdbcType=VARCHAR},
+            </if>
+            <if test="unionCode != null" >
+                UNION_CODE = #{unionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null" >
+                LOGO = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null" >
+                FAX = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null" >
+                POSTCODE = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null" >
+                CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where FINS_ID = #{finsId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.BusFins" >
+        update t_bus_fins
+        set ORG_ID = #{orgId,jdbcType=VARCHAR},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            SHORT_CNAME = #{shortCname,jdbcType=VARCHAR},
+            SHORT_ENAME = #{shortEname,jdbcType=VARCHAR},
+            MGR_ROLE_CODE = #{mgrRoleCode,jdbcType=VARCHAR},
+            PBC_CODE = #{pbcCode,jdbcType=VARCHAR},
+            UNION_CODE = #{unionCode,jdbcType=VARCHAR},
+            LOGO = #{logo,jdbcType=VARCHAR},
+            ADDRESS = #{address,jdbcType=VARCHAR},
+            PHONE = #{phone,jdbcType=VARCHAR},
+            FAX = #{fax,jdbcType=VARCHAR},
+            POSTCODE = #{postcode,jdbcType=VARCHAR},
+            CONTACT_PERSON = #{contactPerson,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=TINYINT},
+            CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where FINS_ID = #{finsId,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    	select 
+    	<include refid="Base_Column_List" />
+    	from t_bus_fins
+    	order by SEQNO ASC
+    </select>
+    
+    <select id="countByOrgIdList" resultType="Integer">
+  	   	select count(FINS_ID) 
+  	   	from t_bus_fins
+  	   	   <if test="list != null and list.size() > 0">
+	    		where 
+		        <foreach item="item" index="index" collection="list" open="(" separator="or" close=")">
+		        ORG_ID like "%"#{item}"%"
+		        </foreach>
+	       </if>
+	       <if test="list == null or list.size() == 0">
+	    		where 1=2
+	       </if>
+  	</select>
+  	
+    <delete id="deleteBusFins" parameterType="java.lang.String" >
+        delete from t_bus_fins
+        where FINS_ID = #{busFin}
+    </delete>
+    
+    <select id="selectByOrgIdList"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_bus_fins
+			<if test="list != null and list.size() > 0">
+	    		where 
+		        <foreach item="item" index="index" collection="list" open="(" separator="or" close=")">
+		        ORG_ID like "%"#{item}"%"
+		        </foreach>
+	       </if>
+	       <if test="list == null or list.size() == 0">
+	    		where 1=2
+	       </if>
+		order by SEQNO ASC
+	</select>
+</mapper>

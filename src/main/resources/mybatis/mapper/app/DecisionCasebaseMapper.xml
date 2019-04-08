@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.DecisionCasebaseMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.DecisionCasebase" >
+        <id column="CSBASE_ID" property="csbaseId" jdbcType="INTEGER" />
+        <result column="CASE_ID" property="caseId" jdbcType="VARCHAR" />
+        <result column="TYPE" property="type" jdbcType="TINYINT" />
+        <result column="BASE_ID" property="baseId" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        CSBASE_ID, CASE_ID, TYPE, BASE_ID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_casebase
+        where CSBASE_ID = #{csbaseId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByCaseAndType" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_casebase
+        where CASE_ID = #{caseId,jdbcType=VARCHAR}
+        and 
+        TYPE = #{type,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_casebase
+        where CASE_ID = #{caseId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="count" resultType="Integer" >
+  	   	select count(CSBASE_ID) 
+  	   	from t_decision_casebase
+  	   	where CASE_ID = #{caseId,jdbcType=VARCHAR}
+        and 
+        TYPE = #{type,jdbcType=INTEGER}
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_decision_casebase
+        where CSBASE_ID = #{csbaseId,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByCaseIdAndType" >
+        delete from t_decision_casebase
+        where CASE_ID = #{caseId,jdbcType=VARCHAR}
+        and 
+        TYPE = #{type,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.DecisionCasebase" >
+        insert into t_decision_casebase (CSBASE_ID, CASE_ID, TYPE, 
+            BASE_ID)
+        values (#{csbaseId,jdbcType=INTEGER}, #{caseId,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+            #{baseId,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.DecisionCasebase" >
+        insert into t_decision_casebase
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="csbaseId != null" >
+                CSBASE_ID,
+            </if>
+            <if test="caseId != null" >
+                CASE_ID,
+            </if>
+            <if test="type != null" >
+                TYPE,
+            </if>
+            <if test="baseId != null" >
+                BASE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="csbaseId != null" >
+                #{csbaseId,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="baseId != null" >
+                #{baseId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.DecisionCasebase" >
+        update t_decision_casebase
+        <set >
+            <if test="caseId != null" >
+                CASE_ID = #{caseId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                TYPE = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="baseId != null" >
+                BASE_ID = #{baseId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where CSBASE_ID = #{csbaseId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.DecisionCasebase" >
+        update t_decision_casebase
+        set CASE_ID = #{caseId,jdbcType=VARCHAR},
+            TYPE = #{type,jdbcType=TINYINT},
+            BASE_ID = #{baseId,jdbcType=VARCHAR}
+        where CSBASE_ID = #{csbaseId,jdbcType=INTEGER}
+    </update>
+</mapper>

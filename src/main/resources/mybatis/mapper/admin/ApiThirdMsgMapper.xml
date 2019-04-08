@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.ApiThirdMsgMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="platform" property="platform" jdbcType="VARCHAR" />
+        <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="id_card_no" property="idCardNo" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="reject_flag" property="rejectFlag" jdbcType="INTEGER" />
+        <result column="report_id" property="reportId" jdbcType="VARCHAR" />
+        <result column="post_risk" property="postRisk" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, into_piece_id, content, platform, createTime, id_card_no, type, reject_flag, report_id, post_risk
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_thirdmsg
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryByPostRisk" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_thirdmsg
+        where post_risk = #{postRisk,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectLastByIDC" resultMap="BaseResultMap" parameterType="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_thirdmsg
+        where id_card_no = #{idCardNo,jdbcType=VARCHAR} and  platform = #{platform,jdbcType=VARCHAR} order by createTime desc limit 0,1
+    </select>
+    
+    <select id="queryByPrimaryPlatform" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_thirdmsg
+        where id = #{id,jdbcType=VARCHAR} and platform = #{platform,jdbcType=VARCHAR}
+        order by createTime desc
+    </select>    
+
+    <select id="queryByPlatform" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_thirdmsg
+        where id_card_no = #{idCardNo,jdbcType=VARCHAR} and platform = #{platform,jdbcType=VARCHAR}
+        order by createTime desc
+    </select>
+
+    <select id="queryByIntoPiecePlatform" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_thirdmsg
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and platform = #{platform,jdbcType=VARCHAR}
+        order by createTime desc
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_thirdmsg
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        insert into t_int_thirdmsg (id, into_piece_id, content, 
+            platform, createTime, id_card_no, 
+            type, reject_flag, report_id, post_risk)
+        values (#{id,jdbcType=VARCHAR}, #{intoPieceId,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+            #{platform,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{idCardNo,jdbcType=VARCHAR}, 
+            #{type,jdbcType=INTEGER}, #{rejectFlag,jdbcType=INTEGER}, #{reportId,jdbcType=VARCHAR}, #{postRisk,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="addPlatformMsg" parameterType="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        insert into t_int_thirdmsg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="platform != null" >
+                platform,
+            </if>
+            <if test="createtime != null" >
+                createTime,
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="rejectFlag != null" >
+                reject_flag,
+            </if>
+            <if test="reportId != null" >
+                report_id,
+            </if>
+            <if test="postRisk != null" >
+                post_risk,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="platform != null" >
+                #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idCardNo != null" >
+                #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="rejectFlag != null" >
+                #{rejectFlag,jdbcType=INTEGER},
+            </if>
+            <if test="reportId != null" >
+                #{reportId,jdbcType=VARCHAR}
+            </if>
+            <if test="postRisk != null" >
+                #{postRisk,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateApiThirdMsg" parameterType="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        update t_int_thirdmsg
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="platform != null" >
+                platform = #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="rejectFlag != null" >
+                reject_flag = #{rejectFlag,jdbcType=INTEGER},
+            </if>
+            <if test="reportId != null" >
+                report_id = #{reportId,jdbcType=VARCHAR}
+            </if>
+            <if test="postRisk != null" >
+                post_risk = #{postRisk,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        update t_int_thirdmsg
+        set into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            content = #{content,jdbcType=LONGVARCHAR},
+            platform = #{platform,jdbcType=VARCHAR},
+            createTime = #{createtime,jdbcType=TIMESTAMP},
+            id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            type = #{type,jdbcType=INTEGER},
+            reject_flag = #{rejectFlag,jdbcType=INTEGER},
+            report_id = #{reportId,jdbcType=VARCHAR},
+            post_risk = #{postRisk,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <update id="updateByIntoPAndIDCSelective" parameterType="com.nongyeos.loan.admin.entity.ApiThirdMsg" >
+        update t_int_thirdmsg
+        <set >
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="platform != null" >
+                platform = #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null" >
+                createTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idCardNo != null" >
+                id_card_no = #{idCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="rejectFlag != null" >
+                reject_flag = #{rejectFlag,jdbcType=INTEGER},
+            </if>
+            <if test="reportId != null" >
+                report_id = #{reportId,jdbcType=VARCHAR}
+            </if>
+            <if test="postRisk != null" >
+                post_risk = #{postRisk,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR} and id_card_no = #{idCardNo,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.IntServiceifaMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.IntServiceifa" >
+        <id column="SERVIFA_CODE" property="servifaCode" jdbcType="VARCHAR" />
+        <result column="CATEGORY" property="category" jdbcType="SMALLINT" />
+        <result column="CNAME" property="cname" jdbcType="VARCHAR" />
+        <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="TINYINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SERVIFA_CODE, CATEGORY, CNAME, ENAME, SEQNO, IS_DELETE
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceifa
+        where SERVIFA_CODE = #{servifaCode,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="count" resultType="Integer">
+  	   	select count(SERVIFA_CODE) from t_int_serviceifa
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_int_serviceifa
+        where SERVIFA_CODE = #{servifaCode,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.IntServiceifa" >
+        insert into t_int_serviceifa (SERVIFA_CODE, CATEGORY, CNAME, 
+            ENAME, SEQNO, IS_DELETE
+            )
+        values (#{servifaCode,jdbcType=VARCHAR}, #{category,jdbcType=SMALLINT}, #{cname,jdbcType=VARCHAR}, 
+            #{ename,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.IntServiceifa" >
+        insert into t_int_serviceifa
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="servifaCode != null" >
+                SERVIFA_CODE,
+            </if>
+            <if test="category != null" >
+                CATEGORY,
+            </if>
+            <if test="cname != null" >
+                CNAME,
+            </if>
+            <if test="ename != null" >
+                ENAME,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="servifaCode != null" >
+                #{servifaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null" >
+                #{category,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.IntServiceifa" >
+        update t_int_serviceifa
+        <set >
+            <if test="category != null" >
+                CATEGORY = #{category,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                CNAME = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ENAME = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=TINYINT},
+            </if>
+        </set>
+        where SERVIFA_CODE = #{servifaCode,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.IntServiceifa" >
+        update t_int_serviceifa
+        set CATEGORY = #{category,jdbcType=SMALLINT},
+            CNAME = #{cname,jdbcType=VARCHAR},
+            ENAME = #{ename,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=TINYINT}
+        where SERVIFA_CODE = #{servifaCode,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from t_int_serviceifa
+    order by SEQNO ASC
+    </select>
+    
+    <select id="selectServiceifaByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_int_serviceifa
+        where CNAME = #{cname,jdbcType=VARCHAR}
+        order by SEQNO ASC
+    </select>
+    
+</mapper>

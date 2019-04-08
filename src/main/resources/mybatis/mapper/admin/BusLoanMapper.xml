@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.admin.mapper.BusLoanMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.admin.entity.BusLoan" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+        <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+        <result column="into_piece_id" property="intoPieceId" jdbcType="VARCHAR" />
+        <result column="into_piece_name" property="intoPieceName" jdbcType="VARCHAR" />
+        <result column="member_id" property="memberId" jdbcType="VARCHAR" />
+        <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+        <result column="capital" property="capital" jdbcType="DECIMAL" />
+        <result column="service_fee" property="serviceFee" jdbcType="DECIMAL" />
+        <result column="loaned_man_fee" property="loanedManFee" jdbcType="DECIMAL" />
+        <result column="rate" property="rate" jdbcType="DECIMAL" />
+        <result column="overdue_rate" property="overdueRate" jdbcType="DECIMAL" />
+        <result column="service_rate_type" property="serviceRateType" jdbcType="INTEGER" />
+        <result column="service_rate" property="serviceRate" jdbcType="DECIMAL" />
+        <result column="term" property="term" jdbcType="INTEGER" />
+        <result column="repayment_type" property="repaymentType" jdbcType="INTEGER" />
+        <result column="month_repayment" property="monthRepayment" jdbcType="DECIMAL" />
+        <result column="use" property="use" jdbcType="VARCHAR" />
+        <result column="receive_capital" property="receiveCapital" jdbcType="DECIMAL" />
+        <result column="receive_interest" property="receiveInterest" jdbcType="DECIMAL" />
+        <result column="receive_overdue" property="receiveOverdue" jdbcType="DECIMAL" />
+        <result column="loan_date" property="loanDate" jdbcType="TIMESTAMP" />
+        <result column="remit_date" property="remitDate" jdbcType="VARCHAR" />
+        <result column="start_date" property="startDate" jdbcType="VARCHAR" />
+        <result column="end_date" property="endDate" jdbcType="VARCHAR" />
+        <result column="first_repayment_date" property="firstRepaymentDate" jdbcType="TIMESTAMP" />
+        <result column="last_repayment_date" property="lastRepaymentDate" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="sign_status" property="signStatus" jdbcType="INTEGER" />
+        <result column="loan_way" property="loanWay" jdbcType="INTEGER" />
+        <result column="trial_by" property="trialBy" jdbcType="VARCHAR" />
+        <result column="trial_name" property="trialName" jdbcType="VARCHAR" />
+        <result column="trial_date" property="trialDate" jdbcType="TIMESTAMP" />
+        <result column="trial_opinion" property="trialOpinion" jdbcType="VARCHAR" />
+        <result column="review_by" property="reviewBy" jdbcType="VARCHAR" />
+        <result column="review_name" property="reviewName" jdbcType="VARCHAR" />
+        <result column="review_date" property="reviewDate" jdbcType="TIMESTAMP" />
+        <result column="review_opinion" property="reviewOpinion" jdbcType="VARCHAR" />
+        <result column="info" property="info" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="service_fee_type" property="serviceFeeType" jdbcType="INTEGER" />
+        <result column="duration2" property="duration2" jdbcType="INTEGER" />
+        <result column="entrusted" property="entrusted" jdbcType="VARCHAR" />
+        <result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
+        <result column="seller_bank_card_no" property="sellerBankCardNo" jdbcType="VARCHAR" />
+        <result column="seller_bank_code" property="sellerBankCode" jdbcType="VARCHAR" />
+        <result column="seller_bank_name" property="sellerBankName" jdbcType="VARCHAR" />
+        <result column="seller_bank_province" property="sellerBankProvince" jdbcType="VARCHAR" />
+        <result column="seller_bank_city" property="sellerBankCity" jdbcType="VARCHAR" />
+        <result column="seller_bank_address" property="sellerBankAddress" jdbcType="VARCHAR" />
+        <result column="lender_id" property="lenderId" jdbcType="VARCHAR" />
+        <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        <result column="IS_DELETED" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CRE_OPER_ID" property="creOperId" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_ID" property="creOrgId" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_ID" property="updOperId" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_ID" property="updOrgId" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+        <result column="product_settle_price" property="productSettlePrice" jdbcType="VARCHAR" />
+        <result column="product_price" property="productPrice" jdbcType="VARCHAR" />
+        <result column="product_list_info" property="productListInfo" jdbcType="LONGVARCHAR" />
+        <result column="recieve_nong_zi" property="recieveNongZi" jdbcType="VARCHAR" />
+        <result column="recieve_cash" property="recieveCash" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, contract_no, order_id, into_piece_id, into_piece_name, member_id, member_name, 
+        capital, service_fee, loaned_man_fee, rate, overdue_rate, service_rate_type, service_rate, 
+        term, repayment_type, month_repayment, `use`, receive_capital, receive_interest, receive_overdue, 
+        loan_date, remit_date, start_date, end_date, first_repayment_date, last_repayment_date, 
+        status, channel, sign_status, loan_way, trial_by, trial_name, trial_date, trial_opinion, 
+        review_by, review_name, review_date, review_opinion, info, user_id, service_fee_type, 
+        duration2, entrusted, seller_name, seller_bank_card_no, seller_bank_code, seller_bank_name, 
+        seller_bank_province, seller_bank_city, seller_bank_address, lender_id, product_id, 
+        IS_DELETED, CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+        UPD_ORG_ID, UPD_DATE, product_settle_price, product_price, product_list_info, recieve_nong_zi, 
+        recieve_cash
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loan
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_bus_loan
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.admin.entity.BusLoan" >
+        insert into t_bus_loan (id, contract_no, order_id, 
+            into_piece_id, into_piece_name, member_id, 
+            member_name, capital, service_fee, 
+            loaned_man_fee, rate, overdue_rate, 
+            service_rate_type, service_rate, term, 
+            repayment_type, month_repayment, `use`, 
+            receive_capital, receive_interest, receive_overdue, 
+            loan_date, remit_date, start_date, 
+            end_date, first_repayment_date, last_repayment_date, 
+            status, channel, sign_status, 
+            loan_way, trial_by, trial_name, 
+            trial_date, trial_opinion, review_by, 
+            review_name, review_date, review_opinion, 
+            info, user_id, service_fee_type, 
+            duration2, entrusted, seller_name, 
+            seller_bank_card_no, seller_bank_code, seller_bank_name, 
+            seller_bank_province, seller_bank_city, seller_bank_address, 
+            lender_id, product_id, IS_DELETED, 
+            CRE_OPER_ID, CRE_OPER_NAME, CRE_ORG_ID, 
+            CRE_DATE, UPD_OPER_ID, UPD_OPER_NAME, 
+            UPD_ORG_ID, UPD_DATE, product_settle_price, 
+            product_price, product_list_info, recieve_nong_zi, 
+            recieve_cash)
+        values (#{id,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+            #{intoPieceId,jdbcType=VARCHAR}, #{intoPieceName,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
+            #{memberName,jdbcType=VARCHAR}, #{capital,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, 
+            #{loanedManFee,jdbcType=DECIMAL}, #{rate,jdbcType=DECIMAL}, #{overdueRate,jdbcType=DECIMAL}, 
+            #{serviceRateType,jdbcType=INTEGER}, #{serviceRate,jdbcType=DECIMAL}, #{term,jdbcType=INTEGER}, 
+            #{repaymentType,jdbcType=INTEGER}, #{monthRepayment,jdbcType=DECIMAL}, #{use,jdbcType=VARCHAR}, 
+            #{receiveCapital,jdbcType=DECIMAL}, #{receiveInterest,jdbcType=DECIMAL}, #{receiveOverdue,jdbcType=DECIMAL}, 
+            #{loanDate,jdbcType=TIMESTAMP}, #{remitDate,jdbcType=VARCHAR}, #{startDate,jdbcType=VARCHAR}, 
+            #{endDate,jdbcType=VARCHAR}, #{firstRepaymentDate,jdbcType=TIMESTAMP}, #{lastRepaymentDate,jdbcType=TIMESTAMP}, 
+            #{status,jdbcType=INTEGER}, #{channel,jdbcType=VARCHAR}, #{signStatus,jdbcType=INTEGER}, 
+            #{loanWay,jdbcType=INTEGER}, #{trialBy,jdbcType=VARCHAR}, #{trialName,jdbcType=VARCHAR}, 
+            #{trialDate,jdbcType=TIMESTAMP}, #{trialOpinion,jdbcType=VARCHAR}, #{reviewBy,jdbcType=VARCHAR}, 
+            #{reviewName,jdbcType=VARCHAR}, #{reviewDate,jdbcType=TIMESTAMP}, #{reviewOpinion,jdbcType=VARCHAR}, 
+            #{info,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{serviceFeeType,jdbcType=INTEGER}, 
+            #{duration2,jdbcType=INTEGER}, #{entrusted,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, 
+            #{sellerBankCardNo,jdbcType=VARCHAR}, #{sellerBankCode,jdbcType=VARCHAR}, #{sellerBankName,jdbcType=VARCHAR}, 
+            #{sellerBankProvince,jdbcType=VARCHAR}, #{sellerBankCity,jdbcType=VARCHAR}, #{sellerBankAddress,jdbcType=VARCHAR}, 
+            #{lenderId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+            #{creOperId,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, #{creOrgId,jdbcType=VARCHAR}, 
+            #{creDate,jdbcType=TIMESTAMP}, #{updOperId,jdbcType=VARCHAR}, #{updOperName,jdbcType=VARCHAR}, 
+            #{updOrgId,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}, #{productSettlePrice,jdbcType=VARCHAR}, 
+            #{productPrice,jdbcType=VARCHAR}, #{productListInfo,jdbcType=LONGVARCHAR}, #{recieveNongZi,jdbcType=VARCHAR}, 
+            #{recieveCash,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.admin.entity.BusLoan" >
+        insert into t_bus_loan
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="contractNo != null" >
+                contract_no,
+            </if>
+            <if test="orderId != null" >
+                order_id,
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id,
+            </if>
+            <if test="intoPieceName != null" >
+                into_piece_name,
+            </if>
+            <if test="memberId != null" >
+                member_id,
+            </if>
+            <if test="memberName != null" >
+                member_name,
+            </if>
+            <if test="capital != null" >
+                capital,
+            </if>
+            <if test="serviceFee != null" >
+                service_fee,
+            </if>
+            <if test="loanedManFee != null" >
+                loaned_man_fee,
+            </if>
+            <if test="rate != null" >
+                rate,
+            </if>
+            <if test="overdueRate != null" >
+                overdue_rate,
+            </if>
+            <if test="serviceRateType != null" >
+                service_rate_type,
+            </if>
+            <if test="serviceRate != null" >
+                service_rate,
+            </if>
+            <if test="term != null" >
+                term,
+            </if>
+            <if test="repaymentType != null" >
+                repayment_type,
+            </if>
+            <if test="monthRepayment != null" >
+                month_repayment,
+            </if>
+            <if test="use != null" >
+                `use`,
+            </if>
+            <if test="receiveCapital != null" >
+                receive_capital,
+            </if>
+            <if test="receiveInterest != null" >
+                receive_interest,
+            </if>
+            <if test="receiveOverdue != null" >
+                receive_overdue,
+            </if>
+            <if test="loanDate != null" >
+                loan_date,
+            </if>
+            <if test="remitDate != null" >
+                remit_date,
+            </if>
+            <if test="startDate != null" >
+                start_date,
+            </if>
+            <if test="endDate != null" >
+                end_date,
+            </if>
+            <if test="firstRepaymentDate != null" >
+                first_repayment_date,
+            </if>
+            <if test="lastRepaymentDate != null" >
+                last_repayment_date,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="channel != null" >
+                channel,
+            </if>
+            <if test="signStatus != null" >
+                sign_status,
+            </if>
+            <if test="loanWay != null" >
+                loan_way,
+            </if>
+            <if test="trialBy != null" >
+                trial_by,
+            </if>
+            <if test="trialName != null" >
+                trial_name,
+            </if>
+            <if test="trialDate != null" >
+                trial_date,
+            </if>
+            <if test="trialOpinion != null" >
+                trial_opinion,
+            </if>
+            <if test="reviewBy != null" >
+                review_by,
+            </if>
+            <if test="reviewName != null" >
+                review_name,
+            </if>
+            <if test="reviewDate != null" >
+                review_date,
+            </if>
+            <if test="reviewOpinion != null" >
+                review_opinion,
+            </if>
+            <if test="info != null" >
+                info,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="serviceFeeType != null" >
+                service_fee_type,
+            </if>
+            <if test="duration2 != null" >
+                duration2,
+            </if>
+            <if test="entrusted != null" >
+                entrusted,
+            </if>
+            <if test="sellerName != null" >
+                seller_name,
+            </if>
+            <if test="sellerBankCardNo != null" >
+                seller_bank_card_no,
+            </if>
+            <if test="sellerBankCode != null" >
+                seller_bank_code,
+            </if>
+            <if test="sellerBankName != null" >
+                seller_bank_name,
+            </if>
+            <if test="sellerBankProvince != null" >
+                seller_bank_province,
+            </if>
+            <if test="sellerBankCity != null" >
+                seller_bank_city,
+            </if>
+            <if test="sellerBankAddress != null" >
+                seller_bank_address,
+            </if>
+            <if test="lenderId != null" >
+                lender_id,
+            </if>
+            <if test="productId != null" >
+                product_id,
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED,
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+            <if test="productSettlePrice != null" >
+                product_settle_price,
+            </if>
+            <if test="productPrice != null" >
+                product_price,
+            </if>
+            <if test="productListInfo != null" >
+                product_list_info,
+            </if>
+            <if test="recieveNongZi != null" >
+                recieve_nong_zi,
+            </if>
+            <if test="recieveCash != null" >
+                recieve_cash,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNo != null" >
+                #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceName != null" >
+                #{intoPieceName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null" >
+                #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceFee != null" >
+                #{serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="loanedManFee != null" >
+                #{loanedManFee,jdbcType=DECIMAL},
+            </if>
+            <if test="rate != null" >
+                #{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="overdueRate != null" >
+                #{overdueRate,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceRateType != null" >
+                #{serviceRateType,jdbcType=INTEGER},
+            </if>
+            <if test="serviceRate != null" >
+                #{serviceRate,jdbcType=DECIMAL},
+            </if>
+            <if test="term != null" >
+                #{term,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentType != null" >
+                #{repaymentType,jdbcType=INTEGER},
+            </if>
+            <if test="monthRepayment != null" >
+                #{monthRepayment,jdbcType=DECIMAL},
+            </if>
+            <if test="use != null" >
+                #{use,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveCapital != null" >
+                #{receiveCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveInterest != null" >
+                #{receiveInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveOverdue != null" >
+                #{receiveOverdue,jdbcType=DECIMAL},
+            </if>
+            <if test="loanDate != null" >
+                #{loanDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remitDate != null" >
+                #{remitDate,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null" >
+                #{startDate,jdbcType=VARCHAR},
+            </if>
+            <if test="endDate != null" >
+                #{endDate,jdbcType=VARCHAR},
+            </if>
+            <if test="firstRepaymentDate != null" >
+                #{firstRepaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastRepaymentDate != null" >
+                #{lastRepaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="channel != null" >
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="signStatus != null" >
+                #{signStatus,jdbcType=INTEGER},
+            </if>
+            <if test="loanWay != null" >
+                #{loanWay,jdbcType=INTEGER},
+            </if>
+            <if test="trialBy != null" >
+                #{trialBy,jdbcType=VARCHAR},
+            </if>
+            <if test="trialName != null" >
+                #{trialName,jdbcType=VARCHAR},
+            </if>
+            <if test="trialDate != null" >
+                #{trialDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="trialOpinion != null" >
+                #{trialOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewBy != null" >
+                #{reviewBy,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewName != null" >
+                #{reviewName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewDate != null" >
+                #{reviewDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reviewOpinion != null" >
+                #{reviewOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="info != null" >
+                #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceFeeType != null" >
+                #{serviceFeeType,jdbcType=INTEGER},
+            </if>
+            <if test="duration2 != null" >
+                #{duration2,jdbcType=INTEGER},
+            </if>
+            <if test="entrusted != null" >
+                #{entrusted,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerName != null" >
+                #{sellerName,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankCardNo != null" >
+                #{sellerBankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankCode != null" >
+                #{sellerBankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankName != null" >
+                #{sellerBankName,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankProvince != null" >
+                #{sellerBankProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankCity != null" >
+                #{sellerBankCity,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankAddress != null" >
+                #{sellerBankAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderId != null" >
+                #{lenderId,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productSettlePrice != null" >
+                #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null" >
+                #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productListInfo != null" >
+                #{productListInfo,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="recieveNongZi != null" >
+                #{recieveNongZi,jdbcType=VARCHAR},
+            </if>
+            <if test="recieveCash != null" >
+                #{recieveCash,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.admin.entity.BusLoan" >
+        update t_bus_loan
+        <set >
+            <if test="contractNo != null" >
+                contract_no = #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null" >
+                order_id = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceId != null" >
+                into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            </if>
+            <if test="intoPieceName != null" >
+                into_piece_name = #{intoPieceName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null" >
+                member_id = #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberName != null" >
+                member_name = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="capital != null" >
+                capital = #{capital,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceFee != null" >
+                service_fee = #{serviceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="loanedManFee != null" >
+                loaned_man_fee = #{loanedManFee,jdbcType=DECIMAL},
+            </if>
+            <if test="rate != null" >
+                rate = #{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="overdueRate != null" >
+                overdue_rate = #{overdueRate,jdbcType=DECIMAL},
+            </if>
+            <if test="serviceRateType != null" >
+                service_rate_type = #{serviceRateType,jdbcType=INTEGER},
+            </if>
+            <if test="serviceRate != null" >
+                service_rate = #{serviceRate,jdbcType=DECIMAL},
+            </if>
+            <if test="term != null" >
+                term = #{term,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentType != null" >
+                repayment_type = #{repaymentType,jdbcType=INTEGER},
+            </if>
+            <if test="monthRepayment != null" >
+                month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+            </if>
+            <if test="use != null" >
+                `use` = #{use,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveCapital != null" >
+                receive_capital = #{receiveCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveInterest != null" >
+                receive_interest = #{receiveInterest,jdbcType=DECIMAL},
+            </if>
+            <if test="receiveOverdue != null" >
+                receive_overdue = #{receiveOverdue,jdbcType=DECIMAL},
+            </if>
+            <if test="loanDate != null" >
+                loan_date = #{loanDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remitDate != null" >
+                remit_date = #{remitDate,jdbcType=VARCHAR},
+            </if>
+            <if test="startDate != null" >
+                start_date = #{startDate,jdbcType=VARCHAR},
+            </if>
+            <if test="endDate != null" >
+                end_date = #{endDate,jdbcType=VARCHAR},
+            </if>
+            <if test="firstRepaymentDate != null" >
+                first_repayment_date = #{firstRepaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastRepaymentDate != null" >
+                last_repayment_date = #{lastRepaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="signStatus != null" >
+                sign_status = #{signStatus,jdbcType=INTEGER},
+            </if>
+            <if test="loanWay != null" >
+                loan_way = #{loanWay,jdbcType=INTEGER},
+            </if>
+            <if test="trialBy != null" >
+                trial_by = #{trialBy,jdbcType=VARCHAR},
+            </if>
+            <if test="trialName != null" >
+                trial_name = #{trialName,jdbcType=VARCHAR},
+            </if>
+            <if test="trialDate != null" >
+                trial_date = #{trialDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="trialOpinion != null" >
+                trial_opinion = #{trialOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewBy != null" >
+                review_by = #{reviewBy,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewName != null" >
+                review_name = #{reviewName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewDate != null" >
+                review_date = #{reviewDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reviewOpinion != null" >
+                review_opinion = #{reviewOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="info != null" >
+                info = #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceFeeType != null" >
+                service_fee_type = #{serviceFeeType,jdbcType=INTEGER},
+            </if>
+            <if test="duration2 != null" >
+                duration2 = #{duration2,jdbcType=INTEGER},
+            </if>
+            <if test="entrusted != null" >
+                entrusted = #{entrusted,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerName != null" >
+                seller_name = #{sellerName,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankCardNo != null" >
+                seller_bank_card_no = #{sellerBankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankCode != null" >
+                seller_bank_code = #{sellerBankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankName != null" >
+                seller_bank_name = #{sellerBankName,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankProvince != null" >
+                seller_bank_province = #{sellerBankProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankCity != null" >
+                seller_bank_city = #{sellerBankCity,jdbcType=VARCHAR},
+            </if>
+            <if test="sellerBankAddress != null" >
+                seller_bank_address = #{sellerBankAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="lenderId != null" >
+                lender_id = #{lenderId,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null" >
+                product_id = #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null" >
+                IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="creOperId != null" >
+                CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgId != null" >
+                CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperId != null" >
+                UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgId != null" >
+                UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productSettlePrice != null" >
+                product_settle_price = #{productSettlePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productPrice != null" >
+                product_price = #{productPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="productListInfo != null" >
+                product_list_info = #{productListInfo,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="recieveNongZi != null" >
+                recieve_nong_zi = #{recieveNongZi,jdbcType=VARCHAR},
+            </if>
+            <if test="recieveCash != null" >
+                recieve_cash = #{recieveCash,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.admin.entity.BusLoan" >
+        update t_bus_loan
+        set contract_no = #{contractNo,jdbcType=VARCHAR},
+            order_id = #{orderId,jdbcType=VARCHAR},
+            into_piece_id = #{intoPieceId,jdbcType=VARCHAR},
+            into_piece_name = #{intoPieceName,jdbcType=VARCHAR},
+            member_id = #{memberId,jdbcType=VARCHAR},
+            member_name = #{memberName,jdbcType=VARCHAR},
+            capital = #{capital,jdbcType=DECIMAL},
+            service_fee = #{serviceFee,jdbcType=DECIMAL},
+            loaned_man_fee = #{loanedManFee,jdbcType=DECIMAL},
+            rate = #{rate,jdbcType=DECIMAL},
+            overdue_rate = #{overdueRate,jdbcType=DECIMAL},
+            service_rate_type = #{serviceRateType,jdbcType=INTEGER},
+            service_rate = #{serviceRate,jdbcType=DECIMAL},
+            term = #{term,jdbcType=INTEGER},
+            repayment_type = #{repaymentType,jdbcType=INTEGER},
+            month_repayment = #{monthRepayment,jdbcType=DECIMAL},
+            `use` = #{use,jdbcType=VARCHAR},
+            receive_capital = #{receiveCapital,jdbcType=DECIMAL},
+            receive_interest = #{receiveInterest,jdbcType=DECIMAL},
+            receive_overdue = #{receiveOverdue,jdbcType=DECIMAL},
+            loan_date = #{loanDate,jdbcType=TIMESTAMP},
+            remit_date = #{remitDate,jdbcType=VARCHAR},
+            start_date = #{startDate,jdbcType=VARCHAR},
+            end_date = #{endDate,jdbcType=VARCHAR},
+            first_repayment_date = #{firstRepaymentDate,jdbcType=TIMESTAMP},
+            last_repayment_date = #{lastRepaymentDate,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=INTEGER},
+            channel = #{channel,jdbcType=VARCHAR},
+            sign_status = #{signStatus,jdbcType=INTEGER},
+            loan_way = #{loanWay,jdbcType=INTEGER},
+            trial_by = #{trialBy,jdbcType=VARCHAR},
+            trial_name = #{trialName,jdbcType=VARCHAR},
+            trial_date = #{trialDate,jdbcType=TIMESTAMP},
+            trial_opinion = #{trialOpinion,jdbcType=VARCHAR},
+            review_by = #{reviewBy,jdbcType=VARCHAR},
+            review_name = #{reviewName,jdbcType=VARCHAR},
+            review_date = #{reviewDate,jdbcType=TIMESTAMP},
+            review_opinion = #{reviewOpinion,jdbcType=VARCHAR},
+            info = #{info,jdbcType=VARCHAR},
+            user_id = #{userId,jdbcType=VARCHAR},
+            service_fee_type = #{serviceFeeType,jdbcType=INTEGER},
+            duration2 = #{duration2,jdbcType=INTEGER},
+            entrusted = #{entrusted,jdbcType=VARCHAR},
+            seller_name = #{sellerName,jdbcType=VARCHAR},
+            seller_bank_card_no = #{sellerBankCardNo,jdbcType=VARCHAR},
+            seller_bank_code = #{sellerBankCode,jdbcType=VARCHAR},
+            seller_bank_name = #{sellerBankName,jdbcType=VARCHAR},
+            seller_bank_province = #{sellerBankProvince,jdbcType=VARCHAR},
+            seller_bank_city = #{sellerBankCity,jdbcType=VARCHAR},
+            seller_bank_address = #{sellerBankAddress,jdbcType=VARCHAR},
+            lender_id = #{lenderId,jdbcType=VARCHAR},
+            product_id = #{productId,jdbcType=VARCHAR},
+            IS_DELETED = #{isDeleted,jdbcType=TINYINT},
+            CRE_OPER_ID = #{creOperId,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_ID = #{creOrgId,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_ID = #{updOperId,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_ID = #{updOrgId,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            product_settle_price = #{productSettlePrice,jdbcType=VARCHAR},
+            product_price = #{productPrice,jdbcType=VARCHAR},
+            product_list_info = #{productListInfo,jdbcType=LONGVARCHAR},
+            recieve_nong_zi = #{recieveNongZi,jdbcType=VARCHAR},
+            recieve_cash = #{recieveCash,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 手写 -->
+    <resultMap id="loanMap" type="com.nongyeos.loan.admin.resultMap.LoanMap" extends="BaseResultMap">
+    	<result column="full_cname" property="fullCname" jdbcType="VARCHAR" />
+    	<result column="ipStatus" property="ipStatus" jdbcType="VARCHAR" />
+    	<result column="monthStatus" property="monthStatus" jdbcType="VARCHAR" />
+    	<result column="time" property="time" jdbcType="VARCHAR" />
+    	<result column="intoPieceId" property="intoPieceId" jdbcType="VARCHAR" />
+    	<result column="person_id" property="personId" jdbcType="VARCHAR" />
+    	<result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    	<result column="phone" property="phone" jdbcType="VARCHAR" />
+    	<result column="bank_card_no" property="bankCardNo" jdbcType="VARCHAR" />
+    	<result column="address" property="address" jdbcType="VARCHAR" />
+    	<result column="fins_name" property="finsName" jdbcType="VARCHAR" />
+    	<result column="CRE_DATE" property="applyTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <select id="selectByIpId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_bus_loan
+        where into_piece_id = #{intoPieceId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectLoanCountByCondition" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        count(ip.id)
+        from t_bus_intopiece ip left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id left join t_bus_loan l on ip.id = l.into_piece_id 
+        where 1=1 
+        <if test="isDeleted != null" >
+             and ip.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and ip.member_name like CONCAT('%',#{memberName},'%')
+         </if> 
+         <if test="idCard != null" >
+             and ip.id_card like CONCAT('%',#{idCard},'%')
+         </if>  
+         <if test="startDate != null" >
+             and l.start_date &gt; #{startDate,jdbcType=VARCHAR}
+         </if> 
+         <if test="endDate != null" >
+             and l.end_date &lt; #{endDate,jdbcType=VARCHAR}
+         </if>     
+         <if test="ipStatus != null" >
+             and ae.node_name = #{ipStatus,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+    </select>
+    <select id="selectLoanByCondition" resultMap="loanMap" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        l.id,ip.id intoPieceId,ip.CRE_DATE,org.full_cname,ip.member_name,ip.id_card,ip.phone,ip.bank_card_no,l.capital,l.term,l.rate,l.service_fee,ae.node_name ipStatus,ip.address,ip.id_card,l.start_date,l.end_date,l.loan_date,f.cname as fins_name,ip.use
+        from t_bus_intopiece ip left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id left join t_bus_loan l on ip.id = l.into_piece_id left join t_bus_fins f on ae.FINS_ID = f.FINS_ID
+        where 1=1 
+        <if test="isDeleted != null" >
+             and ip.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and ip.member_name like CONCAT('%',#{memberName},'%')
+         </if>   
+         <if test="idCard != null" >
+             and ip.id_card like CONCAT('%',#{idCard},'%')
+         </if> 
+         <if test="startDate != null" >
+             and l.start_date &gt; #{startDate,jdbcType=VARCHAR}
+         </if> 
+         <if test="endDate != null" >
+             and l.end_date &lt; #{endDate,jdbcType=VARCHAR}
+         </if>     
+         <if test="ipStatus != null" >
+             and ae.node_name = #{ipStatus,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+         order by ip.CRE_DATE desc
+    </select>
+    <select id="selectContactRecordCount" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        count(ip.id)
+        from t_bus_intopiece ip left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id left join t_bus_loan l on ip.id = l.into_piece_id 
+        where ip.IS_DELETED = 0 and ae.node_name > 7
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and ip.member_name like CONCAT('%',#{memberName},'%')
+         </if> 
+         <if test="idCard != null" >
+             and ip.id_card like CONCAT('%',#{idCard},'%')
+         </if>  
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+    </select>
+    <select id="selectContactRecord" resultMap="loanMap" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        l.id,ip.id intoPieceId,org.full_cname,ip.member_name,ip.id_card,l.capital,l.start_date,l.end_date,ae.node_name ipStatus
+        from t_bus_intopiece ip left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id left join t_bus_loan l on ip.id = l.into_piece_id
+        where ip.IS_DELETED = 0 and ae.node_name > 7
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and ip.member_name like CONCAT('%',#{memberName},'%')
+         </if>   
+         <if test="idCard != null" >
+             and ip.id_card like CONCAT('%',#{idCard},'%')
+         </if> 
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+         order by ip.CRE_DATE desc
+    </select>
+    
+   <select id="selectCountByCondition" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        count(l.id)
+        from t_bus_loan l left join t_bus_intopiece ip on l.into_piece_id = ip.id left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id
+        where 1=1 
+        <if test="isDeleted != null" >
+             and ip.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and l.member_name like CONCAT('%',#{memberName},'%')
+         </if>
+          <if test="idCard != null" >
+             and ip.id_card like CONCAT('%',#{idCard},'%')
+         </if> 
+         <if test="startDate != null" >
+             and l.start_date &gt; #{startDate,jdbcType=VARCHAR}
+         </if> 
+         <if test="endDate != null" >
+             and l.end_date &lt; #{endDate,jdbcType=VARCHAR}
+         </if>
+         <if test="ipStatus != null" >
+             and ae.node_name = #{ipStatus,jdbcType=VARCHAR}
+         </if>
+         <if test="status != null" >
+             and l.status = #{status,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+         <if test="monthStatus != null and monthStatus != ''">
+			<choose>  
+				<when test='monthStatus == "2"'>  
+					and l.first_repayment_date &lt; #{time,jdbcType=VARCHAR}
+				</when>  
+				<when test='monthStatus == "1"'>    
+			        and l.first_repayment_date &gt;= #{time,jdbcType=VARCHAR}  
+				</when>  
+			</choose> 
+		</if>
+    </select>
+    <select id="selectByCondition" resultMap="loanMap" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        l.id,ip.id as intoPieceId,org.full_cname,l.member_name,ip.id_card,l.capital,l.loaned_man_fee,l.receive_capital,l.receive_interest,l.start_date,l.end_date,f.cname as fins_name,l.first_repayment_date
+        from t_bus_loan l left join t_bus_intopiece ip on l.into_piece_id = ip.id left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id left join t_bus_fins f on ae.FINS_ID = f.FINS_ID
+        where 1=1 
+        <if test="isDeleted != null" >
+             and ip.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and l.member_name like CONCAT('%',#{memberName},'%')
+         </if>
+          <if test="idCard != null" >
+             and ip.id_card like CONCAT('%',#{idCard},'%')
+         </if> 
+         <if test="startDate != null" >
+             and l.start_date &gt; #{startDate,jdbcType=VARCHAR}
+         </if> 
+         <if test="endDate != null" >
+             and l.end_date &lt; #{endDate,jdbcType=VARCHAR}
+         </if>
+         <if test="ipStatus != null" >
+             and ae.node_name = #{ipStatus,jdbcType=VARCHAR}
+         </if>
+         <if test="status != null" >
+             and l.status = #{status,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+         <if test="monthStatus != null and monthStatus != ''">
+			<choose>  
+				<when test='monthStatus == "2"'>  
+					and l.first_repayment_date &lt; #{time,jdbcType=VARCHAR}
+				</when>  
+				<when test='monthStatus == "1"'>    
+			        and l.first_repayment_date &gt;= #{time,jdbcType=VARCHAR}  
+				</when>  
+			</choose> 
+		</if>
+    </select>
+     <select id="loanFinishCount" resultType="java.lang.Integer" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        count(l.id)
+        from t_bus_loan l left join t_bus_intopiece ip on l.into_piece_id = ip.id left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id
+        where 1=1 
+        <if test="isDeleted != null" >
+             and ip.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and l.member_name like CONCAT('%',#{memberName},'%')
+         </if>
+         <if test="ipStatus != null" >
+             and ae.node_name = #{ipStatus,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+    </select>
+    <select id="loanFinish" resultMap="loanMap" parameterType="com.nongyeos.loan.admin.resultMap.LoanMap" >
+        select 
+        l.id,ip.id as intoPieceId,org.full_cname,l.member_name,l.loaned_man_fee,l.term,l.receive_capital,l.receive_interest,l.receive_overdue
+        from t_bus_loan l left join t_bus_intopiece ip on l.into_piece_id = ip.id left join t_sys_org org on ip.org_id = org.org_id left join t_app_entry ae on ip.id = ae.mode_id
+        where 1=1 
+        <if test="isDeleted != null" >
+             and ip.IS_DELETED = #{isDeleted,jdbcType=TINYINT}
+        </if>
+        <if test="fullCname != null" >
+             and org.full_cname like CONCAT('%',#{fullCname},'%')
+        </if>
+        <if test="memberName != null" >
+             and l.member_name like CONCAT('%',#{memberName},'%')
+         </if>
+         <if test="ipStatus != null" >
+             and ae.node_name = #{ipStatus,jdbcType=VARCHAR}
+         </if>
+         <if test="personId != null" >
+             and ip.org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR})
+         </if>
+    </select>
+</mapper>

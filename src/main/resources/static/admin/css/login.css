@@ -1,0 +1,62 @@
+@charset "utf-8";
+
+body {
+	text-align:center;
+	padding-top: 3%;
+	font-size: 16px;
+	font-family: Arial,Microsoft YaHei,SimSun;
+	background: url(../image/login.jpg) no-repeat center fixed;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	background-size:cover
+}
+h1 {
+	font-family: Arial,Microsoft YaHei,SimSun;
+	font-weight: 400;
+	font-size: 35px;
+}
+
+/* Override B3 .panel adding a subtly transparent background */
+.panel {
+	background-color: rgba(255, 255, 255, 0.9);
+}
+.margin-base-vertical {
+	margin: 8% 0;
+}
+.white{
+	color:#fff!important;
+}
+.juse{
+	color:#fcb100;
+}
+.center{
+	text-align:center!important;
+}
+.div{
+	margin:0 auto;
+	margin-top:3%;
+	float:inherit;
+}
+.input-lg{
+	height:36px;
+	font-size:14px;
+}
+.panel{
+	border-radius:0px;
+}
+.btn-group-lg>.btn, .btn-lg{
+	border-radius:0px;
+}
+.btn-success:hover{
+	background-color:#ca8e00;
+	border-color:#ca8e00;
+}
+.btn-success{
+	background-color:#fcb100;
+	border-color:#fcb100;
+}
+.div5{ 
+	border-left:2px dashed #F00;
+	border-right:2px dashed #F00
+}

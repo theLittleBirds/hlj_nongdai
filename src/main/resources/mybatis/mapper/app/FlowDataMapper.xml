@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nongyeos.loan.app.mapper.FlowDataMapper">
+  <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.FlowData">
+    <id column="DATA_ID" jdbcType="INTEGER" property="dataId" />
+    <result column="NODE_ID" jdbcType="VARCHAR" property="nodeId" />
+    <result column="OBJECT_TYPE" jdbcType="SMALLINT" property="objectType" />
+    <result column="CONTROL_TYPE" jdbcType="SMALLINT" property="controlType" />
+    <result column="OBJECT_ID" jdbcType="VARCHAR" property="objectId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DATA_ID, NODE_ID, OBJECT_TYPE, CONTROL_TYPE, OBJECT_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_data
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_flow_data
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nongyeos.loan.app.entity.FlowData">
+    insert into t_flow_data (DATA_ID, NODE_ID, OBJECT_TYPE, 
+      CONTROL_TYPE, OBJECT_ID)
+    values (#{dataId,jdbcType=INTEGER}, #{nodeId,jdbcType=VARCHAR}, #{objectType,jdbcType=SMALLINT}, 
+      #{controlType,jdbcType=SMALLINT}, #{objectId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.FlowData">
+    insert into t_flow_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dataId != null">
+        DATA_ID,
+      </if>
+      <if test="nodeId != null">
+        NODE_ID,
+      </if>
+      <if test="objectType != null">
+        OBJECT_TYPE,
+      </if>
+      <if test="controlType != null">
+        CONTROL_TYPE,
+      </if>
+      <if test="objectId != null">
+        OBJECT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dataId != null">
+        #{dataId,jdbcType=INTEGER},
+      </if>
+      <if test="nodeId != null">
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null">
+        #{objectType,jdbcType=SMALLINT},
+      </if>
+      <if test="controlType != null">
+        #{controlType,jdbcType=SMALLINT},
+      </if>
+      <if test="objectId != null">
+        #{objectId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.FlowData">
+    update t_flow_data
+    <set>
+      <if test="nodeId != null">
+        NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="objectType != null">
+        OBJECT_TYPE = #{objectType,jdbcType=SMALLINT},
+      </if>
+      <if test="controlType != null">
+        CONTROL_TYPE = #{controlType,jdbcType=SMALLINT},
+      </if>
+      <if test="objectId != null">
+        OBJECT_ID = #{objectId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.FlowData">
+    update t_flow_data
+    set NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      OBJECT_TYPE = #{objectType,jdbcType=SMALLINT},
+      CONTROL_TYPE = #{controlType,jdbcType=SMALLINT},
+      OBJECT_ID = #{objectId,jdbcType=VARCHAR}
+    where DATA_ID = #{dataId,jdbcType=INTEGER}
+  </update>
+  
+    <select id="selectByNodeIdAndType" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_data
+    where NODE_ID = #{nodeId,jdbcType=VARCHAR} AND OBJECT_TYPE = #{type,jdbcType=SMALLINT} order by CONTROL_TYPE asc
+  </select>
+  
+  <select id="selectByControlType" parameterType="java.util.Map"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_data
+    where  CONTROL_TYPE = #{controlType,jdbcType=SMALLINT} AND OBJECT_TYPE = #{objectType,jdbcType=SMALLINT} AND NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByNodeId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_flow_data
+    where  NODE_ID = #{nodeId,jdbcType=VARCHAR}
+  </select>
+</mapper>

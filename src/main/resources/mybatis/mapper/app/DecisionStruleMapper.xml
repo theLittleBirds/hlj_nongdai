@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.DecisionStruleMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.DecisionStrule" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="STRATEGY_ID" property="strategyId" jdbcType="VARCHAR" />
+        <result column="RULE_ID" property="ruleId" jdbcType="VARCHAR" />
+        <result column="START" property="start" jdbcType="TINYINT" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, STRATEGY_ID, RULE_ID, START, SEQNO
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_strule
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByStrategyId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_decision_strule
+        where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+        order by SEQNO asc
+    </select>
+    
+	<select id="count" resultType="Integer">
+  	   	select count(ID) from t_decision_strule
+  	   	where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+  	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_decision_strule
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    
+    <delete id="deleteByStrategyId" parameterType="java.lang.String" >
+        delete from t_decision_strule
+        where STRATEGY_ID = #{strategyId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.DecisionStrule" >
+        insert into t_decision_strule (ID, STRATEGY_ID, RULE_ID, 
+            START, SEQNO)
+        values (#{id,jdbcType=INTEGER}, #{strategyId,jdbcType=VARCHAR}, #{ruleId,jdbcType=VARCHAR}, 
+            #{start,jdbcType=TINYINT}, #{seqno,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.nongyeos.loan.app.entity.DecisionStrule" >
+        insert into t_decision_strule
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="strategyId != null" >
+                STRATEGY_ID,
+            </if>
+            <if test="ruleId != null" >
+                RULE_ID,
+            </if>
+            <if test="start != null" >
+                START,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="strategyId != null" >
+                #{strategyId,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleId != null" >
+                #{ruleId,jdbcType=VARCHAR},
+            </if>
+            <if test="start != null" >
+                #{start,jdbcType=TINYINT},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.nongyeos.loan.app.entity.DecisionStrule" >
+        update t_decision_strule
+        <set >
+            <if test="strategyId != null" >
+                STRATEGY_ID = #{strategyId,jdbcType=VARCHAR},
+            </if>
+            <if test="ruleId != null" >
+                RULE_ID = #{ruleId,jdbcType=VARCHAR},
+            </if>
+            <if test="start != null" >
+                START = #{start,jdbcType=TINYINT},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.DecisionStrule" >
+        update t_decision_strule
+        set STRATEGY_ID = #{strategyId,jdbcType=VARCHAR},
+            RULE_ID = #{ruleId,jdbcType=VARCHAR},
+            START = #{start,jdbcType=TINYINT},
+            SEQNO = #{seqno,jdbcType=INTEGER}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

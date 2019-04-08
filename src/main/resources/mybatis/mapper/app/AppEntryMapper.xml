@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nongyeos.loan.app.mapper.AppEntryMapper" >
+
+    <resultMap id="BaseResultMap" type="com.nongyeos.loan.app.entity.AppEntry" >
+        <id column="ENTRY_ID" property="entryId" jdbcType="VARCHAR" />
+        <result column="CHANNEL_ID" property="channelId" jdbcType="VARCHAR" />
+        <result column="MODE_ID" property="modeId" jdbcType="VARCHAR" />
+        <result column="FROM_ID" property="fromId" jdbcType="VARCHAR" />
+        <result column="ORG_ID" property="orgId" jdbcType="VARCHAR" />
+        <result column="FINS_ID" property="finsId" jdbcType="VARCHAR" />
+        <result column="FINS_NAME" property="finsName" jdbcType="VARCHAR" />
+        <result column="APP_ID" property="appId" jdbcType="VARCHAR" />
+        <result column="APP_NAME" property="appName" jdbcType="VARCHAR" />
+        <result column="NODE_ID" property="nodeId" jdbcType="VARCHAR" />
+        <result column="NODE_NAME" property="nodeName" jdbcType="VARCHAR" />
+        <result column="NODE_STATUS_ID" property="nodeStatusId" jdbcType="INTEGER" />
+        <result column="NODE_STATUS_NAME" property="nodeStatusName" jdbcType="VARCHAR" />
+        <result column="APPROVER_TYPE" property="approverType" jdbcType="SMALLINT" />
+        <result column="APPROVER_IDS" property="approverIds" jdbcType="VARCHAR" />
+        <result column="APR_PERSON_CODES" property="aprPersonCodes" jdbcType="VARCHAR" />
+        <result column="APR_ROLE_IDS" property="aprRoleIds" jdbcType="VARCHAR" />
+        <result column="APR_ORG_IDS" property="aprOrgIds" jdbcType="VARCHAR" />
+        <result column="RECORD_ID" property="recordId" jdbcType="VARCHAR" />
+        <result column="TITLE" property="title" jdbcType="VARCHAR" />
+        <result column="SEQNO" property="seqno" jdbcType="INTEGER" />
+        <result column="IS_DELETE" property="isDelete" jdbcType="SMALLINT" />
+        <result column="CRE_OPER_CODE" property="creOperCode" jdbcType="VARCHAR" />
+        <result column="CRE_OPER_NAME" property="creOperName" jdbcType="VARCHAR" />
+        <result column="CRE_ORG_CODE" property="creOrgCode" jdbcType="VARCHAR" />
+        <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+        <result column="UPD_OPER_CODE" property="updOperCode" jdbcType="VARCHAR" />
+        <result column="UPD_OPER_NAME" property="updOperName" jdbcType="VARCHAR" />
+        <result column="UPD_ORG_CODE" property="updOrgCode" jdbcType="VARCHAR" />
+        <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ENTRY_ID, CHANNEL_ID, MODE_ID, FROM_ID, ORG_ID, FINS_ID, FINS_NAME, APP_ID, APP_NAME, 
+        NODE_ID, NODE_NAME, NODE_STATUS_ID, NODE_STATUS_NAME, APPROVER_TYPE, APPROVER_IDS, 
+        APR_PERSON_CODES, APR_ROLE_IDS, APR_ORG_IDS, RECORD_ID, TITLE, SEQNO, IS_DELETE, 
+        CRE_OPER_CODE, CRE_OPER_NAME, CRE_ORG_CODE, CRE_DATE, UPD_OPER_CODE, UPD_OPER_NAME, 
+        UPD_ORG_CODE, UPD_DATE
+    </sql>
+
+    <select id="queryByAppModeId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_entry
+        where MODE_ID = #{modeId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_app_entry
+        where ENTRY_ID = #{entryId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_app_entry
+        where ENTRY_ID = #{entryId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.nongyeos.loan.app.entity.AppEntry" >
+        insert into t_app_entry (ENTRY_ID, CHANNEL_ID, MODE_ID, 
+            FROM_ID, ORG_ID, FINS_ID, 
+            FINS_NAME, APP_ID, APP_NAME, 
+            NODE_ID, NODE_NAME, NODE_STATUS_ID, 
+            NODE_STATUS_NAME, APPROVER_TYPE, APPROVER_IDS, 
+            APR_PERSON_CODES, APR_ROLE_IDS, APR_ORG_IDS, 
+            RECORD_ID, TITLE, SEQNO, 
+            IS_DELETE, CRE_OPER_CODE, CRE_OPER_NAME, 
+            CRE_ORG_CODE, CRE_DATE, UPD_OPER_CODE, 
+            UPD_OPER_NAME, UPD_ORG_CODE, UPD_DATE
+            )
+        values (#{entryId,jdbcType=VARCHAR}, #{channelId,jdbcType=INTEGER}, #{modeId,jdbcType=INTEGER}, 
+            #{fromId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{finsId,jdbcType=VARCHAR}, 
+            #{finsName,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+            #{nodeId,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, #{nodeStatusId,jdbcType=INTEGER}, 
+            #{nodeStatusName,jdbcType=VARCHAR}, #{approverType,jdbcType=SMALLINT}, #{approverIds,jdbcType=VARCHAR}, 
+            #{aprPersonCodes,jdbcType=VARCHAR}, #{aprRoleIds,jdbcType=VARCHAR}, #{aprOrgIds,jdbcType=VARCHAR}, 
+            #{recordId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{seqno,jdbcType=INTEGER}, 
+            #{isDelete,jdbcType=SMALLINT}, #{creOperCode,jdbcType=VARCHAR}, #{creOperName,jdbcType=VARCHAR}, 
+            #{creOrgCode,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, #{updOperCode,jdbcType=VARCHAR}, 
+            #{updOperName,jdbcType=VARCHAR}, #{updOrgCode,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="addAppEntrySelective" parameterType="com.nongyeos.loan.app.entity.AppEntry" >
+        insert into t_app_entry
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="entryId != null" >
+                ENTRY_ID,
+            </if>
+            <if test="channelId != null" >
+                CHANNEL_ID,
+            </if>
+            <if test="modeId != null" >
+                MODE_ID,
+            </if>
+            <if test="fromId != null" >
+                FROM_ID,
+            </if>
+            <if test="orgId != null" >
+                ORG_ID,
+            </if>
+            <if test="finsId != null" >
+                FINS_ID,
+            </if>
+            <if test="finsName != null" >
+                FINS_NAME,
+            </if>
+            <if test="appId != null" >
+                APP_ID,
+            </if>
+            <if test="appName != null" >
+                APP_NAME,
+            </if>
+            <if test="nodeId != null" >
+                NODE_ID,
+            </if>
+            <if test="nodeName != null" >
+                NODE_NAME,
+            </if>
+            <if test="nodeStatusId != null" >
+                NODE_STATUS_ID,
+            </if>
+            <if test="nodeStatusName != null" >
+                NODE_STATUS_NAME,
+            </if>
+            <if test="approverType != null" >
+                APPROVER_TYPE,
+            </if>
+            <if test="approverIds != null" >
+                APPROVER_IDS,
+            </if>
+            <if test="aprPersonCodes != null" >
+                APR_PERSON_CODES,
+            </if>
+            <if test="aprRoleIds != null" >
+                APR_ROLE_IDS,
+            </if>
+            <if test="aprOrgIds != null" >
+                APR_ORG_IDS,
+            </if>
+            <if test="recordId != null" >
+                RECORD_ID,
+            </if>
+            <if test="title != null" >
+                TITLE,
+            </if>
+            <if test="seqno != null" >
+                SEQNO,
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE,
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE,
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME,
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE,
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE,
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE,
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME,
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE,
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="entryId != null" >
+                #{entryId,jdbcType=VARCHAR},
+            </if>
+            <if test="channelId != null" >
+                #{channelId,jdbcType=INTEGER},
+            </if>
+            <if test="modeId != null" >
+                #{modeId,jdbcType=INTEGER},
+            </if>
+            <if test="fromId != null" >
+                #{fromId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsName != null" >
+                #{finsName,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null" >
+                #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeId != null" >
+                #{nodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeName != null" >
+                #{nodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeStatusId != null" >
+                #{nodeStatusId,jdbcType=INTEGER},
+            </if>
+            <if test="nodeStatusName != null" >
+                #{nodeStatusName,jdbcType=VARCHAR},
+            </if>
+            <if test="approverType != null" >
+                #{approverType,jdbcType=SMALLINT},
+            </if>
+            <if test="approverIds != null" >
+                #{approverIds,jdbcType=VARCHAR},
+            </if>
+            <if test="aprPersonCodes != null" >
+                #{aprPersonCodes,jdbcType=VARCHAR},
+            </if>
+            <if test="aprRoleIds != null" >
+                #{aprRoleIds,jdbcType=VARCHAR},
+            </if>
+            <if test="aprOrgIds != null" >
+                #{aprOrgIds,jdbcType=VARCHAR},
+            </if>
+            <if test="recordId != null" >
+                #{recordId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperCode != null" >
+                #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByAppEntrySelective" parameterType="com.nongyeos.loan.app.entity.AppEntry" >
+        update t_app_entry
+        <set >
+            <if test="channelId != null" >
+                CHANNEL_ID = #{channelId,jdbcType=INTEGER},
+            </if>
+            <if test="modeId != null" >
+                MODE_ID = #{modeId,jdbcType=INTEGER},
+            </if>
+            <if test="fromId != null" >
+                FROM_ID = #{fromId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                ORG_ID = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsId != null" >
+                FINS_ID = #{finsId,jdbcType=VARCHAR},
+            </if>
+            <if test="finsName != null" >
+                FINS_NAME = #{finsName,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                APP_ID = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="appName != null" >
+                APP_NAME = #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeId != null" >
+                NODE_ID = #{nodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeName != null" >
+                NODE_NAME = #{nodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeStatusId != null" >
+                NODE_STATUS_ID = #{nodeStatusId,jdbcType=INTEGER},
+            </if>
+            <if test="nodeStatusName != null" >
+                NODE_STATUS_NAME = #{nodeStatusName,jdbcType=VARCHAR},
+            </if>
+            <if test="approverType != null" >
+                APPROVER_TYPE = #{approverType,jdbcType=SMALLINT},
+            </if>
+            <if test="approverIds != null" >
+                APPROVER_IDS = #{approverIds,jdbcType=VARCHAR},
+            </if>
+            <if test="aprPersonCodes != null" >
+                APR_PERSON_CODES = #{aprPersonCodes,jdbcType=VARCHAR},
+            </if>
+            <if test="aprRoleIds != null" >
+                APR_ROLE_IDS = #{aprRoleIds,jdbcType=VARCHAR},
+            </if>
+            <if test="aprOrgIds != null" >
+                APR_ORG_IDS = #{aprOrgIds,jdbcType=VARCHAR},
+            </if>
+            <if test="recordId != null" >
+                RECORD_ID = #{recordId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                TITLE = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="seqno != null" >
+                SEQNO = #{seqno,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            </if>
+            <if test="creOperCode != null" >
+                CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creOperName != null" >
+                CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="creOrgCode != null" >
+                CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creDate != null" >
+                CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updOperCode != null" >
+                UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updOperName != null" >
+                UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            </if>
+            <if test="updOrgCode != null" >
+                UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updDate != null" >
+                UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ENTRY_ID = #{entryId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.nongyeos.loan.app.entity.AppEntry" >
+        update t_app_entry
+        set CHANNEL_ID = #{channelId,jdbcType=INTEGER},
+            MODE_ID = #{modeId,jdbcType=INTEGER},
+            FROM_ID = #{fromId,jdbcType=VARCHAR},
+            ORG_ID = #{orgId,jdbcType=VARCHAR},
+            FINS_ID = #{finsId,jdbcType=VARCHAR},
+            FINS_NAME = #{finsName,jdbcType=VARCHAR},
+            APP_ID = #{appId,jdbcType=VARCHAR},
+            APP_NAME = #{appName,jdbcType=VARCHAR},
+            NODE_ID = #{nodeId,jdbcType=VARCHAR},
+            NODE_NAME = #{nodeName,jdbcType=VARCHAR},
+            NODE_STATUS_ID = #{nodeStatusId,jdbcType=INTEGER},
+            NODE_STATUS_NAME = #{nodeStatusName,jdbcType=VARCHAR},
+            APPROVER_TYPE = #{approverType,jdbcType=SMALLINT},
+            APPROVER_IDS = #{approverIds,jdbcType=VARCHAR},
+            APR_PERSON_CODES = #{aprPersonCodes,jdbcType=VARCHAR},
+            APR_ROLE_IDS = #{aprRoleIds,jdbcType=VARCHAR},
+            APR_ORG_IDS = #{aprOrgIds,jdbcType=VARCHAR},
+            RECORD_ID = #{recordId,jdbcType=VARCHAR},
+            TITLE = #{title,jdbcType=VARCHAR},
+            SEQNO = #{seqno,jdbcType=INTEGER},
+            IS_DELETE = #{isDelete,jdbcType=SMALLINT},
+            CRE_OPER_CODE = #{creOperCode,jdbcType=VARCHAR},
+            CRE_OPER_NAME = #{creOperName,jdbcType=VARCHAR},
+            CRE_ORG_CODE = #{creOrgCode,jdbcType=VARCHAR},
+            CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+            UPD_OPER_CODE = #{updOperCode,jdbcType=VARCHAR},
+            UPD_OPER_NAME = #{updOperName,jdbcType=VARCHAR},
+            UPD_ORG_CODE = #{updOrgCode,jdbcType=VARCHAR},
+            UPD_DATE = #{updDate,jdbcType=TIMESTAMP}
+        where ENTRY_ID = #{entryId,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 手写 -->
+    <select id="todayStatistics" resultMap="BaseResultMap" parameterType="hashmap" >
+        select 
+        NODE_NAME,count(NODE_NAME) SEQNO
+        from t_app_entry
+        where org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR}) 
+        and NODE_NAME in 
+        <foreach item="status" index="index" collection="status"
+             open="(" separator="," close=")"> #{status}
+        </foreach> 
+        group by NODE_NAME
+    </select>
+    <select id="todayRefuse" resultType="java.lang.Integer" parameterType="hashmap" >
+        select 
+        count(NODE_NAME) SEQNO
+        from t_app_entry
+        where org_id in (select org_id from t_sys_personorg where PERSON_ID = #{personId,jdbcType=VARCHAR}) 
+        and NODE_NAME = #{status,jdbcType=VARCHAR} and UPD_DATE > #{yyyymmdd,jdbcType=VARCHAR}
+    </select>
+</mapper>
